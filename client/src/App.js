@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 var dropDownStyle = {
 	border: "none",
-	borderRadius: "0px"
+	borderRadius: "0px",
+	color: "#000000"
 }
 
 class GeekToFreakDB extends React.Component {
