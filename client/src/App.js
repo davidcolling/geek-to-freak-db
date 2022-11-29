@@ -9,7 +9,7 @@ class GeekToFreakDB extends React.Component {
 class GeekToFreakWorkoutAdder extends React.Component {
 	render() {
 		return (
-			<div style={ { backgroundColor: 'red', paddingTop: '100px'} }>
+			<div>
 				<MovementSelect id="movementSelector" />
 				<RepsCountEntry />
 				<WeightEntry />
@@ -21,7 +21,7 @@ class GeekToFreakWorkoutAdder extends React.Component {
 class MovementSelect extends React.Component {
 	render() {
 		return (
-			<select id={this.props.id}>
+			<select style={ {border: "none", borderRadius: "0px"} } id={this.props.id}>
 				<option value="incline_press">Incline Press</option>
 				<option value="decline_press">Decline Press</option>
 				<option value="pec_fly">Pec Fly</option>
