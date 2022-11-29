@@ -7,6 +7,11 @@ var dropDownStyle = {
 	fontFamily: "Courier"
 }
 
+var inputStyle = {
+	borderRadius: "0x",
+	fontFamily: "Courier"
+}
+
 class GeekToFreakDB extends React.Component {
 	render() {
   		return <GeekToFreakWorkoutAdder />
@@ -44,7 +49,7 @@ class MovementSelect extends React.Component {
 class RepsCountEntry extends React.Component {
 	render() {
 		return (
-			<input type="number" min="0" max="8"/>
+			<input style={inputStyle} type="number" min="0" max="8"/>
 		);
 	}
 }
@@ -53,7 +58,7 @@ class WeightEntry extends React.Component {
 	render() {
 		return (
 			<div>
-				<input type="number" min="0" max="5000" />
+				<input style={inputStyle} type="number" min="0" max="5000" />
 				<select style={dropDownStyle}>
 					<option value="pounds">Pounds</option>
 					<option value="kilograms">Kilograms</option>
