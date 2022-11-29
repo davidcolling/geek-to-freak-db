@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 
 class GeekToFreakDB extends React.Component {
 	render() {
@@ -8,9 +7,13 @@ class GeekToFreakDB extends React.Component {
 }
 
 class GeekToFreakWorkoutAdder extends React.Component {
+	style = {
+		backgroundColor: "red"
+	}
+
 	render() {
 		return (
-			<div>
+			<div style={this.style}>
 				<MovementSelect id="movementSelector" />
 				<RepsCountEntry />
 				<WeightEntry />
