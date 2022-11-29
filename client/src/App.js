@@ -9,11 +9,7 @@ class GeekToFreakDB extends React.Component {
 class GeekToFreakWorkoutAdder extends React.Component {
 	render() {
 		return (
-			<div style={
-				{
-					backgroundColor: 'red'
-				}
-			}>
+			<div style={ { backgroundColor: 'red', paddingTop: '100px'} }>
 				<MovementSelect id="movementSelector" />
 				<RepsCountEntry />
 				<WeightEntry />
