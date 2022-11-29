@@ -7,13 +7,13 @@ class GeekToFreakDB extends React.Component {
 }
 
 class GeekToFreakWorkoutAdder extends React.Component {
-	style = {
-		backgroundColor: "red"
-	}
-
 	render() {
 		return (
-			<div style={this.style}>
+			<div style={
+				{
+					backgroundColor: 'red'
+				}
+			}>
 				<MovementSelect id="movementSelector" />
 				<RepsCountEntry />
 				<WeightEntry />
