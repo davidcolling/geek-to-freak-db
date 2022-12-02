@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+var buttonStyle = {
+	fontFamily: "Courier",
+	borderStyle: "solid",
+	borderWidth: "1px", 
+	borderRadius: "0px",
+	color: "black"
+}
+
 var dropDownStyle = {
 	border: "none",
 	borderRadius: "0px",
@@ -14,7 +22,11 @@ var inputStyle = {
 
 class GeekToFreakDB extends React.Component {
 	render() {
-  		return <GeekToFreakWorkoutAdder />
+  		return (
+			<div style={{width: '250px', display: 'block', margin: 'auto', borderColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
+				<GeekToFreakWorkoutAdder />
+			</div>
+		)
 	}
 }
 
@@ -25,6 +37,7 @@ class GeekToFreakWorkoutAdder extends React.Component {
 				<MovementSelect id="movementSelector" />
 				<RepsCountEntry />
 				<WeightEntry />
+				<button style={buttonStyle}>Add</button>
 			</div>
 		);
 	}
