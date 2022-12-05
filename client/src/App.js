@@ -35,14 +35,19 @@ class GeekToFreakDB extends React.Component {
 	
 	render() {
   		return (
-			<div style={{width: '250px', display: 'block', margin: 'auto', borderColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
+			<div style={
+				{
+					width: '250px', 
+					display: 'block', 
+					margin: 'auto', 
+					borderColor: 'black', 
+					borderStyle: 'solid', 
+					borderWidth: '1px'
+				}
+			}>
 				{this.state.currentView}
 			</div>
 		)
-	}
-
-	viewHome() {
-		this.currentView = this.homeView;
 	}
 
 	viewAdder = () => {
@@ -121,10 +126,9 @@ class WeightEntry extends React.Component {
 }
 
 class App extends Component {
-
-  render() {
-	  return <GeekToFreakDB />;
-  }
+	render() {
+		return <GeekToFreakDB />;
+  	}
 }
 
 export default App;
