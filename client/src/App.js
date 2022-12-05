@@ -40,11 +40,13 @@ class GeekToFreakDB extends React.Component {
 	}
 
 	viewHome() {
-		this.setState( {currentView: this.homeView} );
+		this.currentView = this.homeView;
 	}
 
-	viewAdder() {
-		this.setState( {currentView: <GeekToFreakWorkoutAdder />} );
+	viewAdder = () => {
+		this.setState( (state, props) => {
+			return {currentView: <GeekToFreakWorkoutAdder />, homeView: <HomeView />}
+		});
 	}
 }
 
