@@ -23,27 +23,31 @@ const db = mysql.createConnection({
 
 //CONNECT
 db.connect( (err) => {
-  if(err) throw err;
-  console.log('MySQL Connected...');
-  db.query(
-	  "CREATE DATABASE IF NOT EXISTS " + 	keys.DB_DATABASE + "; ",
-	  function (err, result) {
-    if (err) {
-	    throw err;
-    } else {
-  	console.log("workout db: exists;");
-    }
-  });
-  db.query(
-	  "USE " + 				keys.DB_DATABASE + ";", 
-	  function (err, result) {
-    if (err) {
-	    throw err;
-    } else {
-  	console.log("workout db: selected;");
-    }
-  });
+	if(err) throw err;
+	console.log('MySQL Connected...');
+	var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
+	facade.query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
+	facade.query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
 });
+
+class WorkoutDBFacade {
+	constructor(con, db) {
+		this.con = con;
+		this.db = db;
+	}
+	query(query, successMessage) {
+		this.con.query(
+			query,
+			function (err, result) {
+				if (err) {
+					throw err;
+				} else {
+					console.log(successMessage);
+				}
+			}
+		);
+	}
+}
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
