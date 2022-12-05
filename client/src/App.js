@@ -116,12 +116,10 @@ class WeightEntry extends React.Component {
 	}
 }
 
-var gtfdb = <GeekToFreakDB />
-
 class App extends Component {
 
   render() {
-	  return gtfdb;
+	  return <GeekToFreakDB />;
   }
 }
 
