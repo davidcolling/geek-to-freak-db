@@ -21,10 +21,35 @@ var inputStyle = {
 }
 
 class GeekToFreakDB extends React.Component {
+	currentView: React.Component;
+
+	constructor(props) {
+		super(props);
+		this.currentView = <HomeView />;
+	}
+	
 	render() {
   		return (
 			<div style={{width: '250px', display: 'block', margin: 'auto', borderColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
-				<GeekToFreakWorkoutAdder />
+				{this.currentView}
+			</div>
+		)
+	}
+
+	viewHome() {
+		this.setState( {currentView: <HomeView />} );
+	}
+
+	viewAdder() {
+		this.setState( {currentView: <GeekToFreakWorkoutAdder />} );
+	}
+}
+
+class HomeView extends React.Component {
+	render() {
+		return (
+			<div>
+				<button style={buttonStyle}>Add</button>
 			</div>
 		)
 	}
