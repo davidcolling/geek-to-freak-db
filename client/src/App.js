@@ -27,14 +27,16 @@ class GeekToFreakDB extends React.Component {
 	constructor(props) {
 		super(props);
 		var homeView = <HomeView viewAdderEvent={this.viewAdder}/>;
-		this.homeView = homeView;
-		this.currentView = homeView;
+		this.state = {
+			homeView: homeView,
+			currentView: homeView
+		}
 	}
 	
 	render() {
   		return (
 			<div style={{width: '250px', display: 'block', margin: 'auto', borderColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
-				{this.currentView}
+				{this.state.currentView}
 			</div>
 		)
 	}
