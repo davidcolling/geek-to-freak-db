@@ -25,6 +25,24 @@ const db = mysql.createConnection({
 db.connect( (err) => {
   if(err) throw err;
   console.log('MySQL Connected...');
+  db.query(
+	  "CREATE DATABASE IF NOT EXISTS " + 	keys.DB_DATABASE + "; ",
+	  function (err, result) {
+    if (err) {
+	    throw err;
+    } else {
+  	console.log("workout db: exists;");
+    }
+  });
+  db.query(
+	  "USE " + 				keys.DB_DATABASE + ";", 
+	  function (err, result) {
+    if (err) {
+	    throw err;
+    } else {
+  	console.log("workout db: selected;");
+    }
+  });
 });
 
 app.listen(PORT, () => {
