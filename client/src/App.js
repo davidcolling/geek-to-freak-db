@@ -22,10 +22,13 @@ var inputStyle = {
 
 class GeekToFreakDB extends React.Component {
 	currentView: React.Component;
+	homeView: React.Component;
 
 	constructor(props) {
 		super(props);
-		this.currentView = <HomeView />;
+		var homeView = <HomeView viewAdderEvent={this.viewAdder}/>;
+		this.homeView = homeView;
+		this.currentView = homeView;
 	}
 	
 	render() {
@@ -37,7 +40,7 @@ class GeekToFreakDB extends React.Component {
 	}
 
 	viewHome() {
-		this.setState( {currentView: <HomeView />} );
+		this.setState( {currentView: this.homeView} );
 	}
 
 	viewAdder() {
@@ -46,10 +49,17 @@ class GeekToFreakDB extends React.Component {
 }
 
 class HomeView extends React.Component {
+	viewAdderEvent: React.PropTypes.func;
+
+	constructor(props) {
+		super(props);
+		this.viewAdderEvent = this.props.viewAdderEvent;
+	}
+
 	render() {
 		return (
 			<div>
-				<button style={buttonStyle}>Add</button>
+				<button onClick={this.viewAdderEvent} style={buttonStyle}>Add</button>
 			</div>
 		)
 	}
@@ -106,12 +116,12 @@ class WeightEntry extends React.Component {
 	}
 }
 
+var gtfdb = <GeekToFreakDB />
+
 class App extends Component {
 
   render() {
-    return (
-	    <GeekToFreakDB />
-    );
+	  return gtfdb;
   }
 }
 
