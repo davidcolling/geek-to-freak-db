@@ -28,7 +28,9 @@ db.connect( (err) => {
 	var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 	facade.query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
 	facade.query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
-	facade.query("create table if not exists workouts (startDate varchar(255)) ", "workout db: selected;");
+	facade.query("create table if not exists workouts (id int auto_increment, startTime datetime not null, endTime datetime not null, set1 int not null, set2 int, set3 int, set4 int, set5 int, set6 int, set7 int, set8 int, notes text, primary key (id) ) ", "workout db: table 'workouts' exists;");
+	facade.query("create table if not exists sets (id int auto_increment, startTime datetime not null, endTime datetime not null, movement text not null, equipment int not null, reps tinyint not null, lastRepComplete boolean not null, weight float not null, notes text, primary key (id) )", "workout db: table 'sets' exists;");
+	facade.query("create table if not exists equipment (id int auto_increment, name text not null, isFreeWeight boolean not null, notes text, primary key (id) )", "workout db: table 'equipment' exists;");
 });
 
 class WorkoutDBFacade {
