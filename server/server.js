@@ -24,10 +24,11 @@ const db = mysql.createConnection({
 //CONNECT
 db.connect( (err) => {
 	if(err) throw err;
-	console.log('MySQL Connected...');
+		console.log('MySQL Connected...');
 	var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 	facade.query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
 	facade.query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
+	facade.query("create table if not exists workouts (startDate varchar(255)) ", "workout db: selected;");
 });
 
 class WorkoutDBFacade {
