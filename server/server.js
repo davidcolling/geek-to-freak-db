@@ -49,6 +49,8 @@ db.connect( (err) => {
 			"reps tinyint not null, " +
 			"lastRepComplete boolean not null, " +
 			"weight float not null, " +
+			"isLR boolean not null, " +
+			"isL boolean not null, " +
 			"notes text, primary key (id) )", 
 		"workout db: table 'sets' exists;"
 	);
@@ -81,6 +83,11 @@ class WorkoutDBFacade {
 		);
 	}
 }
+
+app.get('/test', function (req, res) {
+	res.send('Hello World');
+	console.log('request received');
+})
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
