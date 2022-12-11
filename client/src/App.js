@@ -31,6 +31,7 @@ class GeekToFreakDB extends React.Component {
 			homeView: homeView,
 			currentView: homeView
 		}
+		this.testApi();
 	}
 	
 	render() {
@@ -55,32 +56,34 @@ class GeekToFreakDB extends React.Component {
 			return {currentView: <GeekToFreakWorkoutAdder />, homeView: <HomeView />}
 		});
 	}
+
+	testApi() {
+		fetch('/api').then(response => { 
+			if (!response.ok) {
+				throw new Error(`status ${response.status}`);
+			}
+			return response;
+		});
+	}
+
 }
 
 class HomeView extends React.Component {
 	viewAdderEvent: React.PropTypes.func;
-	out: string;
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			viewAdderEvent: this.props.viewAdderEvent,
-			out: "nothing"
-		}
+		this.viewAdderEvent = this.props.viewAdderEvent;
 	}
 
 	render() {
 		return (
 			<div>
 				<button onClick={this.viewAdderEvent} style={buttonStyle}>Add</button>
-				<button onClick={this.test}> {this.out} </button>
 			</div>
 		)
 	}
 
-	test() {
-		this.out = fetch('/api');
-	}
 }
 
 class GeekToFreakWorkoutAdder extends React.Component {
