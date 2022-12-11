@@ -59,18 +59,27 @@ class GeekToFreakDB extends React.Component {
 
 class HomeView extends React.Component {
 	viewAdderEvent: React.PropTypes.func;
+	out: string;
 
 	constructor(props) {
 		super(props);
-		this.viewAdderEvent = this.props.viewAdderEvent;
+		this.state = {
+			viewAdderEvent: this.props.viewAdderEvent,
+			out: "nothing"
+		}
 	}
 
 	render() {
 		return (
 			<div>
 				<button onClick={this.viewAdderEvent} style={buttonStyle}>Add</button>
+				<button onClick={this.test}> {this.out} </button>
 			</div>
 		)
+	}
+
+	test() {
+		this.out = fetch('/api');
 	}
 }
 

@@ -85,6 +85,12 @@ class WorkoutDBFacade {
 	}
 }
 
+app.get('/api', function (req, res) {
+	console.log('workout client: test request received');
+	res.send('workout client: test request received');
+})
+
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 })
