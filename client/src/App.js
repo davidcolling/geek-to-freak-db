@@ -58,18 +58,15 @@ class GeekToFreakDB extends React.Component {
 	}
 
 	testApi() {
-		var out;
 		fetch('/api').then(response => { 
 			if (!response.ok) {
 				throw new Error(`status ${response.status}`);
 			}
+			console.log(response);
 			return response.json;
-		}).then(json => {
-			out = json.message;
 		}).catch(e => {
-			console.log('API call failed: ${e}');
+			console.log('API call failed: ' + e);
 		})
-		console.log(out);
 	}
 
 }
