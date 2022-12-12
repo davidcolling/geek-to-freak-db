@@ -85,9 +85,10 @@ class WorkoutDBFacade {
 	}
 }
 
-app.get('/api', function (req, res) {
+app.get('/api', function (request, response) {
 	console.log('workout server: test request received');
-	res.send('workout server: test request received');
+	response.set('Content-Type', 'application/json');
+	response.send('{"message": "workout server: test request received"}');
 })
 
 
