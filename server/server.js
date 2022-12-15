@@ -7,6 +7,25 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+class WorkoutDBFacade {
+	constructor(con, db) {
+		this.con = con;
+		this.db = db;
+	}
+	query(query, successMessage) {
+		return this.con.query(
+			query,
+			function (err, result) {
+				if (err) {
+					throw err;
+				} else {
+					return result;
+				}
+			}
+		)
+	}
+}
+
 //STATIC FOLDER
 app.use(express.static(path.join(__dirname,'../client/build')));
 
@@ -21,11 +40,11 @@ const db = mysql.createConnection({
   database : keys.DB_DATABASE
 });
 
+var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 //CONNECT
 db.connect( (err) => {
 	if(err) throw err;
 		console.log('MySQL Connected...');
-	var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 	facade.query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
 	facade.query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
 	facade.query(
@@ -66,28 +85,22 @@ db.connect( (err) => {
 	);
 });
 
-class WorkoutDBFacade {
-	constructor(con, db) {
-		this.con = con;
-		this.db = db;
-	}
-	query(query, successMessage) {
-		this.con.query(
-			query,
-			function (err, result) {
-				if (err) {
-					throw err;
-				} else {
-					console.log(successMessage);
-				}
-			}
-		);
-	}
-}
-
-app.get('/api', function (request, response) {
+app.get('/api', function(request, response) {
 	console.log('workout server: test request received');
 	response.set('Content-Type', 'application/json');
+	var out = facade.query(
+		"select json_arrayagg(" +
+			"json_object(" +
+				"'id', 'id', " +
+				"'name', 'name', " +
+				"'isFreeWeight', 'isFreeWeight'," +
+				"'notes', 'notes'" +
+			") " +
+		") " +
+		"from equipment;",
+		"workout database: got query"
+	)
+	console.log(out);
 	response.send('{"message": "workout server: test request received"}');
 })
 
