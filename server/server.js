@@ -19,6 +19,7 @@ class WorkoutDBFacade {
 				if (err) {
 					throw err;
 				} else {
+					console.log(successMessage);
 					return result;
 				}
 			}
