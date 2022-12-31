@@ -86,8 +86,11 @@ db.connect( (err) => {
 	);
 });
 
-app.get('/api', function(request, response) {
+app.post('/api', function(request, response) {
 	console.log('workout server: test request received');
+	console.log(request.body.data);
+})
+app.get('/api', function(request, response) {
 	response.set('Content-Type', 'application/json');
 	var out = facade.query(
 		"select json_arrayagg(" +
@@ -101,8 +104,8 @@ app.get('/api', function(request, response) {
 		"from equipment;",
 		"workout database: got query"
 	)
-	console.log(out);
 	response.send('{"message": "workout server: test request received"}');
+	console.log(out);
 })
 
 

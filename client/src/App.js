@@ -58,17 +58,20 @@ class GeekToFreakDB extends React.Component {
 	}
 
 	testApi() {
+		fetch('/api', {
+			method: 'post',
+			data: JSON.stringify({message: 'test'})
+		});
 		fetch('/api').then(response => { 
 			if (!response.ok) {
-				throw new Error(`status ${response.status}`);
-			}
-			console.log(response);
-			return response.json;
-		}).catch(e => {
-			console.log('API call failed: ' + e);
-		})
+	                	throw new Error(`status ${response.status}`);
+	                }
+	                console.log(response);
+	                return response.json;
+	        }).catch(e => {
+	                console.log('API call failed: ' + e);
+	        })
 	}
-
 }
 
 class HomeView extends React.Component {
