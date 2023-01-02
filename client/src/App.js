@@ -21,9 +21,6 @@ var inputStyle = {
 }
 
 class GeekToFreakDB extends React.Component {
-	currentView: React.Component;
-	homeView: React.Component;
-
 	constructor(props) {
 		super(props);
 		var homeView = <HomeView viewAdderEvent={this.viewAdder}/>;
@@ -31,7 +28,6 @@ class GeekToFreakDB extends React.Component {
 			homeView: homeView,
 			currentView: homeView
 		}
-		this.testApi();
 	}
 	
 	render() {
@@ -87,15 +83,47 @@ class HomeView extends React.Component {
 }
 
 class GeekToFreakWorkoutAdder extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleMovementChange = this.handleMovementChange.bind(this)
+		this.post = this.post.bind(this)
+		this.state = {
+			movement: "incline_press",
+			reps: 6,
+			weight: 160
+		}
+	}
 	render() {
 		return (
 			<div>
-				<MovementSelect id="movementSelector" />
-				<RepsCountEntry />
-				<WeightEntry />
-				<button style={buttonStyle}>Add</button>
+				<select style={dropDownStyle} value={this.state.movement} onChange={this.handleMovementChange}>
+					<option value="incline_press">Incline Press</option>
+					<option value="decline_press">Decline Press</option>
+					<option value="pec_fly">Pec Fly</option>
+					<option value="rear_deltoid">Rear Deltoid</option>
+						<option value="hip_abduction">Hip Abduction</option>
+					<option value="hip_adduction">Hip Adduction</option>
+					<option value="squat">Squat</option>
+				</select>
+				<button onClick={this.post} style={buttonStyle}>Add</button>
 			</div>
 		);
+	}
+	handleMovementChange(e) {
+		this.setState({
+			movement: e.target.value,
+			reps: 6,
+			weight: 160
+		});
+	}
+	post() {
+		fetch('/api', {
+			method: 'post',
+			body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight}),
+    			headers: {
+				"Content-Type": "application/json"
+			}
+		});
 	}
 }
 
