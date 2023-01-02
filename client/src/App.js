@@ -61,10 +61,9 @@ class GeekToFreakDB extends React.Component {
 		fetch('/api', {
 			method: 'post',
 			body: JSON.stringify({message: "test"}),
-    			headers:
-				{
-					"Content-Type": "application/json"
-				}
+    			headers: {
+				"Content-Type": "application/json"
+			}
 		});
 	}
 }
