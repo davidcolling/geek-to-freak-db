@@ -49,7 +49,7 @@ class GeekToFreakDB extends React.Component {
 
 	viewAdder = () => {
 		this.setState( (state, props) => {
-			return {currentView: <GeekToFreakWorkoutAdder />, homeView: <HomeView />}
+			return {currentView: <GeekToFreakSetAdder />, homeView: <HomeView />}
 		});
 	}
 
@@ -82,7 +82,7 @@ class HomeView extends React.Component {
 
 }
 
-class GeekToFreakWorkoutAdder extends React.Component {
+class GeekToFreakSetAdder extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleMovementChange = this.handleMovementChange.bind(this)
