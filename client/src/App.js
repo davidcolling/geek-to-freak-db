@@ -105,6 +105,12 @@ class GeekToFreakWorkoutAdder extends React.Component {
 					<option value="hip_adduction">Hip Adduction</option>
 					<option value="squat">Squat</option>
 				</select>
+				<input style={inputStyle} type="number" min="0" max="8" onChange={this.handleRepsChange} />
+				<input style={inputStyle} type="number" min="0" max="5000" onChange={this.handleWeightChange}/>
+				<select style={dropDownStyle} onChange={this.handleUnitChange}>
+					<option value="pounds">Pounds</option>
+					<option value="kilograms">Kilograms</option>
+				</select>
 				<button onClick={this.post} style={buttonStyle}>Add</button>
 			</div>
 		);
