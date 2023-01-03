@@ -86,6 +86,10 @@ db.connect( (err) => {
 	);
 });
 
+app.post('/dbg', function(request, response) {
+	console.log("workoutdb client debug message: " + request.body.message);
+})
+
 app.post('/api', function(request, response) {
 	console.log('workout server: test request received');
 	console.log(request.body.movement);

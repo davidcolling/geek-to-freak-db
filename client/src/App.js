@@ -20,6 +20,20 @@ var inputStyle = {
 	fontFamily: "Courier"
 }
 
+class DebugMessager {
+	post(message) {
+		fetch('/dbg', {
+			method: 'post',
+			body: JSON.stringify({message: message}),
+    			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+	}
+}
+var debug = new DebugMessager();
+
+
 class WorkoutDB extends React.Component {
 	constructor(props) {
 		super(props);
@@ -137,6 +151,7 @@ class SetAdder extends React.Component {
 	}
 	handleMovementChange(e) {
 		var input = e.target.value;
+		debug.post("movement changed");
 		this.setState( (state, props) => {
 			return {
 				movement: input,
