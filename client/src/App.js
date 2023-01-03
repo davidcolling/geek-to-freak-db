@@ -115,10 +115,7 @@ class WorkoutAdder extends React.Component {
 class SetAdder extends React.Component {
 	constructor(props) {
 		super(props);
-		this.handleMovementChange = this.handleMovementChange.bind(this)
-		this.handleRepsChange = this.handleRepsChange.bind(this)
-		this.handleWeightChange = this.handleWeightChange.bind(this)
-		this.handleUnitChange = this.handleUnitChange.bind(this)
+		this.handleChange = this.handleChange.bind(this)
 		this.post = this.post.bind(this)
 		this.state = {
 			movement: "incline_press",
@@ -130,7 +127,7 @@ class SetAdder extends React.Component {
 	render() {
 		return (
 			<div>
-				<select style={dropDownStyle} value={this.state.movement} onChange={this.handleMovementChange}>
+				<select id="movement" style={dropDownStyle} value={this.state.movement} onChange={this.handleChange}>
 					<option value="incline_press">Incline Press</option>
 					<option value="decline_press">Decline Press</option>
 					<option value="pec_fly">Pec Fly</option>
@@ -139,9 +136,9 @@ class SetAdder extends React.Component {
 					<option value="hip_adduction">Hip Adduction</option>
 					<option value="squat">Squat</option>
 				</select>
-				<input style={inputStyle} type="number" min="0" max="8" onChange={this.handleRepsChange} value={this.state.reps} />
-				<input style={inputStyle} type="number" min="0" max="5000" onChange={this.handleWeightChange} value={this.state.weight} />
-				<select style={dropDownStyle} onChange={this.handleUnitChange} value={this.state.unit}>
+				<input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
+				<input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={this.handleChange} value={this.state.weight} />
+				<select id="unit" style={dropDownStyle} onChange={this.handleChange} value={this.state.unit}>
 					<option value="pounds">Pounds</option>
 					<option value="kilograms">Kilograms</option>
 				</select>
@@ -149,50 +146,50 @@ class SetAdder extends React.Component {
 			</div>
 		);
 	}
-	handleMovementChange(e) {
+	handleChange(e) {
 		var input = e.target.value;
-		debug.post("movement changed");
-		this.setState( (state, props) => {
-			return {
-				movement: input,
-				reps: state.reps,
-				weight: state.weight,
-				unit: state.unit
-			}
-		});
-	}
-	handleRepsChange(e) {
-		var input = e.target.value;
-		this.setState( (state, props) => {
-			return {
-				movement: state.movement,
-				reps: input,
-				weight: state.weight,
-				unit: state.unit
-			}
-		});
-	}
-	handleWeightChange(e) {
-		var input = e.target.value;
-		this.setState( (state, props) => {
-			return {
-				movement: state.movement,
-				reps: state.reps,
-				weight: input,
-				unit: state.unit
-			}
-		});
-	}
-	handleUnitChange(e) {
-		var input = e.target.value;
-		this.setState( (state, props) => {
-			return {
-				movement: state.movement,
-				reps: state.reps,
-				weight: state.weight,
-				unit: input
-			}
-		});
+		switch(e.target.id) {
+			case "movemnt":
+				this.setState( (state, props) => {
+					return {
+						movement: input,
+						reps: state.reps,
+						weight: state.weight,
+						unit: state.unit
+					}
+				});
+				break;
+			case "reps":
+				this.setState( (state, props) => {
+					return {
+						movement: state.movement,
+						reps: input,
+						weight: state.weight,
+						unit: state.unit
+					}
+				});
+				break;
+			case "weight":
+				this.setState( (state, props) => {
+					return {
+						movement: state.movement,
+						reps: state.reps,
+						weight: input,
+						unit: state.unit
+					}
+				});
+				break;
+			case "unit":
+				this.setState( (state, props) => {
+					return {
+						movement: state.movement,
+						reps: state.reps,
+						weight: state.weight,
+						unit: input
+					}
+				});
+				break;
+		}
 	}
 	post() {
 		fetch('/api', {
