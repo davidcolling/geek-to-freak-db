@@ -82,6 +82,26 @@ class HomeView extends React.Component {
 
 }
 
+class WorkoutAdder extends React.Component {
+	viewAdderEvent: React.PropTypes.func;
+
+	costructor(props) {
+		super(props);
+		this.viewAdderEvent = this.props.viewAdderEvent;
+		this.state = {
+			buttons = {<button onClick={this.props.viewAdderEvent} style={buttonStyle}>Add</button>}
+		}
+	}
+
+	render() {
+		return (
+			<div>
+			</div>
+		)
+	}
+}
+
+
 class SetAdder extends React.Component {
 	constructor(props) {
 		super(props);
