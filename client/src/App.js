@@ -20,7 +20,7 @@ var inputStyle = {
 	fontFamily: "Courier"
 }
 
-class GeekToFreakDB extends React.Component {
+class WorkoutDB extends React.Component {
 	constructor(props) {
 		super(props);
 		var homeView = <HomeView viewAdderEvent={this.viewAdder}/>;
@@ -49,7 +49,7 @@ class GeekToFreakDB extends React.Component {
 
 	viewAdder = () => {
 		this.setState( (state, props) => {
-			return {currentView: <GeekToFreakSetAdder />, homeView: <HomeView />}
+			return {currentView: <SetAdder />, homeView: <HomeView />}
 		});
 	}
 
@@ -82,7 +82,7 @@ class HomeView extends React.Component {
 
 }
 
-class GeekToFreakSetAdder extends React.Component {
+class SetAdder extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleMovementChange = this.handleMovementChange.bind(this)
@@ -214,7 +214,7 @@ class WeightEntry extends React.Component {
 
 class App extends Component {
 	render() {
-		return <GeekToFreakDB />;
+		return <WorkoutDB />;
   	}
 }
 
