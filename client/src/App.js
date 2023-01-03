@@ -86,11 +86,15 @@ class GeekToFreakWorkoutAdder extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleMovementChange = this.handleMovementChange.bind(this)
+		this.handleRepsChange = this.handleRepsChange.bind(this)
+		this.handleWeightChange = this.handleWeightChange.bind(this)
+		this.handleUnitChange = this.handleUnitChange.bind(this)
 		this.post = this.post.bind(this)
 		this.state = {
 			movement: "incline_press",
 			reps: 6,
-			weight: 160
+			weight: 160,
+			unit: "pounds"
 		}
 	}
 	render() {
@@ -105,9 +109,9 @@ class GeekToFreakWorkoutAdder extends React.Component {
 					<option value="hip_adduction">Hip Adduction</option>
 					<option value="squat">Squat</option>
 				</select>
-				<input style={inputStyle} type="number" min="0" max="8" onChange={this.handleRepsChange} />
-				<input style={inputStyle} type="number" min="0" max="5000" onChange={this.handleWeightChange}/>
-				<select style={dropDownStyle} onChange={this.handleUnitChange}>
+				<input style={inputStyle} type="number" min="0" max="8" onChange={this.handleRepsChange} value={this.state.reps} />
+				<input style={inputStyle} type="number" min="0" max="5000" onChange={this.handleWeightChange} value={this.state.weight} />
+				<select style={dropDownStyle} onChange={this.handleUnitChange} value={this.state.unit}>
 					<option value="pounds">Pounds</option>
 					<option value="kilograms">Kilograms</option>
 				</select>
@@ -116,10 +120,47 @@ class GeekToFreakWorkoutAdder extends React.Component {
 		);
 	}
 	handleMovementChange(e) {
-		this.setState({
-			movement: e.target.value,
-			reps: 6,
-			weight: 160
+		var input = e.target.value;
+		this.setState( (state, props) => {
+			return {
+				movement: input,
+				reps: state.reps,
+				weight: state.weight,
+				unit: state.unit
+			}
+		});
+	}
+	handleRepsChange(e) {
+		var input = e.target.value;
+		this.setState( (state, props) => {
+			return {
+				movement: state.movement,
+				reps: input,
+				weight: state.weight,
+				unit: state.unit
+			}
+		});
+	}
+	handleWeightChange(e) {
+		var input = e.target.value;
+		this.setState( (state, props) => {
+			return {
+				movement: state.movement,
+				reps: state.reps,
+				weight: input,
+				unit: state.unit
+			}
+		});
+	}
+	handleUnitChange(e) {
+		var input = e.target.value;
+		this.setState( (state, props) => {
+			return {
+				movement: state.movement,
+				reps: state.reps,
+				weight: state.weight,
+				unit: input
+			}
 		});
 	}
 	post() {

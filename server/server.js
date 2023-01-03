@@ -89,6 +89,9 @@ db.connect( (err) => {
 app.post('/api', function(request, response) {
 	console.log('workout server: test request received');
 	console.log(request.body.movement);
+	console.log(request.body.reps);
+	console.log(request.body.weight);
+	console.log(request.body.unit);
 })
 app.get('/api', function(request, response) {
 	response.set('Content-Type', 'application/json');
