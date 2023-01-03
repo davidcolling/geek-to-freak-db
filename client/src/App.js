@@ -23,7 +23,7 @@ var inputStyle = {
 class WorkoutDB extends React.Component {
 	constructor(props) {
 		super(props);
-		var homeView = <HomeView viewAdderEvent={this.viewAdder}/>;
+		var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder}/>;
 		this.state = {
 			homeView: homeView,
 			currentView: homeView
@@ -47,7 +47,13 @@ class WorkoutDB extends React.Component {
 		)
 	}
 
-	viewAdder = () => {
+	viewWorkoutAdder = () => {
+		this.setState( (state, props) => {
+			return {currentView: <WorkoutAdder viewSetAdderEvent={this.viewSetAdder} />, homeView: <HomeView />}
+		});
+	}
+
+	viewSetAdder = () => {
 		this.setState( (state, props) => {
 			return {currentView: <SetAdder />, homeView: <HomeView />}
 		});
@@ -56,17 +62,17 @@ class WorkoutDB extends React.Component {
 }
 
 class HomeView extends React.Component {
-	viewAdderEvent: React.PropTypes.func;
+	viewWorkoutAdderEvent: React.PropTypes.func;
 
 	constructor(props) {
 		super(props);
-		this.viewAdderEvent = this.props.viewAdderEvent;
+		this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
 	}
 
 	render() {
 		return (
 			<div>
-				<button onClick={this.viewAdderEvent} style={buttonStyle}>Add</button>
+				<button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add</button>
 			</div>
 		)
 	}
@@ -74,22 +80,21 @@ class HomeView extends React.Component {
 }
 
 class WorkoutAdder extends React.Component {
-	viewAdderEvent: React.PropTypes.func;
+	viewSetAdderEvent: React.PropTypes.func;
 
 	constructor(props) {
 		super(props);
-		this.viewAdderEvent = this.props.viewAdderEvent;
-		this.state = {
-			buttons: {}
-		}
+		this.viewSetAdderEvent = this.props.viewSetAdderEvent;
 	}
 
 	render() {
 		return (
 			<div>
+				<button onClick={this.viewSetAdderEvent} style={buttonStyle}>Add Set</button>
 			</div>
 		)
 	}
+
 }
 
 
