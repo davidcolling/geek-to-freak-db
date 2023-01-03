@@ -53,15 +53,6 @@ class WorkoutDB extends React.Component {
 		});
 	}
 
-	testApi() {
-		fetch('/api', {
-			method: 'post',
-			body: JSON.stringify({message: "test"}),
-    			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-	}
 }
 
 class HomeView extends React.Component {
