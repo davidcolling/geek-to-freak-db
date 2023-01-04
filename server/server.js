@@ -42,7 +42,7 @@ class WorkoutDBFacade {
 }
 var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 
-//CONNECT
+// initialize db
 db.connect( (err) => {
 	if(err) throw err;
 		console.log('MySQL Connected...');
@@ -86,6 +86,7 @@ db.connect( (err) => {
 	);
 });
 
+// define api
 app.post('/dbg', function(request, response) {
 	console.log("workoutdb client debug message: " + request.body.message);
 })
@@ -116,6 +117,7 @@ app.get('/api', function(request, response) {
 	console.log(out);
 })
 
+// start server
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 })
