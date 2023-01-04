@@ -7,6 +7,20 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+//STATIC FOLDER
+app.use(express.static(path.join(__dirname,'../client/build')));
+
+// Body Parser Middleware
+app.use(bodyParser.json());
+
+//CREATE CONNECTION
+const db = mysql.createConnection({
+  host     : keys.DB_HOST,
+  user     : keys.DB_USER,
+  password : keys.DB_PASSWORD,
+  database : keys.DB_DATABASE
+});
+
 class WorkoutDBFacade {
 	constructor(con, db) {
 		this.con = con;
@@ -26,22 +40,8 @@ class WorkoutDBFacade {
 		)
 	}
 }
-
-//STATIC FOLDER
-app.use(express.static(path.join(__dirname,'../client/build')));
-
-// Body Parser Middleware
-app.use(bodyParser.json());
-
-//CREATE CONNECTION
-const db = mysql.createConnection({
-  host     : keys.DB_HOST,
-  user     : keys.DB_USER,
-  password : keys.DB_PASSWORD,
-  database : keys.DB_DATABASE
-});
-
 var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
+
 //CONNECT
 db.connect( (err) => {
 	if(err) throw err;
@@ -97,6 +97,7 @@ app.post('/api', function(request, response) {
 	console.log(request.body.weight);
 	console.log(request.body.unit);
 })
+
 app.get('/api', function(request, response) {
 	response.set('Content-Type', 'application/json');
 	var out = facade.query(
@@ -114,7 +115,6 @@ app.get('/api', function(request, response) {
 	response.send('{"message": "workout server: test request received"}');
 	console.log(out);
 })
-
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
