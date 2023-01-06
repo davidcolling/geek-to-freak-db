@@ -39,6 +39,18 @@ class WorkoutDBFacade {
 			}
 		)
 	}
+	insertEquipment(name, isFreeWeight) {
+		facade.query(
+			"INSERT INTO equipment (name, isFreeWeight) " +
+			    "SELECT '" + name + "', " + isFreeWeight + " " +
+			    "FROM dual " +
+			    "WHERE NOT EXISTS ( " +
+				            "SELECT name, isFreeWeight " +
+				            "FROM equipment " +
+				            "WHERE equipment.name='" + name + "' AND equipment.isFreeWeight=" + isFreeWeight + ") LIMIT 1; ",
+			"workout server: inserting equipment to db;"
+		)
+	}
 }
 var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 
@@ -84,16 +96,11 @@ db.connect( (err) => {
 			"primary key (id) )", 
 		"workout db: table 'equipment' exists;"
 	);
-	facade.query(
-		"INSERT INTO equipment (name, isFreeWeight) " +
-		    "SELECT 'incline press', 0 " +
-		    "FROM dual " +
-		    "WHERE NOT EXISTS ( " +
-			            "SELECT name, isFreeWeight " +
-			            "FROM equipment " +
-			            "WHERE equipment.name='incline press' AND equipment.isFreeWeight=0) LIMIT 1; ",
-		"workout db: inserting basic equipment;"
-	)
+	facade.insertEquipment("incline press", 0);
+	facade.insertEquipment("chest press", 0);
+	facade.insertEquipment("leg press", 0);
+	facade.insertEquipment("leg curl", 0);
+	facade.insertEquipment("leg extension", 0);
 });
 
 // define api
