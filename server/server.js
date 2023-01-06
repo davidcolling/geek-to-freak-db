@@ -78,12 +78,22 @@ db.connect( (err) => {
 	facade.query(
 		"create table if not exists equipment ( " +
 			"id int auto_increment, " +
-			"name text not null, " +
+			"name text not null unique, " +
 			"isFreeWeight boolean not null, " +
 			"notes text, " +
 			"primary key (id) )", 
 		"workout db: table 'equipment' exists;"
 	);
+	facade.query(
+		"INSERT INTO equipment (name, isFreeWeight) " +
+		    "SELECT 'incline press', 0 " +
+		    "FROM dual " +
+		    "WHERE NOT EXISTS ( " +
+			            "SELECT name, isFreeWeight " +
+			            "FROM equipment " +
+			            "WHERE equipment.name='incline press' AND equipment.isFreeWeight=0) LIMIT 1; ",
+		"workout db: inserting basic equipment;"
+	)
 });
 
 // define api
