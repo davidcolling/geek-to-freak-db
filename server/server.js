@@ -40,7 +40,7 @@ class WorkoutDBFacade {
 		)
 	}
 	insertEquipment(name, isFreeWeight) {
-		facade.query(
+		this.query(
 			"INSERT INTO equipment (name, isFreeWeight) " +
 			    "SELECT '" + name + "', " + isFreeWeight + " " +
 			    "FROM dual " +
