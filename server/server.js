@@ -103,6 +103,16 @@ db.connect( (err) => {
 			"primary key (id) )", 
 		"workout db: table 'equipment' exists;"
 	);
+	facade.query(
+		"create table if not exists movement ( " + 
+			"id int auto_increment, " + 
+			"name text , " + 
+			"upCadence int not null , " + 
+			"downCadence int not null, " + 
+			"notes text, " + 
+			"primary key (id) )", 
+		"workout db: table 'movement' exists;"
+	);
 	facade.insertEquipment("incline press", 0);
 	facade.insertEquipment("chest press", 0);
 	facade.insertEquipment("leg press", 0);
