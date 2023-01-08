@@ -51,9 +51,9 @@ class WorkoutDBFacade {
 			"workout server: inserting equipment to db;"
 		)
 	}
-	insertSet(movement, reps, weight, lastRepComplete) {
+	insertSet(movement, reps, weight, lastRepComplete, isLR, isL) {
 		this.query(
-			"insert into sets(startTime, endTime, movement, equipment, reps, lastRepComplete, weight, isLR, isL, notes) values(CURTIME(), CURTIME(), '" + movement + "', 1, " + reps + ", " + lastRepComplete + ", " + weight + ", 1, 0, null);",
+			"insert into sets(startTime, endTime, movement, equipment, reps, lastRepComplete, weight, isLR, isL, notes) values(CURTIME(), CURTIME(), '" + movement + "', 1, " + reps + ", " + lastRepComplete + ", " + weight + ", " + isLR + ", " + isL + ", null);",
 			"workout server: inserting set to db;"
 		)
 
@@ -127,7 +127,7 @@ app.post('/dbg', function(request, response) {
 
 app.post('/api', function(request, response) {
 	console.log('workout server: test request received');
-	facade.insertSet(request.body.movement, request.body.reps, request.body.weight, request.body.lastRepComplete);
+	facade.insertSet(request.body.movement, request.body.reps, request.body.weight, request.body.lastRepComplete, request.body.isLR, request.body.isL);
 })
 
 app.get('/api', function(request, response) {

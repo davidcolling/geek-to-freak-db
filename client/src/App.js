@@ -121,7 +121,9 @@ class SetAdder extends React.Component {
 			reps: 6,
 			weight: 160,
 			unit: "pounds",
-			lastRepComplete: false
+			lastRepComplete: false,
+			isLR: true,
+			isL: false
 		}
 	}
 	render() {
@@ -143,6 +145,8 @@ class SetAdder extends React.Component {
 					<option value="kilograms">Kilograms</option>
 				</select>
 				<input id="lastRepComplete" type="checkbox" onChange={this.handleChange} checked={this.state.lastRepComplete} />
+				<input id="isLR" type="checkbox" onChange={this.handleChange} checked={this.state.isLR} />
+				<input id="isL" type="checkbox" onChange={this.handleChange} checked={this.state.isL} />
 				<button onClick={this.post} style={buttonStyle}>Add</button>
 			</div>
 		);
@@ -157,7 +161,9 @@ class SetAdder extends React.Component {
 						reps: state.reps,
 						weight: state.weight,
 						unit: state.unit,
-						lastRepComplete: state.lastRepComplete
+						lastRepComplete: state.lastRepComplete, 
+						isLR: state.isLR,
+						isL: state.isL
 					}
 				});
 				break;
@@ -168,7 +174,9 @@ class SetAdder extends React.Component {
 						reps: input,
 						weight: state.weight,
 						unit: state.unit,
-						lastRepComplete: state.lastRepComplete
+						lastRepComplete: state.lastRepComplete, 
+						isLR: state.isLR,
+						isL: state.isL
 					}
 				});
 				break;
@@ -179,7 +187,9 @@ class SetAdder extends React.Component {
 						reps: state.reps,
 						weight: input,
 						unit: state.unit,
-						lastRepComplete: state.lastRepComplete
+						lastRepComplete: state.lastRepComplete, 
+						isLR: state.isLR,
+						isL: state.isL
 					}
 				});
 				break;
@@ -190,7 +200,9 @@ class SetAdder extends React.Component {
 						reps: state.reps,
 						weight: state.weight,
 						unit: input,
-						lastRepComplete: state.lastRepComplete
+						lastRepComplete: state.lastRepComplete, 
+						isLR: state.isLR,
+						isL: state.isL
 					}
 				});
 				break;
@@ -201,7 +213,35 @@ class SetAdder extends React.Component {
 						reps: state.reps, 
 						weight: state.weight, 
 						unit: state.unit, 
-						lastRepComplete: !state.lastRepComplete
+						lastRepComplete: !state.lastRepComplete, 
+						isLR: state.isLR,
+						isL: state.isL
+					}
+				});
+				break;
+			case "isLR":
+				this.setState( (state, props) => {
+					return {
+						movement: state.movement,
+						reps: state.reps, 
+						weight: state.weight, 
+						unit: state.unit, 
+						lastRepComplete: state.lastRepComplete,
+						isLR: !state.isLR,
+						isL: state.isL
+					}
+				});
+				break;
+			case "isL":
+				this.setState( (state, props) => {
+					return {
+						movement: state.movement,
+						reps: state.reps, 
+						weight: state.weight, 
+						unit: state.unit, 
+						lastRepComplete: state.lastRepComplete,
+						isLR: state.isLR,
+						isL: !state.isL
 					}
 				});
 				break;
@@ -210,7 +250,7 @@ class SetAdder extends React.Component {
 	post() {
 		fetch('/api', {
 			method: 'post',
-			body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight, lastRepComplete: this.state.lastRepComplete}),
+			body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight, lastRepComplete: this.state.lastRepComplete, isLR: this.state.isLR, isL: this.state.isL}),
     			headers: {
 				"Content-Type": "application/json"
 			}
