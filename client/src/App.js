@@ -120,7 +120,8 @@ class SetAdder extends React.Component {
 			movement: "incline_press",
 			reps: 6,
 			weight: 160,
-			unit: "pounds"
+			unit: "pounds",
+			lastRepComplete: false
 		}
 	}
 	render() {
@@ -141,6 +142,7 @@ class SetAdder extends React.Component {
 					<option value="pounds">Pounds</option>
 					<option value="kilograms">Kilograms</option>
 				</select>
+				<input id="lastRepComplete" type="checkbox" onChange={this.handleChange} checked={this.state.lastRepComplete} />
 				<button onClick={this.post} style={buttonStyle}>Add</button>
 			</div>
 		);
@@ -148,13 +150,14 @@ class SetAdder extends React.Component {
 	handleChange(e) {
 		var input = e.target.value;
 		switch(e.target.id) {
-			case "movemnt":
+			case "movement":
 				this.setState( (state, props) => {
 					return {
 						movement: input,
 						reps: state.reps,
 						weight: state.weight,
-						unit: state.unit
+						unit: state.unit,
+						lastRepComplete: state.lastRepComplete
 					}
 				});
 				break;
@@ -164,7 +167,8 @@ class SetAdder extends React.Component {
 						movement: state.movement,
 						reps: input,
 						weight: state.weight,
-						unit: state.unit
+						unit: state.unit,
+						lastRepComplete: state.lastRepComplete
 					}
 				});
 				break;
@@ -174,7 +178,8 @@ class SetAdder extends React.Component {
 						movement: state.movement,
 						reps: state.reps,
 						weight: input,
-						unit: state.unit
+						unit: state.unit,
+						lastRepComplete: state.lastRepComplete
 					}
 				});
 				break;
@@ -184,7 +189,19 @@ class SetAdder extends React.Component {
 						movement: state.movement,
 						reps: state.reps,
 						weight: state.weight,
-						unit: input
+						unit: input,
+						lastRepComplete: state.lastRepComplete
+					}
+				});
+				break;
+			case "lastRepComplete":
+				this.setState( (state, props) => {
+					return {
+						movement: state.movement,
+						reps: state.reps, 
+						weight: state.weight, 
+						unit: state.unit, 
+						lastRepComplete: !state.lastRepComplete
 					}
 				});
 				break;
@@ -193,7 +210,7 @@ class SetAdder extends React.Component {
 	post() {
 		fetch('/api', {
 			method: 'post',
-			body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight}),
+			body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight, lastRepComplete: this.state.lastRepComplete}),
     			headers: {
 				"Content-Type": "application/json"
 			}
