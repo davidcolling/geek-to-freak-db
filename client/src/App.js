@@ -36,7 +36,7 @@ var debug = new DebugMessager();
 class WorkoutDB extends React.Component {
 	constructor(props) {
 		super(props);
-		var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder}/>;
+		var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
 		this.state = {
 			homeView: homeView,
 			currentView: homeView
@@ -72,24 +72,54 @@ class WorkoutDB extends React.Component {
 		});
 	}
 
+	viewEquipment = () => {
+		this.setState( (state, props) => {
+			return {currentView: <EquipmentView />, homeView: <HomeView />}
+		});
+	}
 }
 
 class HomeView extends React.Component {
 	viewWorkoutAdderEvent: React.PropTypes.func;
+	viewEquipmentViewEvent: React.PropTypes.func;
 
 	constructor(props) {
 		super(props);
 		this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
+		this.viewEquipmentViewEvent = this.props.viewEquipmentViewEvent;
 	}
 
 	render() {
 		return (
 			<div>
 				<button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add</button>
+				<button onClick={this.viewEquipmentViewEvent} style={buttonStyle}>Equipment</button>
 			</div>
 		)
 	}
 
+}
+
+class EquipmentView extends React.Component {
+	constructor(props) {
+		super(props);
+		this.text = "";
+		fetch('/equipment', {
+			method: 'get',
+			body: JSON.stringify({}),
+    			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<p>{this.text}</p>
+			</div>
+		)
+	}
 }
 
 class WorkoutAdder extends React.Component {
