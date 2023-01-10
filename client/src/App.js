@@ -106,7 +106,6 @@ class EquipmentView extends React.Component {
 		this.text = "";
 		fetch('/equipment', {
 			method: 'get',
-			body: JSON.stringify({}),
     			headers: {
 				"Content-Type": "application/json"
 			}
