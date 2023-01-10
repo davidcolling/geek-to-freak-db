@@ -154,121 +154,21 @@ class SetAdder extends React.Component {
 		);
 	}
 	handleChange(e) {
+		var id = e.target.id;
 		var input = e.target.value;
-		switch(e.target.id) {
-			case "movement":
-				this.setState( (state, props) => {
-					return {
-						movement: input,
-						reps: state.reps,
-						weight: state.weight,
-						unit: state.unit,
-						lastRepComplete: state.lastRepComplete, 
-						isLR: state.isLR,
-						isL: state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "reps":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: input,
-						weight: state.weight,
-						unit: state.unit,
-						lastRepComplete: state.lastRepComplete, 
-						isLR: state.isLR,
-						isL: state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "weight":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: state.reps,
-						weight: input,
-						unit: state.unit,
-						lastRepComplete: state.lastRepComplete, 
-						isLR: state.isLR,
-						isL: state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "unit":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: state.reps,
-						weight: state.weight,
-						unit: input,
-						lastRepComplete: state.lastRepComplete, 
-						isLR: state.isLR,
-						isL: state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "lastRepComplete":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: state.reps, 
-						weight: state.weight, 
-						unit: state.unit, 
-						lastRepComplete: !state.lastRepComplete, 
-						isLR: state.isLR,
-						isL: state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "isLR":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: state.reps, 
-						weight: state.weight, 
-						unit: state.unit, 
-						lastRepComplete: state.lastRepComplete,
-						isLR: !state.isLR,
-						isL: state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "isL":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: state.reps, 
-						weight: state.weight, 
-						unit: state.unit, 
-						lastRepComplete: state.lastRepComplete,
-						isLR: state.isLR,
-						isL: !state.isL,
-						notes: state.notes
-					}
-				});
-				break;
-			case "notes":
-				this.setState( (state, props) => {
-					return {
-						movement: state.movement,
-						reps: state.reps, 
-						weight: state.weight, 
-						unit: state.unit, 
-						lastRepComplete: state.lastRepComplete,
-						isLR: state.isLR,
-						isL: state.isL,
-						notes: input
-					}
-				});
-				break;
-		}
+
+		this.setState( (state, props) => {
+			return {
+				movement: (id == "movement") ? input : state.movement,
+				reps: (id == "reps") ? input : state.reps,
+				weight: (id == "weight") ? input : state.weight,
+				unit: (id == "unit") ? input : state.unit,
+				lastRepComplete: (id == "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
+				isLR: (id == "isLR") ? !state.isLR : state.isLR,
+				isL: (id == "isL") ? !state.isL : state.isL,
+				notes: (id == "notes") ? input : state.notes
+			}
+		});
 	}
 	post() {
 		fetch('/api', {

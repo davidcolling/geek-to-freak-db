@@ -127,6 +127,7 @@ app.post('/dbg', function(request, response) {
 
 app.post('/api', function(request, response) {
 	console.log('workout server: test request received');
+	console.log(request.body);
 	facade.insertSet(request.body.movement, request.body.reps, request.body.weight, request.body.lastRepComplete, request.body.isLR, request.body.isL, request.body.notes);
 })
 
