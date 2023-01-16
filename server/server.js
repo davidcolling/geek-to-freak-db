@@ -58,6 +58,18 @@ class WorkoutDBFacade {
 		)
 
 	}
+	selectEquipment(cb) {
+		this.con.query(
+			"select * from equipment;",
+			function (err, result) {
+				if (err) {
+					cb(err, null);
+				} else {
+					cb(null, result);
+				}
+			}
+		)
+	}
 }
 var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 
@@ -132,6 +144,15 @@ app.post('/api', function(request, response) {
 
 app.get('/equipment', function(request, response) {
 	console.log("test");
+	facade.selectEquipment(
+		function(err, data) {
+			if(err) {
+				console.log("workout server: ", err);
+			} else {
+				console.log("workout server: result: ", data);
+			}
+		}
+	);
 	response.send({message: "hellol"});
 });
 
