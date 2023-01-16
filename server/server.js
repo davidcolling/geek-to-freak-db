@@ -143,17 +143,15 @@ app.post('/api', function(request, response) {
 })
 
 app.get('/equipment', function(request, response) {
-	console.log("test");
 	facade.selectEquipment(
 		function(err, data) {
 			if(err) {
 				console.log("workout server: ", err);
 			} else {
-				console.log("workout server: result: ", data);
+				response.send(data);
 			}
 		}
 	);
-	response.send({message: "hellol"});
 });
 
 app.get('/api', function(request, response) {
