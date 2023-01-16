@@ -131,6 +131,8 @@ app.post('/api', function(request, response) {
 })
 
 app.get('/equipment', function(request, response) {
+	console.log("test");
+	response.send({message: "hellol"});
 });
 
 app.get('/api', function(request, response) {

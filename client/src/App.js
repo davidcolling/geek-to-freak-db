@@ -104,12 +104,17 @@ class EquipmentView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.text = "";
-		fetch('/equipment', {
-			method: 'get',
-    			headers: {
-				"Content-Type": "application/json"
+		this.text += fetch('/equipment').then(res => {
+			if (res.status >= 200 && res.status < 300) {
+				return res.json()
+			} else {
+				throw new Error()
 			}
-		});
+		}).then(
+			data=>console.log(data.message)
+		).catch(
+			err=>console.log('workout client: fetch failed')
+		);
 	}
 
 	render() {
