@@ -111,7 +111,7 @@ class EquipmentView extends React.Component {
 				throw new Error()
 			}
 		}).then(
-			data=>console.log(data)
+			data=>debug.post(data[0].name)
 		).catch(
 			err=>console.log('workout client: fetch failed')
 		);
