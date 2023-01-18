@@ -103,9 +103,9 @@ class HomeView extends React.Component {
 class EquipmentView extends React.Component {
 	constructor(props) {
 		super(props);
-		this.setText = this.setText.bind(this);
+		this.setNames = this.setNames.bind(this);
 		this.state = {
-			text: ""
+			names: new Array()
 		}
 		fetch('/equipment').then(res => {
 			if (res.status >= 200 && res.status < 300) {
@@ -114,7 +114,7 @@ class EquipmentView extends React.Component {
 				throw new Error()
 			}
 		}).then(
-			data=>this.setText(data[0].name)
+			data=>this.setNames(data)
 		).catch(
 			err=>console.log('workout client: fetch failed')
 		);
@@ -123,14 +123,14 @@ class EquipmentView extends React.Component {
 	render() {
 		return (
 			<div>
-				<p>{this.state.text}</p>
+				{this.state.names.map( (item) => (<p>{item.name}</p>))}
 			</div>
 		)
 	}
 
-	setText(text) {
+	setNames(names) {
 		this.setState( (state, props) => {
-			return {text: text}
+			return {names: names}
 		});
 	}
 }
