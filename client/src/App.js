@@ -33,6 +33,30 @@ class DebugMessager {
 }
 var debug = new DebugMessager();
 
+class WorkoutAPIFetcher {
+    constructor() {
+        this.equipment = new Array();
+    }
+    retreiveEquipment() {
+		fetch('/equipment').then(res => {
+			if (res.status >= 200 && res.status < 300) {
+				return res.json()
+			} else {
+				throw new Error()
+			}
+		}).then(
+			data=>this.setEquipment(data)
+		).catch(
+			err=>console.log('workout client: fetch failed')
+		);
+    }
+    setEquipment(equipment) {
+        this.equipment = equipment;
+        debug.post(this.equipment[0].name);
+    }
+}
+var fetcher = new WorkoutAPIFetcher();
+
 class WorkoutDB extends React.Component {
 	constructor(props) {
 		super(props);
@@ -104,20 +128,10 @@ class EquipmentView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.setNames = this.setNames.bind(this);
+        fetcher.retreiveEquipment();
 		this.state = {
 			names: new Array()
 		}
-		fetch('/equipment').then(res => {
-			if (res.status >= 200 && res.status < 300) {
-				return res.json()
-			} else {
-				throw new Error()
-			}
-		}).then(
-			data=>this.setNames(data)
-		).catch(
-			err=>console.log('workout client: fetch failed')
-		);
 	}
 
 	render() {
