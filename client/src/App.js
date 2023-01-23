@@ -191,13 +191,7 @@ class SetAdder extends React.Component {
 		return (
 			<div>
 				<select id="movement" style={dropDownStyle} value={this.state.movement} onChange={this.handleChange}>
-					<option value="incline_press">Incline Press</option>
-					<option value="decline_press">Decline Press</option>
-					<option value="pec_fly">Pec Fly</option>
-					<option value="rear_deltoid">Rear Deltoid</option>
-						<option value="hip_abduction">Hip Abduction</option>
-					<option value="hip_adduction">Hip Adduction</option>
-					<option value="squat">Squat</option>
+                    {fetcher.equipment.map( (item) => (<option value='{item.name}'>{item.name}</option>) )}
 				</select>
 				<input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
 				<input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={this.handleChange} value={this.state.weight} />
