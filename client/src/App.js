@@ -129,27 +129,27 @@ class HomeView extends React.Component {
 class EquipmentView extends React.Component {
 	constructor(props) {
 		super(props);
-		this.setNames = this.setNames.bind(this);
+		this.setEquipment = this.setEquipment.bind(this);
 		this.state = {
-			names: new Array()
+			names: new Array(), 
+            equipment: new Array()
 		}
 	}
 
 	render() {
 		return (
 			<div>
-                <button onClick={this.setNames} style={buttonStyle}>Get</button>
-				{this.state.names.map( (item) => (<p>{item.name}</p>))}
+                <button onClick={this.setEquipment} style={buttonStyle}>Get</button>
+				{this.state.names.map( (item) => (<p>{item}</p>))}
 			</div>
 		)
 	}
 
-	async setNames() {
+	async setEquipment() {
         await fetcher.retreiveEquipment();
-        await debug.post(JSON.stringify(fetcher.equipment));
-		// this.setState( (state, props) => {
-			// return {names: names}
-		// });
+		await this.setState( (state, props) => {
+			return {names: fetcher.equipment.map( (item) => (item.name) ), equipment: fetcher.equipment}
+		});
 	}
 }
 
