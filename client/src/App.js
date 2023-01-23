@@ -54,7 +54,6 @@ class WorkoutAPIFetcher {
     }
     setEquipment(equipment) {
         this.equipment = equipment;
-        debug.post(this.equipment[0].name);
     }
 }
 var fetcher = new WorkoutAPIFetcher();
@@ -134,12 +133,12 @@ class EquipmentView extends React.Component {
 			names: new Array(), 
             equipment: new Array()
 		}
+        this.setEquipment();
 	}
 
 	render() {
 		return (
 			<div>
-                <button onClick={this.setEquipment} style={buttonStyle}>Get</button>
 				{this.state.names.map( (item) => (<p>{item}</p>))}
 			</div>
 		)
