@@ -132,6 +132,7 @@ class EquipmentView extends React.Component {
 		this.state = {
 			names: new Array()
 		}
+        debug.post(JSON.stringify(fetcher.equipment));
 	}
 
 	render() {
