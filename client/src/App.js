@@ -35,10 +35,12 @@ var debug = new DebugMessager();
 
 class WorkoutAPIFetcher {
     constructor() {
+        this.retreiveEquipment = this.retreiveEquipment.bind(this);
+        this.setEquipment = this.setEquipment.bind(this);
         this.equipment = new Array();
     }
-    retreiveEquipment() {
-		fetch('/equipment').then(res => {
+    async retreiveEquipment() {
+		await fetch('/equipment').then(res => {
 			if (res.status >= 200 && res.status < 300) {
 				return res.json()
 			} else {
@@ -128,25 +130,26 @@ class EquipmentView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.setNames = this.setNames.bind(this);
-        fetcher.retreiveEquipment();
 		this.state = {
 			names: new Array()
 		}
-        debug.post(JSON.stringify(fetcher.equipment));
 	}
 
 	render() {
 		return (
 			<div>
+                <button onClick={this.setNames} style={buttonStyle}>Get</button>
 				{this.state.names.map( (item) => (<p>{item.name}</p>))}
 			</div>
 		)
 	}
 
-	setNames(names) {
-		this.setState( (state, props) => {
-			return {names: names}
-		});
+	async setNames() {
+        await fetcher.retreiveEquipment();
+        await debug.post(JSON.stringify(fetcher.equipment));
+		// this.setState( (state, props) => {
+			// return {names: names}
+		// });
 	}
 }
 
