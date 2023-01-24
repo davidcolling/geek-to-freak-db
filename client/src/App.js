@@ -190,9 +190,7 @@ class SetAdder extends React.Component {
 	render() {
 		return (
 			<div>
-				<select id="movement" style={dropDownStyle} value={this.state.movement} onChange={this.handleChange}>
-                    {fetcher.equipment.map( (item) => (<option value='{item.name}'>{item.name}</option>) )}
-				</select>
+                <EquipmentSelector />
 				<input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
 				<input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={this.handleChange} value={this.state.weight} />
 				<select id="unit" style={dropDownStyle} onChange={this.handleChange} value={this.state.unit}>
@@ -233,6 +231,37 @@ class SetAdder extends React.Component {
 			}
 		});
 	}
+}
+
+class EquipmentSelector extends React.Component {
+    constructor() {
+        super();
+        this.setList = this.setList.bind(this);
+        this.state = {
+            list: new Array(),
+            selected: ""
+        }
+        this.setList();
+    }
+    render() {
+        return (
+            <div>
+				<select id="movement" style={dropDownStyle} value={this.state.selected} onChange={this.handleChange}>
+                    {this.state.list.map( (item) => (<option value='{item.name}'>{item.name}</option>) )}
+				</select>
+            </div>
+        )
+    }
+    async setList() {
+        await fetcher.retreiveEquipment();
+        debug.post(JSON.stringify(fetcher.equipment));
+        await this.setState( (state, props) => {
+            return {
+                list: fetcher.equipment,
+                selected: state.selected
+            }
+        });
+    }
 }
 
 class App extends Component {
