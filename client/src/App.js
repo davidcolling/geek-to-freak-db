@@ -104,7 +104,6 @@ class WorkoutDB extends React.Component {
 	}
 	viewEquipmentAdder = () => {
 		this.setState( (state, props) => {
-            debug.post("pushed");
 			return {currentView: <EquipmentAdder />, homeView: <HomeView />}
 		});
     }
