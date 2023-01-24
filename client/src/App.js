@@ -117,8 +117,9 @@ class HomeView extends React.Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add</button>
-				<button onClick={this.viewEquipmentViewEvent} style={buttonStyle}>Equipment</button>
+				<button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add Workout</button>
+                <br />
+				<button onClick={this.viewEquipmentViewEvent} style={buttonStyle}>Manage Equipment</button>
 			</div>
 		)
 	}
