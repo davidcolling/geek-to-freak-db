@@ -99,9 +99,15 @@ class WorkoutDB extends React.Component {
 
 	viewEquipment = () => {
 		this.setState( (state, props) => {
-			return {currentView: <EquipmentView />, homeView: <HomeView />}
+			return {currentView: <EquipmentView viewEquipmentAdderEvent={this.viewEquipmentAdder} />, homeView: <HomeView />}
 		});
 	}
+	viewEquipmentAdder = () => {
+		this.setState( (state, props) => {
+            debug.post("pushed");
+			return {currentView: <EquipmentAdder />, homeView: <HomeView />}
+		});
+    }
 }
 
 class HomeView extends React.Component {
@@ -127,9 +133,12 @@ class HomeView extends React.Component {
 }
 
 class EquipmentView extends React.Component {
+	viewEquipmentAdderEvent: React.PropTypes.func;
+
 	constructor(props) {
 		super(props);
 		this.setEquipment = this.setEquipment.bind(this);
+        this.viewEquipmentAdderEvent = this.props.viewEquipmentAdderEvent;
 		this.state = {
 			names: new Array(), 
             equipment: new Array()
@@ -141,6 +150,7 @@ class EquipmentView extends React.Component {
 		return (
 			<div>
 				{this.state.names.map( (item) => (<p>{item}</p>))}
+                <button onClick={this.viewEquipmentAdderEvent}>Add</button>
 			</div>
 		)
 	}
@@ -149,6 +159,40 @@ class EquipmentView extends React.Component {
         await fetcher.retreiveEquipment();
 		await this.setState( (state, props) => {
 			return {names: fetcher.equipment.map( (item) => (item.name) ), equipment: fetcher.equipment}
+		});
+	}
+}
+
+class EquipmentAdder extends React.Component {
+    constructor() {
+        super();
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            name: "",
+            isFreeWeight: false,
+            notes: ""
+        }
+    }
+	render() {
+		return (
+			<div>
+				<input id="name" type="text" onChange={this.handleChange} value={this.state.name} />
+				<input id="isFreeWeight" type="checkbox" onChange={this.handleChange} checked={this.state.isFreeWeight} />
+				<input id="notes" type="text" onChange={this.handleChange} value={this.state.notes} />
+			</div>
+		)
+	}
+
+	handleChange(e) {
+		var id = e.target.id;
+		var input = e.target.value;
+
+		this.setState( (state, props) => {
+			return {
+				name: (id == "name") ? input : state.name,
+				isFreeWeight: (id == "isFreeWeight") ? !state.isFreeWeight : state.isFreeWeight,
+				notes : (id == "notes") ? input : state.notes
+			}
 		});
 	}
 }
