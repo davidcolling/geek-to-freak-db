@@ -254,7 +254,6 @@ class EquipmentSelector extends React.Component {
     }
     async setList() {
         await fetcher.retreiveEquipment();
-        debug.post(JSON.stringify(fetcher.equipment));
         await this.setState( (state, props) => {
             return {
                 list: fetcher.equipment,
