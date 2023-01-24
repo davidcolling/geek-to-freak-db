@@ -238,6 +238,7 @@ class EquipmentSelector extends React.Component {
     constructor() {
         super();
         this.setList = this.setList.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
             list: new Array(),
             selected: ""
@@ -248,17 +249,26 @@ class EquipmentSelector extends React.Component {
         return (
             <div>
 				<select id="movement" style={dropDownStyle} value={this.state.selected} onChange={this.handleChange}>
-                    {this.state.list.map( (item) => (<option value='{item.name}'>{item.name}</option>) )}
+                    {this.state.list.map( (item) => (<option value={item.name}>{item.name}</option>) )}
 				</select>
             </div>
         )
+    }
+    handleChange(e) {
+        var input = e.target.value;
+        this.setState( (state, props) => {
+            return {
+                list: state.list, 
+                selected: input
+            }
+        });
     }
     async setList() {
         await fetcher.retreiveEquipment();
         await this.setState( (state, props) => {
             return {
                 list: fetcher.equipment,
-                selected: state.selected
+                selected: state.equipment
             }
         });
     }
