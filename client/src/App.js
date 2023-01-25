@@ -249,15 +249,20 @@ class SetAdder extends React.Component {
         return (
             <div>
                 <EquipmentSelector />
+                <p>Reps</p>
                 <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
+                <br/>
                 <input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={this.handleChange} value={this.state.weight} />
                 <select id="unit" style={dropDownStyle} onChange={this.handleChange} value={this.state.unit}>
                     <option value="pounds">Pounds</option>
                     <option value="kilograms">Kilograms</option>
                 </select>
+                <p>Was the last rep complete?</p>
                 <input id="lastRepComplete" type="checkbox" onChange={this.handleChange} checked={this.state.lastRepComplete} />
+                <p>Did you lift both sides of your body simultaneously?</p>
                 <input id="isLR" type="checkbox" onChange={this.handleChange} checked={this.state.isLR} />
                 <input id="isL" type="checkbox" onChange={this.handleChange} checked={this.state.isL} />
+                <p>Notes</p>
                 <input id="notes" type="text" onChange={this.handleChange} value={this.state.notes} />
                 <button onClick={this.post} style={buttonStyle}>Add</button>
             </div>
@@ -334,7 +339,7 @@ class EquipmentSelector extends React.Component {
 class App extends Component {
     render() {
         return <WorkoutDB />;
-      }
+    }
 }
 
 export default App;
