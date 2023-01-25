@@ -281,7 +281,7 @@ class SetAdder extends React.Component {
         });
     }
     post() {
-        fetch('/api', {
+        fetch('/sets', {
             method: 'post',
             body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight, lastRepComplete: this.state.lastRepComplete, isLR: this.state.isLR, isL: this.state.isL, notes: this.state.notes}),
                 headers: {

@@ -137,7 +137,7 @@ app.post('/dbg', function(request, response) {
 	console.log("workoutdb client debug message: " + request.body.message);
 })
 
-app.post('/api', function(request, response) {
+app.post('/sets', function(request, response) {
 	console.log('workout server: test request received');
 	facade.insertSet(request.body.movement, request.body.reps, request.body.weight, request.body.lastRepComplete, request.body.isLR, request.body.isL, request.body.notes);
 })
