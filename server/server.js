@@ -142,6 +142,13 @@ app.post('/api', function(request, response) {
 	facade.insertSet(request.body.movement, request.body.reps, request.body.weight, request.body.lastRepComplete, request.body.isLR, request.body.isL, request.body.notes);
 })
 
+app.post('/equipment', function(request, response) {
+    facade.insertEquipment(
+        request.body.name, 
+        request.body.isFreeWeight
+    );
+});
+
 app.get('/equipment', function(request, response) {
 	facade.selectEquipment(
 		function(err, data) {

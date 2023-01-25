@@ -166,6 +166,7 @@ class EquipmentAdder extends React.Component {
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
+        this.post = this.post.bind(this);
         this.state = {
             name: "",
             isFreeWeight: false,
@@ -175,9 +176,13 @@ class EquipmentAdder extends React.Component {
     render() {
         return (
             <div>
+                <p>Name</p>
                 <input id="name" type="text" onChange={this.handleChange} value={this.state.name} />
+                <p>This is a free-weight.</p>
                 <input id="isFreeWeight" type="checkbox" onChange={this.handleChange} checked={this.state.isFreeWeight} />
+                <p>Notes</p>
                 <input id="notes" type="text" onChange={this.handleChange} value={this.state.notes} />
+                <button onClick={this.post}>Add</button>
             </div>
         )
     }
@@ -191,6 +196,15 @@ class EquipmentAdder extends React.Component {
                 name: (id == "name") ? input : state.name,
                 isFreeWeight: (id == "isFreeWeight") ? !state.isFreeWeight : state.isFreeWeight,
                 notes : (id == "notes") ? input : state.notes
+            }
+        });
+    }
+    post() {
+        fetch('/equipment', {
+            method: 'post',
+            body: JSON.stringify({name: this.state.name, isFreeWeight: this.state.isFreeWeight}),
+                headers: {
+                "Content-Type": "application/json"
             }
         });
     }
