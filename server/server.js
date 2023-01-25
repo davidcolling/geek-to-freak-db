@@ -161,24 +161,6 @@ app.get('/equipment', function(request, response) {
 	);
 });
 
-app.get('/api', function(request, response) {
-	response.set('Content-Type', 'application/json');
-	var out = facade.query(
-		"select json_arrayagg(" +
-			"json_object(" +
-				"'id', 'id', " +
-				"'name', 'name', " +
-				"'isFreeWeight', 'isFreeWeight'," +
-				"'notes', 'notes'" +
-			") " +
-		") " +
-		"from equipment;",
-		"workout database: got query"
-	)
-	response.send('{"message": "workout server: test request received"}');
-	console.log(out);
-})
-
 // start server
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
