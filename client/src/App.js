@@ -93,7 +93,7 @@ class WorkoutDB extends React.Component {
 
     viewSetAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <SetAdder />, homeView: <HomeView />}
+            return {currentView: <SetAdder viewPostedViewEvent={this.viewPostedView} />, homeView: <HomeView />}
         });
     }
 
@@ -104,7 +104,12 @@ class WorkoutDB extends React.Component {
     }
     viewEquipmentAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentAdder />, homeView: <HomeView />}
+            return {currentView: <EquipmentAdder viewPostedViewEvent={this.viewPostedView} />, homeView: <HomeView />}
+        });
+    }
+    viewPostedView = () => {
+        this.setState( (state, props) => {
+            return {currentView: <PostedView />, homeView: <HomeView />}
         });
     }
 }
@@ -125,6 +130,20 @@ class HomeView extends React.Component {
                 <button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add Workout</button>
                 <br />
                 <button onClick={this.viewEquipmentViewEvent} style={buttonStyle}>Manage Equipment</button>
+            </div>
+        )
+    }
+
+}
+
+class PostedView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>
+                <p>The data was successfully posted.</p>
             </div>
         )
     }
@@ -163,9 +182,12 @@ class EquipmentView extends React.Component {
 }
 
 class EquipmentAdder extends React.Component {
-    constructor() {
-        super();
+    viewPostedViewEvent: React.PropTypes.func;
+
+    constructor(props) {
+        super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.viewPostedViewEvent = this.props.viewPostedViewEvent;
         this.post = this.post.bind(this);
         this.state = {
             name: "",
@@ -207,6 +229,7 @@ class EquipmentAdder extends React.Component {
                 "Content-Type": "application/json"
             }
         });
+        this.viewPostedViewEvent();
     }
 }
 
@@ -230,9 +253,12 @@ class WorkoutAdder extends React.Component {
 
 
 class SetAdder extends React.Component {
+    viewPostedViewEvent: React.PropTypes.func;
+
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this)
+        this.viewPostedViewEvent = this.props.viewPostedViewEvent;
         this.post = this.post.bind(this)
         this.state = {
             movement: "incline_press",
@@ -293,7 +319,9 @@ class SetAdder extends React.Component {
                 "Content-Type": "application/json"
             }
         });
+        this.viewPostedViewEvent();
     }
+
 }
 
 class EquipmentSelector extends React.Component {
