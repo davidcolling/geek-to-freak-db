@@ -239,14 +239,27 @@ class WorkoutAdder extends React.Component {
     constructor(props) {
         super(props);
         this.viewSetAdderEvent = this.props.viewSetAdderEvent;
+        this.addSet = this.addSet.bind(this);
+        this.state = {
+            list: [ <button onClick={this.addSet} style={buttonStyle}>Add Set</button> ]
+        }
     }
 
     render() {
         return (
             <div>
-                <button onClick={this.viewSetAdderEvent} style={buttonStyle}>Add Set</button>
+                {this.state.list}
             </div>
         )
+    }
+
+    addSet() {
+        this.setState( (state, props)  => {
+            list: state.list.push(
+                <button onClick={this.addSet} style={buttonStyle}>Add Set</button>
+            )
+        });
+        this.viewSetAdderEvent();
     }
 
 }
