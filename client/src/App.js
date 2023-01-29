@@ -56,12 +56,12 @@ class WorkoutAPIFetcher {
         this.equipment = equipment;
     }
 }
-var fetcher = new WorkoutAPIFetcher();
 
 class WorkoutDB extends React.Component {
     constructor(props) {
         super(props);
         var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
+        this.fetcher = new WorkoutAPIFetcher();
         this.state = {
             homeView: homeView,
             currentView: homeView
@@ -93,18 +93,18 @@ class WorkoutDB extends React.Component {
 
     viewSetAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <SetAdder viewPostedViewEvent={this.viewPostedView} />, homeView: <HomeView />}
+            return {currentView: <SetAdder viewPostedViewEvent={this.viewPostedView} fetcher={this.fetcher} />, homeView: <HomeView />}
         });
     }
 
     viewEquipment = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentView viewEquipmentAdderEvent={this.viewEquipmentAdder} />, homeView: <HomeView />}
+            return {currentView: <EquipmentView viewEquipmentAdderEvent={this.viewEquipmentAdder} fetcher={this.fetcher} />, homeView: <HomeView />}
         });
     }
     viewEquipmentAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentAdder viewPostedViewEvent={this.viewPostedView} />, homeView: <HomeView />}
+            return {currentView: <EquipmentAdder viewPostedViewEvent={this.viewPostedView} fetcher={this.fetcher}/>, homeView: <HomeView />}
         });
     }
     viewPostedView = () => {
@@ -157,6 +157,7 @@ class EquipmentView extends React.Component {
         super(props);
         this.setEquipment = this.setEquipment.bind(this);
         this.viewEquipmentAdderEvent = this.props.viewEquipmentAdderEvent;
+        this.fetcher = this.props.fetcher;
         this.state = {
             names: new Array(), 
             equipment: new Array()
@@ -174,9 +175,10 @@ class EquipmentView extends React.Component {
     }
 
     async setEquipment() {
-        await fetcher.retreiveEquipment();
+        await this.fetcher.retreiveEquipment();
+        var equipment = this.fetcher.equipment;
         await this.setState( (state, props) => {
-            return {names: fetcher.equipment.map( (item) => (item.name) ), equipment: fetcher.equipment}
+            return {names: equipment.map( (item) => (item.name) ), equipment: equipment}
         });
     }
 }
@@ -273,6 +275,7 @@ class SetAdder extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.viewPostedViewEvent = this.props.viewPostedViewEvent;
         this.post = this.post.bind(this)
+        this.fetcher = this.props.fetcher;
         this.state = {
             movement: "incline_press",
             reps: 6,
@@ -287,7 +290,7 @@ class SetAdder extends React.Component {
     render() {
         return (
             <div>
-                <EquipmentSelector />
+                <EquipmentSelector fetcher={this.fetcher} />
                 <p>Reps</p>
                 <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
                 <br/>
@@ -338,10 +341,11 @@ class SetAdder extends React.Component {
 }
 
 class EquipmentSelector extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.setList = this.setList.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.fetcher = this.props.fetcher;
         this.state = {
             list: new Array(),
             selected: ""
@@ -367,10 +371,11 @@ class EquipmentSelector extends React.Component {
         });
     }
     async setList() {
-        await fetcher.retreiveEquipment();
+        await this.fetcher.retreiveEquipment();
+        var equipment = this.fetcher.equipment
         await this.setState( (state, props) => {
             return {
-                list: fetcher.equipment,
+                list: equipment,
                 selected: state.equipment
             }
         });
