@@ -64,7 +64,8 @@ class WorkoutDB extends React.Component {
         this.fetcher = new WorkoutAPIFetcher();
         this.state = {
             homeView: homeView,
-            currentView: homeView
+            currentView: homeView,
+            workoutAdder: <WorkoutAdder viewSetAdderEvent={this.viewSetAdder} />
         }
     }
     
@@ -87,29 +88,29 @@ class WorkoutDB extends React.Component {
 
     viewWorkoutAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <WorkoutAdder viewSetAdderEvent={this.viewSetAdder} />, homeView: <HomeView />}
+            return {currentView: state.workoutAdder, homeView: <HomeView />, workoutAdder: state.workoutAdder}
         });
     }
 
     viewSetAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <SetAdder viewPostedViewEvent={this.viewPostedView} fetcher={this.fetcher} />, homeView: <HomeView />}
+            return {currentView: <SetAdder viewPostedViewEvent={this.viewPostedView} viewWorkoutAdderEvent={this.viewWorkoutAdder} fetcher={this.fetcher} />, homeView: <HomeView />, workoutAdder: state.workoutAdder}
         });
     }
 
     viewEquipment = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentView viewEquipmentAdderEvent={this.viewEquipmentAdder} fetcher={this.fetcher} />, homeView: <HomeView />}
+            return {currentView: <EquipmentView viewEquipmentAdderEvent={this.viewEquipmentAdder} fetcher={this.fetcher} />, homeView: <HomeView />, workoutAdder: state.workoutAdder}
         });
     }
     viewEquipmentAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentAdder viewPostedViewEvent={this.viewPostedView} fetcher={this.fetcher}/>, homeView: <HomeView />}
+            return {currentView: <EquipmentAdder viewPostedViewEvent={this.viewPostedView} fetcher={this.fetcher}/>, homeView: <HomeView />, workoutAdder: state.workoutAdder}
         });
     }
     viewPostedView = () => {
         this.setState( (state, props) => {
-            return {currentView: <PostedView />, homeView: <HomeView />}
+            return {currentView: <PostedView />, homeView: <HomeView />, workoutAdder: state.workoutAdder}
         });
     }
 }
@@ -250,16 +251,19 @@ class WorkoutAdder extends React.Component {
     render() {
         return (
             <div>
-                {this.state.list}
+                {this.state.list.map( (item) => {return item;} )}
             </div>
         )
     }
 
     addSet() {
+        var newList = this.state.list;
+        newList[newList.length - 1]  = <p>Set Added</p>;
+        newList.push(
+            <button onClick={this.addSet} style={buttonStyle}>Add Set</button>
+        );
         this.setState( (state, props)  => {
-            list: state.list.push(
-                <button onClick={this.addSet} style={buttonStyle}>Add Set</button>
-            )
+            list: newList
         });
         this.viewSetAdderEvent();
     }
@@ -269,11 +273,13 @@ class WorkoutAdder extends React.Component {
 
 class SetAdder extends React.Component {
     viewPostedViewEvent: React.PropTypes.func;
+    viewWorkoutAdderEvent: React.PropTypes.func;
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this)
         this.viewPostedViewEvent = this.props.viewPostedViewEvent;
+        this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
         this.post = this.post.bind(this)
         this.fetcher = this.props.fetcher;
         this.state = {
@@ -335,7 +341,7 @@ class SetAdder extends React.Component {
                 "Content-Type": "application/json"
             }
         });
-        this.viewPostedViewEvent();
+        this.viewWorkoutAdderEvent();
     }
 
 }
