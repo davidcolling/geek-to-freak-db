@@ -88,29 +88,56 @@ class WorkoutDB extends React.Component {
 
     viewWorkoutAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: state.workoutAdder, homeView: <HomeView />, workoutAdder: state.workoutAdder}
+            return {
+                currentView: state.workoutAdder, 
+                homeView: <HomeView />, 
+                workoutAdder: state.workoutAdder
+            }
         });
     }
 
     viewSetAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <SetAdder viewPostedViewEvent={this.viewPostedView} viewWorkoutAdderEvent={this.viewWorkoutAdder} fetcher={this.fetcher} />, homeView: <HomeView />, workoutAdder: state.workoutAdder}
+            return {
+                currentView: <SetAdder 
+                    viewPostedViewEvent={this.viewPostedView} 
+                    viewWorkoutAdderEvent={this.viewWorkoutAdder} 
+                    fetcher={this.fetcher} />, 
+                homeView: <HomeView />, 
+                workoutAdder: state.workoutAdder
+            }
         });
     }
 
     viewEquipment = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentView viewEquipmentAdderEvent={this.viewEquipmentAdder} fetcher={this.fetcher} />, homeView: <HomeView />, workoutAdder: state.workoutAdder}
+            return {
+                currentView: <EquipmentView 
+                    viewEquipmentAdderEvent={this.viewEquipmentAdder} 
+                    fetcher={this.fetcher} />, 
+                homeView: <HomeView />, 
+                workoutAdder: state.workoutAdder
+            }
         });
     }
     viewEquipmentAdder = () => {
         this.setState( (state, props) => {
-            return {currentView: <EquipmentAdder viewPostedViewEvent={this.viewPostedView} fetcher={this.fetcher}/>, homeView: <HomeView />, workoutAdder: state.workoutAdder}
+            return {
+                currentView: <EquipmentAdder 
+                    viewPostedViewEvent={this.viewPostedView} 
+                    fetcher={this.fetcher}/>, 
+                homeView: <HomeView />, 
+                workoutAdder: state.workoutAdder
+            }
         });
     }
     viewPostedView = () => {
         this.setState( (state, props) => {
-            return {currentView: <PostedView />, homeView: <HomeView />, workoutAdder: state.workoutAdder}
+            return {
+                currentView: <PostedView />, 
+                homeView: <HomeView />, 
+                workoutAdder: state.workoutAdder
+            }
         });
     }
 }
@@ -336,8 +363,16 @@ class SetAdder extends React.Component {
     post() {
         fetch('/sets', {
             method: 'post',
-            body: JSON.stringify({movement: this.state.movement, reps: this.state.reps, weight: this.state.weight, lastRepComplete: this.state.lastRepComplete, isLR: this.state.isLR, isL: this.state.isL, notes: this.state.notes}),
-                headers: {
+            body: JSON.stringify({
+                movement: this.state.movement, 
+                reps: this.state.reps, 
+                weight: this.state.weight, 
+                lastRepComplete: this.state.lastRepComplete, 
+                isLR: this.state.isLR, 
+                isL: this.state.isL, 
+                notes: this.state.notes
+            }),
+            headers: {
                 "Content-Type": "application/json"
             }
         });
