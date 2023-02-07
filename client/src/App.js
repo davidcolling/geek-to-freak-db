@@ -61,6 +61,7 @@ class WorkoutDB extends React.Component {
     constructor(props) {
         super(props);
         var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
+        this.viewEquipment = this.viewEquipment.bind(this);
         this.fetcher = new WorkoutAPIFetcher();
         this.state = {
             homeView: homeView,
@@ -109,12 +110,14 @@ class WorkoutDB extends React.Component {
         });
     }
 
-    viewEquipment = () => {
-        this.setState( (state, props) => {
+    viewEquipment = async () => {
+        await this.fetcher.retreiveEquipment();
+        await this.setState( (state, props) => {
             return {
                 currentView: <EquipmentView 
                     viewEquipmentAdderEvent={this.viewEquipmentAdder} 
-                    fetcher={this.fetcher} />, 
+                    fetcher={this.fetcher} 
+                    names={this.fetcher.equipment.map( (item) => (item.name) )}/>, 
                 homeView: <HomeView />, 
                 workoutAdder: state.workoutAdder
             }
@@ -183,32 +186,18 @@ class EquipmentView extends React.Component {
 
     constructor(props) {
         super(props);
-        this.setEquipment = this.setEquipment.bind(this);
         this.viewEquipmentAdderEvent = this.props.viewEquipmentAdderEvent;
-        this.fetcher = this.props.fetcher;
-        this.state = {
-            names: new Array(), 
-            equipment: new Array()
-        }
-        this.setEquipment();
     }
 
     render() {
         return (
             <div>
-                {this.state.names.map( (item) => (<p>{item}</p>))}
+                {this.props.names.map( (item) => (<p>{item}</p>))}
                 <button onClick={this.viewEquipmentAdderEvent}>Add</button>
             </div>
         )
     }
 
-    async setEquipment() {
-        await this.fetcher.retreiveEquipment();
-        var equipment = this.fetcher.equipment;
-        await this.setState( (state, props) => {
-            return {names: equipment.map( (item) => (item.name) ), equipment: equipment}
-        });
-    }
 }
 
 class EquipmentAdder extends React.Component {
