@@ -62,6 +62,7 @@ class WorkoutDB extends React.Component {
         super(props);
         var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
         this.viewEquipment = this.viewEquipment.bind(this);
+        this.viewSetAdder = this.viewSetAdder.bind(this);
         this.fetcher = new WorkoutAPIFetcher();
         this.state = {
             homeView: homeView,
@@ -97,13 +98,14 @@ class WorkoutDB extends React.Component {
         });
     }
 
-    viewSetAdder = () => {
-        this.setState( (state, props) => {
+    viewSetAdder = async () => {
+        await this.fetcher.retreiveEquipment();
+        await this.setState( (state, props) => {
             return {
                 currentView: <SetAdder 
                     viewPostedViewEvent={this.viewPostedView} 
                     viewWorkoutAdderEvent={this.viewWorkoutAdder} 
-                    fetcher={this.fetcher} />, 
+                    equipment={this.fetcher.equipment.map( (item) => { return item })} />, 
                 homeView: <HomeView />, 
                 workoutAdder: state.workoutAdder
             }
@@ -295,7 +297,6 @@ class SetAdder extends React.Component {
         this.viewPostedViewEvent = this.props.viewPostedViewEvent;
         this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
         this.post = this.post.bind(this)
-        this.fetcher = this.props.fetcher;
         this.state = {
             movement: "incline_press",
             reps: 6,
@@ -310,7 +311,7 @@ class SetAdder extends React.Component {
     render() {
         return (
             <div>
-                <EquipmentSelector fetcher={this.fetcher} />
+                <EquipmentSelector list={this.props.equipment} />
                 <p>Reps</p>
                 <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
                 <br/>
@@ -371,40 +372,24 @@ class SetAdder extends React.Component {
 class EquipmentSelector extends React.Component {
     constructor(props) {
         super(props);
-        this.setList = this.setList.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.fetcher = this.props.fetcher;
         this.state = {
-            list: new Array(),
             selected: ""
         }
-        this.setList();
     }
     render() {
         return (
             <div>
                 <select id="movement" style={dropDownStyle} value={this.state.selected} onChange={this.handleChange}>
-                    {this.state.list.map( (item) => (<option value={item.name}>{item.name}</option>) )}
+                    {this.props.list.map( (item) => (<option value={item.name}>{item.name}</option>) )}
                 </select>
             </div>
         )
     }
     handleChange(e) {
-        var input = e.target.value;
         this.setState( (state, props) => {
             return {
-                list: state.list, 
-                selected: input
-            }
-        });
-    }
-    async setList() {
-        await this.fetcher.retreiveEquipment();
-        var equipment = this.fetcher.equipment
-        await this.setState( (state, props) => {
-            return {
-                list: equipment,
-                selected: state.equipment
+                selected: e.value 
             }
         });
     }
