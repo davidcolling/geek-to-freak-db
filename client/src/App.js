@@ -57,7 +57,7 @@ class WorkoutAPIFetcher {
     }
 }
 
-class WorkoutDB extends React.Component {
+class WorkoutDBContainer extends React.Component {
     constructor(props) {
         super(props);
         var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
@@ -397,7 +397,7 @@ class EquipmentSelector extends React.Component {
 
 class App extends Component {
     render() {
-        return <WorkoutDB />;
+        return <WorkoutDBContainer />;
     }
 }
 
