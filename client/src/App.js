@@ -84,7 +84,7 @@ class WorkoutDB extends React.Component {
 class WorkoutDBContainer extends React.Component {
     constructor(props) {
         super(props);
-        var homeView = <HomeView viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
+        var homeView = <HomeViewContainer viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
         this.viewEquipment = this.viewEquipment.bind(this);
         this.viewSetAdder = this.viewSetAdder.bind(this);
         this.fetcher = new WorkoutAPIFetcher();
@@ -105,7 +105,7 @@ class WorkoutDBContainer extends React.Component {
         this.setState( (state, props) => {
             return {
                 currentView: state.workoutAdder, 
-                homeView: <HomeView />, 
+                homeView: <HomeViewContainer />, 
                 workoutAdder: state.workoutAdder
             }
         });
@@ -119,7 +119,7 @@ class WorkoutDBContainer extends React.Component {
                     viewPostedViewEvent={this.viewPostedView} 
                     viewWorkoutAdderEvent={this.viewWorkoutAdder} 
                     equipment={this.fetcher.equipment.map( (item) => { return item })} />, 
-                homeView: <HomeView />, 
+                homeView: <HomeViewContainer />, 
                 workoutAdder: state.workoutAdder
             }
         });
@@ -133,7 +133,7 @@ class WorkoutDBContainer extends React.Component {
                     viewEquipmentAdderEvent={this.viewEquipmentAdder} 
                     fetcher={this.fetcher} 
                     names={this.fetcher.equipment.map( (item) => (item.name) )}/>, 
-                homeView: <HomeView />, 
+                homeView: <HomeViewContainer />, 
                 workoutAdder: state.workoutAdder
             }
         });
@@ -144,7 +144,7 @@ class WorkoutDBContainer extends React.Component {
                 currentView: <EquipmentAdder 
                     viewPostedViewEvent={this.viewPostedView} 
                     fetcher={this.fetcher}/>, 
-                homeView: <HomeView />, 
+                homeView: <HomeViewContainer />, 
                 workoutAdder: state.workoutAdder
             }
         });
@@ -153,7 +153,7 @@ class WorkoutDBContainer extends React.Component {
         this.setState( (state, props) => {
             return {
                 currentView: <PostedView />, 
-                homeView: <HomeView />, 
+                homeView: <HomeViewContainer />, 
                 workoutAdder: state.workoutAdder
             }
         });
@@ -176,6 +176,28 @@ class HomeView extends React.Component {
                 <button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add Workout</button>
                 <br />
                 <button onClick={this.viewEquipmentViewEvent} style={buttonStyle}>Manage Equipment</button>
+            </div>
+        );
+    }
+}
+
+class HomeViewContainer extends React.Component {
+    viewWorkoutAdderEvent: React.PropTypes.func;
+    viewEquipmentViewEvent: React.PropTypes.func;
+
+    constructor(props) {
+        super(props);
+        this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
+        this.viewEquipmentViewEvent = this.props.viewEquipmentViewEvent;
+    }
+
+    render() {
+        return (
+            <div>
+                <HomeView 
+                    viewWorkoutAdderEvent={this.viewWorkoutAdderEvent}
+                    viewEquipmentViewEvent={this.viewEquipmentViewEvent}
+                />
             </div>
         )
     }
