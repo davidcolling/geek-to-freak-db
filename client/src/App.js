@@ -56,6 +56,30 @@ class WorkoutAPIFetcher {
         this.equipment = equipment;
     }
 }
+class WorkoutDB extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props = props;
+    }
+    
+    render() {
+          return (
+            <div style={
+                {
+                    width: '250px', 
+                    display: 'block', 
+                    margin: 'auto', 
+                    borderColor: 'black', 
+                    borderStyle: 'solid', 
+                    borderWidth: '1px'
+                }
+            }>
+                {this.props.view}
+            </div>
+        )
+    }
+
+}
 
 class WorkoutDBContainer extends React.Component {
     constructor(props) {
@@ -72,19 +96,8 @@ class WorkoutDBContainer extends React.Component {
     }
     
     render() {
-          return (
-            <div style={
-                {
-                    width: '250px', 
-                    display: 'block', 
-                    margin: 'auto', 
-                    borderColor: 'black', 
-                    borderStyle: 'solid', 
-                    borderWidth: '1px'
-                }
-            }>
-                {this.state.currentView}
-            </div>
+        return (
+            <WorkoutDB view={this.state.currentView} />
         )
     }
 
