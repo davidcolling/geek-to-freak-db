@@ -346,7 +346,7 @@ class SetAdder extends React.Component {
     render() {
         return (
             <div>
-                <EquipmentSelector list={this.props.equipment} />
+                <EquipmentSelectorContainer list={this.props.equipment} />
                 <p>Reps</p>
                 <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
                 <br/>
@@ -407,6 +407,20 @@ class SetAdder extends React.Component {
 class EquipmentSelector extends React.Component {
     constructor(props) {
         super(props);
+    }
+    render() {
+        return (
+            <div>
+                <select id="movement" style={dropDownStyle} value={this.props.selected} onChange={this.props.onChange} >
+                    {this.props.list.map( (item) => (<option value={item.name}>{item.name}</option>) )}
+                </select>
+            </div>
+        )
+    }
+}
+class EquipmentSelectorContainer extends React.Component {
+    constructor(props) {
+        super(props);
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             selected: ""
@@ -414,11 +428,7 @@ class EquipmentSelector extends React.Component {
     }
     render() {
         return (
-            <div>
-                <select id="movement" style={dropDownStyle} value={this.state.selected} onChange={this.handleChange}>
-                    {this.props.list.map( (item) => (<option value={item.name}>{item.name}</option>) )}
-                </select>
-            </div>
+            <EquipmentSelector selected={this.state.selected} list={this.props.list}  onChange={this.handleChange} />
         )
     }
     handleChange(e) {
