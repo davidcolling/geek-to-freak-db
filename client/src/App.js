@@ -238,6 +238,22 @@ class EquipmentView extends React.Component {
 }
 
 class EquipmentAdder extends React.Component {
+    render() {
+        return (
+            <div>
+                <p>Name</p>
+                <input id="name" type="text" onChange={this.handleChange} value={this.props.name} />
+                <p>This is a free-weight.</p>
+                <input id="isFreeWeight" type="checkbox" onChange={this.handleChange} checked={this.props.isFreeWeight} />
+                <p>Notes</p>
+                <input id="notes" type="text" onChange={this.handleChange} value={this.props.notes} />
+                <button onClick={this.post}>Add</button>
+            </div>
+        )
+    }
+
+}
+class EquipmentAdderContainer extends React.Component {
     viewPostedViewEvent: React.PropTypes.func;
 
     constructor(props) {
@@ -254,13 +270,7 @@ class EquipmentAdder extends React.Component {
     render() {
         return (
             <div>
-                <p>Name</p>
-                <input id="name" type="text" onChange={this.handleChange} value={this.state.name} />
-                <p>This is a free-weight.</p>
-                <input id="isFreeWeight" type="checkbox" onChange={this.handleChange} checked={this.state.isFreeWeight} />
-                <p>Notes</p>
-                <input id="notes" type="text" onChange={this.handleChange} value={this.state.notes} />
-                <button onClick={this.post}>Add</button>
+                <EquipmentAdder {...this.state} />
             </div>
         )
     }
