@@ -136,7 +136,7 @@ class WorkoutDBContainer extends React.Component {
     viewEquipmentAdder = () => {
         this.setState( (state, props) => {
             return {
-                currentView: <EquipmentAdder 
+                currentView: <EquipmentAdderContainer 
                     viewPostedViewEvent={this.viewPostedView} 
                     fetcher={this.fetcher}/>, 
                 homeView: <HomeViewContainer />, 
