@@ -273,9 +273,9 @@ class EquipmentAdderContainer extends React.Component {
 
         this.setState( (state, props) => {
             return {
-                name: (id == "name") ? input : state.name,
-                isFreeWeight: (id == "isFreeWeight") ? !state.isFreeWeight : state.isFreeWeight,
-                notes : (id == "notes") ? input : state.notes
+                name: (id === "name") ? input : state.name,
+                isFreeWeight: (id === "isFreeWeight") ? !state.isFreeWeight : state.isFreeWeight,
+                notes : (id === "notes") ? input : state.notes
             }
         });
     }
@@ -307,7 +307,6 @@ class WorkoutAdderContainer extends React.Component {
     constructor(props) {
         super(props);
         this.viewSetAdderEvent = this.props.viewSetAdderEvent;
-        this.addSet = this.addSet.bind(this);
         this.state = {
             list: [ <button onClick={this.viewSetAdderEvent} style={buttonStyle}>Add Set</button> ]
         }
@@ -372,14 +371,14 @@ class SetAdder extends React.Component {
 
         this.setState( (state, props) => {
             return {
-                movement: (id == "movement") ? input : state.movement,
-                reps: (id == "reps") ? input : state.reps,
-                weight: (id == "weight") ? input : state.weight,
-                unit: (id == "unit") ? input : state.unit,
-                lastRepComplete: (id == "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
-                isLR: (id == "isLR") ? !state.isLR : state.isLR,
-                isL: (id == "isL") ? !state.isL : state.isL,
-                notes: (id == "notes") ? input : state.notes
+                movement: (id === "movement") ? input : state.movement,
+                reps: (id === "reps") ? input : state.reps,
+                weight: (id === "weight") ? input : state.weight,
+                unit: (id === "unit") ? input : state.unit,
+                lastRepComplete: (id === "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
+                isLR: (id === "isLR") ? !state.isLR : state.isLR,
+                isL: (id === "isL") ? !state.isL : state.isL,
+                notes: (id === "notes") ? input : state.notes
             }
         });
     }
