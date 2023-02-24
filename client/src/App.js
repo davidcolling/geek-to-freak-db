@@ -415,9 +415,6 @@ class SetAdder extends React.Component {
 }
 
 class EquipmentSelector extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div>
@@ -438,7 +435,7 @@ class EquipmentSelectorContainer extends React.Component {
     }
     render() {
         return (
-            <EquipmentSelector selected={this.state.selected} list={this.props.list}  onChange={this.handleChange} />
+            <EquipmentSelector {...this.state} {...this.props}  onChange={this.handleChange} />
         )
     }
     handleChange(e) {
