@@ -57,11 +57,6 @@ class WorkoutAPIFetcher {
     }
 }
 class WorkoutDB extends React.Component {
-    constructor(props) {
-        super(props);
-        this.props = props;
-    }
-    
     render() {
           return (
             <div style={
@@ -91,7 +86,7 @@ class WorkoutDBContainer extends React.Component {
         this.state = {
             homeView: homeView,
             currentView: homeView,
-            workoutAdder: <WorkoutAdder viewSetAdderEvent={this.viewSetAdder} />
+            workoutAdder: <WorkoutAdderContainer viewSetAdderEvent={this.viewSetAdder} />
         }
     }
     
@@ -300,6 +295,16 @@ class EquipmentAdderContainer extends React.Component {
 }
 
 class WorkoutAdder extends React.Component {
+    render() {
+        return (
+            <div>
+                {this.props.list.map( (item) => {return item;} )}
+            </div>
+        )
+    }
+
+}
+class WorkoutAdderContainer extends React.Component {
     viewSetAdderEvent: React.PropTypes.func;
 
     constructor(props) {
@@ -307,15 +312,13 @@ class WorkoutAdder extends React.Component {
         this.viewSetAdderEvent = this.props.viewSetAdderEvent;
         this.addSet = this.addSet.bind(this);
         this.state = {
-            list: [ <button onClick={this.addSet} style={buttonStyle}>Add Set</button> ]
+            list: [ <button onClick={this.viewSetAdderEvent} style={buttonStyle}>Add Set</button> ]
         }
     }
 
     render() {
         return (
-            <div>
-                {this.state.list.map( (item) => {return item;} )}
-            </div>
+            <WorkoutAdder {...this.state} />
         )
     }
 
