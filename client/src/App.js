@@ -319,16 +319,6 @@ class WorkoutAdderContainer extends React.Component {
         )
     }
 
-    addSet() {
-        var newList = this.state.list.slice();
-        newList[newList.length - 1] = <p>Set</p>;
-        newList.push(<button onClick={this.addSet} style={buttonStyle}>Add Set</button> );
-        this.state = {
-            list: newList
-        }
-        this.viewSetAdderEvent();
-    }
-
 }
 
 
