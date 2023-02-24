@@ -37,7 +37,7 @@ class WorkoutAPIFetcher {
     constructor() {
         this.retreiveEquipment = this.retreiveEquipment.bind(this);
         this.setEquipment = this.setEquipment.bind(this);
-        this.equipment = new Array();
+        this.equipment = [];
     }
     async retreiveEquipment() {
         await fetch('/equipment').then(res => {
