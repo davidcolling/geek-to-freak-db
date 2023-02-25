@@ -16,7 +16,8 @@
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.1",
     "express": "^4.16.3",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "redux": "^4.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.4"
