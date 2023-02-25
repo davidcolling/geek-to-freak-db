@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import {createStore, combineReducers} from 'redux';
 
+// actions
 const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
 const SET_IS_LR = "SET_IS_LR";
 
+// action creators
 const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight});
 const setIsLR = isLR => ({type: SET_IS_LR, isLR});
 
+//reducers
 const isFreeWeightReducer = function (state, action) {
     if (action.type === SET_IS_FREE_WEIGHT) {
         return action.isFreeWeight;
@@ -35,6 +38,7 @@ const initialState = {
 const getFreeWeight = state => state.FreeWeight;
 const getIsLR = state => state.isLR;
 
+//css
 var buttonStyle = {
     fontFamily: "Courier",
     borderStyle: "solid",
