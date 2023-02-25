@@ -1,6 +1,36 @@
 import React, { Component } from 'react';
 import {createStore, combineReducers} from 'react-redux';
 
+const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
+const SET_IS_LR = "SET_IS_LR";
+
+const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight});
+const setIsLR = isLR => ({type: SET_IS_LR, isLR});
+
+const isFreeWeightReducer = function (state, action) {
+    if (action.type === SET_IS_FREE_WEIGHT) {
+        return action.isFreeWeight;
+    }
+    return true;
+};
+
+const isLRReducer = function (state, action) {
+    if (action.type === SET_IS_LR) {
+        return action.isLR;
+    }
+    return true;
+};
+
+const rootReducer = combineReducers({
+    isFreeWeight: isFreeWeightReducer, 
+    isLR: isLRReducer
+});
+
+const initialState = {
+    isFreeWeight: false, 
+    isLR: true
+}
+
 var buttonStyle = {
     fontFamily: "Courier",
     borderStyle: "solid",
