@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {createStore, combineReducers} from 'react-redux';
 
 var buttonStyle = {
     fontFamily: "Courier",
