@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {createStore, combineReducers} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
 
 const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
 const SET_IS_LR = "SET_IS_LR";
