@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {createStore, combineReducers} from 'redux';
+import {connect} from 'react-redux';
 
 // actions
 const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
@@ -175,9 +176,7 @@ class WorkoutDBContainer extends React.Component {
     viewEquipmentAdder = () => {
         this.setState( (state, props) => {
             return {
-                currentView: <EquipmentAdderContainer 
-                    viewPostedViewEvent={this.viewPostedView} 
-                    fetcher={this.fetcher}/>, 
+                currentView: <EquipmentAdderConnected />, 
                 homeView: <HomeViewContainer />, 
                 workoutAdder: state.workoutAdder
             }
@@ -273,17 +272,25 @@ class EquipmentAdder extends React.Component {
         return (
             <div>
                 <p>Name</p>
-                <input id="name" type="text" onChange={this.handleChange} value={this.props.name} />
+                <input id="name" type="text" />
                 <p>This is a free-weight.</p>
-                <input id="isFreeWeight" type="checkbox" onChange={this.handleChange} checked={this.props.isFreeWeight} />
+                <input id="isFreeWeight" type="checkbox" onChange={() => setIsFreeWeight} />
                 <p>Notes</p>
-                <input id="notes" type="text" onChange={this.handleChange} value={this.props.notes} />
+                <input id="notes" type="text" />
                 <button onClick={this.post}>Add</button>
             </div>
         )
     }
 
 }
+
+const EquipmentAdderConnected = connect( 
+	null,
+	dispatch => ({
+	    setIsFreeWeight: value => dispatch(setIsFreeWeight(value))
+	}) 
+)(EquipmentAdder);
+
 class EquipmentAdderContainer extends React.Component {
     viewPostedViewEvent: React.PropTypes.func;
 
