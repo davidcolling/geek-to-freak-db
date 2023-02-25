@@ -31,6 +31,10 @@ const initialState = {
     isLR: true
 }
 
+// selectors
+const getFreeWeight = state => state.FreeWeight;
+const getIsLR = state => state.isLR;
+
 var buttonStyle = {
     fontFamily: "Courier",
     borderStyle: "solid",
