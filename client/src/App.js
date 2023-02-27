@@ -36,7 +36,7 @@ const initialState = {
 }
 
 // selectors
-const getFreeWeight = state => state.FreeWeight;
+const getIsFreeWeight = state => state.isFreeWeight;
 const getIsLR = state => state.isLR;
 
 //css
