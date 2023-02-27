@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {createStore, combineReducers} from 'redux';
-import {connect} from 'react-redux';
+import {Provider, connect} from 'react-redux';
 
 // actions
 const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
 const SET_IS_LR = "SET_IS_LR";
 
-// action creators
 const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight});
 const setIsLR = isLR => ({type: SET_IS_LR, isLR});
 
@@ -38,6 +37,9 @@ const initialState = {
 // selectors
 const getIsFreeWeight = state => state.isFreeWeight;
 const getIsLR = state => state.isLR;
+
+//store
+const store = createStore(rootReducer, initialState);
 
 //css
 var buttonStyle = {
@@ -484,7 +486,7 @@ class EquipmentSelectorContainer extends React.Component {
 
 class App extends Component {
     render() {
-        return <WorkoutDBContainer />;
+        return <Provider store={store}> <WorkoutDBConnected /> </Provider>;
     }
 }
 
