@@ -31,12 +31,14 @@ const rootReducer = combineReducers({
 
 const initialState = {
     isFreeWeight: false, 
-    isLR: true
+    isLR: true,
+    view: <HomeView />
 }
 
 // selectors
 const getIsFreeWeight = state => state.isFreeWeight;
 const getIsLR = state => state.isLR;
+const getView = state => state.view;
 
 //store
 const store = createStore(rootReducer, initialState);
@@ -98,25 +100,29 @@ class WorkoutAPIFetcher {
         this.equipment = equipment;
     }
 }
-class WorkoutDB extends React.Component {
-    render() {
-          return (
-            <div style={
-                {
-                    width: '250px', 
-                    display: 'block', 
-                    margin: 'auto', 
-                    borderColor: 'black', 
-                    borderStyle: 'solid', 
-                    borderWidth: '1px'
-                }
-            }>
-                {this.props.view}
-            </div>
-        )
-    }
-
+function WorkoutDB ({view}) {
+      return (
+        <div style={
+            {
+                width: '250px', 
+                display: 'block', 
+                margin: 'auto', 
+                borderColor: 'black', 
+                borderStyle: 'solid', 
+                borderWidth: '1px'
+            }
+        }>
+            {view}
+        </div>
+    )
 }
+
+const WorkoutDBConnected = connect(
+    state => ({
+        view: getView(state)
+    }),
+    null
+)(WorkoutDB);
 
 class WorkoutDBContainer extends React.Component {
     constructor(props) {
@@ -491,4 +497,3 @@ class App extends Component {
 }
 
 export default App;
-
