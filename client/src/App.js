@@ -5,9 +5,11 @@ import {Provider, connect} from 'react-redux';
 // actions
 const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
 const SET_IS_LR = "SET_IS_LR";
+const SET_VIEW = "SET_VIEW";
 
 const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight});
 const setIsLR = isLR => ({type: SET_IS_LR, isLR});
+const setView = view => ({type:SET_VIEW, view});
 
 //reducers
 const isFreeWeightReducer = function (state, action) {
@@ -24,9 +26,17 @@ const isLRReducer = function (state, action) {
     return true;
 };
 
+const viewReducer = function (state, action) {
+    if (action.type === SET_VIEW) {
+        return action.view;
+    }
+    return true;
+}
+
 const rootReducer = combineReducers({
     isFreeWeight: isFreeWeightReducer, 
-    isLR: isLRReducer
+    isLR: isLRReducer,
+    view: viewReducer
 });
 
 const initialState = {
@@ -39,6 +49,7 @@ const initialState = {
 const getIsFreeWeight = state => state.isFreeWeight;
 const getIsLR = state => state.isLR;
 const getView = state => state.view;
+
 
 //store
 const store = createStore(rootReducer, initialState);
@@ -76,6 +87,8 @@ class DebugMessager {
     }
 }
 var debug = new DebugMessager();
+var state = store.getState();
+debug.post("store " + JSON.stringify(state) );
 
 class WorkoutAPIFetcher {
     constructor() {
@@ -201,25 +214,12 @@ class WorkoutDBContainer extends React.Component {
     }
 }
 
-class HomeView extends React.Component {
-    viewWorkoutAdderEvent: React.PropTypes.func;
-    viewEquipmentViewEvent: React.PropTypes.func;
-
-    constructor(props) {
-        super(props);
-        this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
-        this.viewEquipmentViewEvent = this.props.viewEquipmentViewEvent;
-    }
-
-    render() {
-        return (
-            <div>
-                <button onClick={this.viewWorkoutAdderEvent} style={buttonStyle}>Add Workout</button>
-                <br />
-                <button onClick={this.viewEquipmentViewEvent} style={buttonStyle}>Manage Equipment</button>
-            </div>
-        );
-    }
+function HomeView() {
+    return (
+        <div>
+            <p>home</p>
+        </div>
+    );
 }
 
 class HomeViewContainer extends React.Component {
