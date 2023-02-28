@@ -50,7 +50,6 @@ const getIsFreeWeight = state => state.isFreeWeight;
 const getIsLR = state => state.isLR;
 const getView = state => state.view;
 
-
 //store
 const store = createStore(rootReducer, initialState);
 
@@ -87,8 +86,6 @@ class DebugMessager {
     }
 }
 var debug = new DebugMessager();
-var state = store.getState();
-debug.post("store " + JSON.stringify(state) );
 
 class WorkoutAPIFetcher {
     constructor() {
