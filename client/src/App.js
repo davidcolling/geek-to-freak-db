@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import {createStore, combineReducers} from 'redux';
 import {Provider, connect} from 'react-redux';
 
+class DebugMessager {
+    post(message) {
+        fetch('/dbg', {
+            method: 'post',
+            body: JSON.stringify({message: message}),
+                headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    }
+}
+var debug = new DebugMessager();
+
 // actions
 const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
 const SET_IS_LR = "SET_IS_LR";
@@ -11,7 +24,16 @@ const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight
 const setIsLR = isLR => ({type: SET_IS_LR, isLR});
 const setView = view => ({type:SET_VIEW, view});
 
+// views
+const HOME_VIEW = "HOME";
+
 //reducers
+const initialState = {
+    isFreeWeight: false, 
+    isLR: true,
+    view: HOME_VIEW
+}
+
 const isFreeWeightReducer = function (state, action) {
     if (action.type === SET_IS_FREE_WEIGHT) {
         return action.isFreeWeight;
@@ -26,11 +48,13 @@ const isLRReducer = function (state, action) {
     return true;
 };
 
-const viewReducer = function (state, action) {
+const viewReducer = function (state = initialState, action) {
     if (action.type === SET_VIEW) {
-        return action.view;
+        if (action.view === HOME_VIEW) {
+            return HOME_VIEW;
+        }
     }
-    return true;
+    return state.view
 }
 
 const rootReducer = combineReducers({
@@ -38,12 +62,6 @@ const rootReducer = combineReducers({
     isLR: isLRReducer,
     view: viewReducer
 });
-
-const initialState = {
-    isFreeWeight: false, 
-    isLR: true,
-    view: <HomeView />
-}
 
 // selectors
 const getIsFreeWeight = state => state.isFreeWeight;
@@ -73,19 +91,6 @@ var inputStyle = {
     borderRadius: "0x",
     fontFamily: "Courier"
 }
-
-class DebugMessager {
-    post(message) {
-        fetch('/dbg', {
-            method: 'post',
-            body: JSON.stringify({message: message}),
-                headers: {
-                "Content-Type": "application/json"
-            }
-        });
-    }
-}
-var debug = new DebugMessager();
 
 class WorkoutAPIFetcher {
     constructor() {
@@ -122,7 +127,7 @@ function WorkoutDB ({view}) {
                 borderWidth: '1px'
             }
         }>
-            {view}
+            {view === "home" && <HomeView />}
         </div>
     )
 }
