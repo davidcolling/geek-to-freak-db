@@ -54,7 +54,7 @@ const viewReducer = function (state = initialState, action) {
             return HOME_VIEW;
         }
     }
-    return state.view
+    return HOME_VIEW;
 }
 
 const rootReducer = combineReducers({
@@ -127,7 +127,7 @@ function WorkoutDB ({view}) {
                 borderWidth: '1px'
             }
         }>
-            {view === "home" && <HomeView />}
+            {view === HOME_VIEW && <HomeView />}
         </div>
     )
 }
