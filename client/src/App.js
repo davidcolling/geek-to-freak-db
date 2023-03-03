@@ -22,12 +22,18 @@ const SET_VIEW = "SET_VIEW";
 
 const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight});
 const setIsLR = isLR => ({type: SET_IS_LR, isLR});
-const setView = view => ({type:SET_VIEW, view});
+const setView = view => {
+    debug.post(view)
+    return {type:SET_VIEW, view}
+};
 
 // views
 const HOME_VIEW = "HOME";
+const WORKOUT_ADDER_VIEW = "WORKOUT_ADDER";
+const EQUIPMENT_VIEW = "EQUIPMENT_VIEW";
 
 //reducers
+
 const initialState = {
     isFreeWeight: false, 
     isLR: true,
@@ -48,10 +54,17 @@ const isLRReducer = function (state, action) {
     return true;
 };
 
-const viewReducer = function (state = initialState, action) {
+const viewReducer = function (state, action) {
+    debug.post(JSON.stringify(action))
     if (action.type === SET_VIEW) {
         if (action.view === HOME_VIEW) {
             return HOME_VIEW;
+        }
+        if (action.view === WORKOUT_ADDER_VIEW) {
+            return WORKOUT_ADDER_VIEW;
+        }
+        if (action.view === EQUIPMENT_VIEW) {
+            return EQUIPMENT_VIEW;
         }
     }
     return HOME_VIEW;
@@ -127,7 +140,9 @@ function WorkoutDB ({view}) {
                 borderWidth: '1px'
             }
         }>
-            {view === HOME_VIEW && <HomeView />}
+            {view === HOME_VIEW && <HomeViewConnected />}
+            {view === WORKOUT_ADDER_VIEW && <WorkoutAdderContainer />}
+            {view === EQUIPMENT_VIEW && <EquipmentView />}
         </div>
     )
 }
@@ -219,10 +234,19 @@ class WorkoutDBContainer extends React.Component {
 function HomeView() {
     return (
         <div>
-            <p>home</p>
+            <button onClick={() => setView(WORKOUT_ADDER_VIEW)} >Add Workout</button>
+            <br />
+            <button onClick={() => setView(EQUIPMENT_VIEW) } >Manage Equipment</button>
         </div>
     );
 }
+
+const HomeViewConnected = connect(
+    null,
+    dispatch => ({
+        setView: value => dispatch(setView(value))
+    })
+)(HomeView);
 
 class HomeViewContainer extends React.Component {
     viewWorkoutAdderEvent: React.PropTypes.func;
