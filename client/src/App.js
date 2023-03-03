@@ -16,12 +16,8 @@ class DebugMessager {
 var debug = new DebugMessager();
 
 // actions
-const SET_IS_FREE_WEIGHT = "SET_IS_FREE_WEIGHT";
-const SET_IS_LR = "SET_IS_LR";
 const SET_VIEW = "SET_VIEW";
 
-const setIsFreeWeight = isFreeWeight => ({type: SET_IS_FREE_WEIGHT, isFreeWeight});
-const setIsLR = isLR => ({type: SET_IS_LR, isLR});
 const setView = view => {
     debug.post(view)
     return {type:SET_VIEW, view}
@@ -35,24 +31,8 @@ const EQUIPMENT_VIEW = "EQUIPMENT_VIEW";
 //reducers
 
 const initialState = {
-    isFreeWeight: false, 
-    isLR: true,
     view: HOME_VIEW
 }
-
-const isFreeWeightReducer = function (state, action) {
-    if (action.type === SET_IS_FREE_WEIGHT) {
-        return action.isFreeWeight;
-    }
-    return true;
-};
-
-const isLRReducer = function (state, action) {
-    if (action.type === SET_IS_LR) {
-        return action.isLR;
-    }
-    return true;
-};
 
 const viewReducer = function (state, action) {
     debug.post(JSON.stringify(action))
@@ -71,14 +51,10 @@ const viewReducer = function (state, action) {
 }
 
 const rootReducer = combineReducers({
-    isFreeWeight: isFreeWeightReducer, 
-    isLR: isLRReducer,
     view: viewReducer
 });
 
 // selectors
-const getIsFreeWeight = state => state.isFreeWeight;
-const getIsLR = state => state.isLR;
 const getView = state => state.view;
 
 //store
@@ -141,7 +117,7 @@ function WorkoutDB ({view}) {
             }
         }>
             {view === HOME_VIEW && <HomeViewConnected />}
-            {view === WORKOUT_ADDER_VIEW && <WorkoutAdderContainer />}
+            {view === WORKOUT_ADDER_VIEW && <WorkoutAdder />}
             {view === EQUIPMENT_VIEW && <EquipmentView />}
         </div>
     )
@@ -153,83 +129,6 @@ const WorkoutDBConnected = connect(
     }),
     null
 )(WorkoutDB);
-
-class WorkoutDBContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        var homeView = <HomeViewContainer viewWorkoutAdderEvent={this.viewWorkoutAdder} viewEquipmentViewEvent={this.viewEquipment}/>;
-        this.viewEquipment = this.viewEquipment.bind(this);
-        this.viewSetAdder = this.viewSetAdder.bind(this);
-        this.fetcher = new WorkoutAPIFetcher();
-        this.state = {
-            homeView: homeView,
-            currentView: homeView,
-            workoutAdder: <WorkoutAdderContainer viewSetAdderEvent={this.viewSetAdder} />
-        }
-    }
-    
-    render() {
-        return (
-            <WorkoutDB view={this.state.currentView} />
-        )
-    }
-
-    viewWorkoutAdder = () => {
-        this.setState( (state, props) => {
-            return {
-                currentView: state.workoutAdder, 
-                homeView: <HomeViewContainer />, 
-                workoutAdder: state.workoutAdder
-            }
-        });
-    }
-
-    viewSetAdder = async () => {
-        await this.fetcher.retreiveEquipment();
-        await this.setState( (state, props) => {
-            return {
-                currentView: <SetAdder 
-                    viewPostedViewEvent={this.viewPostedView} 
-                    viewWorkoutAdderEvent={this.viewWorkoutAdder} 
-                    equipment={this.fetcher.equipment.map( (item) => { return item })} />, 
-                homeView: <HomeViewContainer />, 
-                workoutAdder: state.workoutAdder
-            }
-        });
-    }
-
-    viewEquipment = async () => {
-        await this.fetcher.retreiveEquipment();
-        await this.setState( (state, props) => {
-            return {
-                currentView: <EquipmentView 
-                    viewEquipmentAdderEvent={this.viewEquipmentAdder} 
-                    fetcher={this.fetcher} 
-                    names={this.fetcher.equipment.map( (item) => (item.name) )}/>, 
-                homeView: <HomeViewContainer />, 
-                workoutAdder: state.workoutAdder
-            }
-        });
-    }
-    viewEquipmentAdder = () => {
-        this.setState( (state, props) => {
-            return {
-                currentView: <EquipmentAdderConnected />, 
-                homeView: <HomeViewContainer />, 
-                workoutAdder: state.workoutAdder
-            }
-        });
-    }
-    viewPostedView = () => {
-        this.setState( (state, props) => {
-            return {
-                currentView: <PostedView />, 
-                homeView: <HomeViewContainer />, 
-                workoutAdder: state.workoutAdder
-            }
-        });
-    }
-}
 
 function HomeView() {
     return (
@@ -247,40 +146,6 @@ const HomeViewConnected = connect(
         setView: value => dispatch(setView(value))
     })
 )(HomeView);
-
-class HomeViewContainer extends React.Component {
-    viewWorkoutAdderEvent: React.PropTypes.func;
-    viewEquipmentViewEvent: React.PropTypes.func;
-
-    constructor(props) {
-        super(props);
-        this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
-        this.viewEquipmentViewEvent = this.props.viewEquipmentViewEvent;
-    }
-
-    render() {
-        return (
-            <div>
-                <HomeView 
-                    viewWorkoutAdderEvent={this.viewWorkoutAdderEvent}
-                    viewEquipmentViewEvent={this.viewEquipmentViewEvent}
-                />
-            </div>
-        )
-    }
-
-}
-
-class PostedView extends React.Component {
-    render() {
-        return (
-            <div>
-                <p>The data was successfully posted.</p>
-            </div>
-        )
-    }
-
-}
 
 class EquipmentView extends React.Component {
     viewEquipmentAdderEvent: React.PropTypes.func;
@@ -308,7 +173,7 @@ class EquipmentAdder extends React.Component {
                 <p>Name</p>
                 <input id="name" type="text" />
                 <p>This is a free-weight.</p>
-                <input id="isFreeWeight" type="checkbox" onChange={() => setIsFreeWeight} />
+                <input id="isFreeWeight" type="checkbox" />
                 <p>Notes</p>
                 <input id="notes" type="text" />
                 <button onClick={this.post}>Add</button>
@@ -316,59 +181,6 @@ class EquipmentAdder extends React.Component {
         )
     }
 
-}
-
-const EquipmentAdderConnected = connect( 
-	null,
-	dispatch => ({
-	    setIsFreeWeight: value => dispatch(setIsFreeWeight(value))
-	}) 
-)(EquipmentAdder);
-
-class EquipmentAdderContainer extends React.Component {
-    viewPostedViewEvent: React.PropTypes.func;
-
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.viewPostedViewEvent = this.props.viewPostedViewEvent;
-        this.post = this.post.bind(this);
-        this.state = {
-            name: "",
-            isFreeWeight: false,
-            notes: ""
-        }
-    }
-    render() {
-        return (
-            <div>
-                <EquipmentAdder {...this.state} />
-            </div>
-        )
-    }
-
-    handleChange(e) {
-        var id = e.target.id;
-        var input = e.target.value;
-
-        this.setState( (state, props) => {
-            return {
-                name: (id === "name") ? input : state.name,
-                isFreeWeight: (id === "isFreeWeight") ? !state.isFreeWeight : state.isFreeWeight,
-                notes : (id === "notes") ? input : state.notes
-            }
-        });
-    }
-    post() {
-        fetch('/equipment', {
-            method: 'post',
-            body: JSON.stringify({name: this.state.name, isFreeWeight: this.state.isFreeWeight}),
-                headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        this.viewPostedViewEvent();
-    }
 }
 
 class WorkoutAdder extends React.Component {
@@ -381,25 +193,6 @@ class WorkoutAdder extends React.Component {
     }
 
 }
-class WorkoutAdderContainer extends React.Component {
-    viewSetAdderEvent: React.PropTypes.func;
-
-    constructor(props) {
-        super(props);
-        this.viewSetAdderEvent = this.props.viewSetAdderEvent;
-        this.state = {
-            list: [ <button onClick={this.viewSetAdderEvent} style={buttonStyle}>Add Set</button> ]
-        }
-    }
-
-    render() {
-        return (
-            <WorkoutAdder {...this.state} />
-        )
-    }
-
-}
-
 
 class SetAdder extends React.Component {
     viewPostedViewEvent: React.PropTypes.func;
@@ -425,7 +218,7 @@ class SetAdder extends React.Component {
     render() {
         return (
             <div>
-                <EquipmentSelectorContainer list={this.props.equipment} />
+                <p> Equipment Selector </p>
                 <p>Reps</p>
                 <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
                 <br/>
@@ -481,39 +274,6 @@ class SetAdder extends React.Component {
         this.viewWorkoutAdderEvent();
     }
 
-}
-
-class EquipmentSelector extends React.Component {
-    render() {
-        return (
-            <div>
-                <select id="movement" style={dropDownStyle} value={this.props.selected} onChange={this.props.onChange} >
-                    {this.props.list.map( (item) => (<option value={item.name}>{item.name}</option>) )}
-                </select>
-            </div>
-        )
-    }
-}
-class EquipmentSelectorContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            selected: ""
-        }
-    }
-    render() {
-        return (
-            <EquipmentSelector {...this.state} {...this.props}  onChange={this.handleChange} />
-        )
-    }
-    handleChange(e) {
-        this.setState( (state, props) => {
-            return {
-                selected: e.value 
-            }
-        });
-    }
 }
 
 class App extends Component {
