@@ -148,17 +148,9 @@ const HomeViewConnected = connect(
 )(HomeView);
 
 class EquipmentView extends React.Component {
-    viewEquipmentAdderEvent: React.PropTypes.func;
-
-    constructor(props) {
-        super(props);
-        this.viewEquipmentAdderEvent = this.props.viewEquipmentAdderEvent;
-    }
-
     render() {
         return (
             <div>
-                {this.props.names.map( (item) => (<p>{item}</p>))}
                 <button onClick={this.viewEquipmentAdderEvent}>Add</button>
             </div>
         )
@@ -187,7 +179,7 @@ class WorkoutAdder extends React.Component {
     render() {
         return (
             <div>
-                {this.props.list.map( (item) => {return item;} )}
+                <p> Workout Adder </p>
             </div>
         )
     }
