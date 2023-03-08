@@ -27,6 +27,7 @@ const setView = view => {
 const HOME_VIEW = "HOME";
 const WORKOUT_ADDER_VIEW = "WORKOUT_ADDER";
 const EQUIPMENT_VIEW = "EQUIPMENT_VIEW";
+const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
 
 //reducers
 
@@ -45,6 +46,9 @@ const viewReducer = function (state, action) {
         }
         if (action.view === EQUIPMENT_VIEW) {
             return EQUIPMENT_VIEW;
+        }
+        if (action.view === EQUIPMENT_ADDER_VIEW) {
+            return EQUIPMENT_ADDER_VIEW
         }
     }
     return HOME_VIEW;
@@ -118,7 +122,8 @@ function WorkoutDB ({view}) {
         }>
             {view === HOME_VIEW && <HomeViewConnected />}
             {view === WORKOUT_ADDER_VIEW && <WorkoutAdder />}
-            {view === EQUIPMENT_VIEW && <EquipmentView />}
+            {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
+            {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderView />}
         </div>
     )
 }
@@ -151,15 +156,24 @@ const HomeViewConnected = () => {
     );
 }
 
-const EquipmentView = () => {
+const EquipmentView = ({viewEquipmentAdder}) => {
     return (
         <div>
-            <button onClick={this.viewEquipmentAdderEvent}>Add</button>
+            <button onClick={viewEquipmentAdder}>Add</button>
         </div>
     )
 }
 
-class EquipmentAdder extends React.Component {
+const EquipmentViewConnected = () => {
+    const dispatch = useDispatch();
+    const viewEquipmentAdder = () => dispatch(setView(EQUIPMENT_ADDER_VIEW));
+
+    return (
+        <EquipmentView viewEquipmentAdder={viewEquipmentAdder} />
+    );
+}
+
+class EquipmentAdderView extends React.Component {
     render() {
         return (
             <div>
