@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {createStore, combineReducers} from 'redux';
-import {Provider, connect, useDispatch} from 'react-redux';
+import {Provider, useSelector, useDispatch} from 'react-redux';
 
 class DebugMessager {
     post(message) {
@@ -123,12 +123,13 @@ function WorkoutDB ({view}) {
     )
 }
 
-const WorkoutDBConnected = connect(
-    state => ({
-        view: getView(state)
-    }),
-    null
-)(WorkoutDB);
+const WorkoutDBConnected = () => {
+    const getViewConnected = useSelector(getView);
+    
+    return (
+        <WorkoutDB view={getViewConnected} />
+    );
+}
 
 function HomeView({viewWorkoutAdder, viewEquipmentView}) {
     return (
