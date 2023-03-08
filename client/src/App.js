@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {createStore, combineReducers} from 'redux';
-import {Provider, connect} from 'react-redux';
+import {Provider, connect, useDispatch} from 'react-redux';
 
 class DebugMessager {
     post(message) {
@@ -130,22 +130,25 @@ const WorkoutDBConnected = connect(
     null
 )(WorkoutDB);
 
-function HomeView() {
+function HomeView({viewWorkoutAdder, viewEquipmentView}) {
     return (
         <div>
-            <button onClick={() => setView(WORKOUT_ADDER_VIEW)} >Add Workout</button>
+            <button onClick={viewWorkoutAdder} >Add Workout</button>
             <br />
-            <button onClick={() => setView(EQUIPMENT_VIEW) } >Manage Equipment</button>
+            <button onClick={viewEquipmentView} >Manage Equipment</button>
         </div>
     );
 }
 
-const HomeViewConnected = connect(
-    null,
-    dispatch => ({
-        setView: value => dispatch(setView(value))
-    })
-)(HomeView);
+const HomeViewConnected = () => {
+    const dispatch = useDispatch();
+    const viewWorkoutAdder = () => dispatch(setView(WORKOUT_ADDER_VIEW));
+    const viewEquipmentView = () => dispatch(setView(EQUIPMENT_VIEW));
+
+    return(
+        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} />
+    );
+}
 
 class EquipmentView extends React.Component {
     render() {
