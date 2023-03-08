@@ -151,15 +151,12 @@ const HomeViewConnected = () => {
     );
 }
 
-class EquipmentView extends React.Component {
-    render() {
-        return (
-            <div>
-                <button onClick={this.viewEquipmentAdderEvent}>Add</button>
-            </div>
-        )
-    }
-
+const EquipmentView = () => {
+    return (
+        <div>
+            <button onClick={this.viewEquipmentAdderEvent}>Add</button>
+        </div>
+    )
 }
 
 class EquipmentAdder extends React.Component {
