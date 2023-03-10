@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider, useSelector, useDispatch} from 'react-redux';
+import thunk from 'redux-thunk';
 
 class DebugMessager {
     post(message) {
