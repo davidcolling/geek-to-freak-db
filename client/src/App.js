@@ -16,13 +16,27 @@ class DebugMessager {
 }
 var debug = new DebugMessager();
 
+const getInfo = () => {
+    return async (dispatch, setState) => {
+        const response = await fetch('/equipment');
+        const data = await response.json();
+
+        dispatch(storeInfoSuccess(data));
+    }
+}
+
 // actions
 const SET_VIEW = "SET_VIEW";
+const STORE_INFO_SUCCESS = "STORE_INFO_SUCCESS";
+const STORE_INFO_FAILURE = "STORE_INFO_FAILURE";
 
 const setView = view => {
     debug.post(view)
     return {type:SET_VIEW, view}
 };
+
+const storeInfoSuccess = list => ({type:STORE_INFO_SUCCESS, list})
+const storeInfoFailure = e => ({type:STORE_INFO_FAILURE, e})
 
 // views
 const HOME_VIEW = "HOME";
@@ -33,11 +47,11 @@ const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
 //reducers
 
 const initialState = {
-    view: HOME_VIEW
+    view: HOME_VIEW,
+    info: [{name: "hello"}]
 }
 
 const viewReducer = function (state, action) {
-    debug.post(JSON.stringify(action))
     if (action.type === SET_VIEW) {
         if (action.view === HOME_VIEW) {
             return HOME_VIEW;
@@ -55,15 +69,27 @@ const viewReducer = function (state, action) {
     return HOME_VIEW;
 }
 
+const infoReducer = function(state, action) {
+    if (action.type === STORE_INFO_SUCCESS) {
+        return action.list;
+    }
+    if (action.type === STORE_INFO_FAILURE) {
+        return "failed";
+    }
+    return "failed";
+}
+
 const rootReducer = combineReducers({
-    view: viewReducer
+    view: viewReducer,
+    info: infoReducer
 });
 
 // selectors
 const getView = state => state.view;
+const selectInfo = state => state.info;
 
 //store
-const store = createStore(rootReducer, initialState);
+const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
 //css
 var buttonStyle = {
@@ -109,6 +135,7 @@ class WorkoutAPIFetcher {
         this.equipment = equipment;
     }
 }
+
 function WorkoutDB ({view}) {
       return (
         <div style={
@@ -137,12 +164,16 @@ const WorkoutDBConnected = () => {
     );
 }
 
-function HomeView({viewWorkoutAdder, viewEquipmentView}) {
+function HomeView({viewWorkoutAdder, viewEquipmentView, testAPI, list}) {
     return (
         <div>
             <button onClick={viewWorkoutAdder} >Add Workout</button>
             <br />
             <button onClick={viewEquipmentView} >Manage Equipment</button>
+            <br />
+            <button onClick={testAPI} > Test API </button>
+            <br />
+            <p>{JSON.stringify(list)}</p>
         </div>
     );
 }
@@ -151,9 +182,11 @@ const HomeViewConnected = () => {
     const dispatch = useDispatch();
     const viewWorkoutAdder = () => dispatch(setView(WORKOUT_ADDER_VIEW));
     const viewEquipmentView = () => dispatch(setView(EQUIPMENT_VIEW));
+    const testAPI = () => dispatch(getInfo());
+    const selectInfoConnected = () => useSelector(selectInfo);
 
     return(
-        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} />
+        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} testAPI={testAPI} list={selectInfoConnected} />
     );
 }
 
