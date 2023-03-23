@@ -72,7 +72,7 @@ const equipmentReducer = function(state, action) {
     if (action.type === SET_EQUIPMENT_FAILURE) {
         return "failed";
     }
-    return "failed";
+    return "unknown action";
 }
 
 const rootReducer = combineReducers({
@@ -106,30 +106,6 @@ var dropDownStyle = {
 var inputStyle = {
     borderRadius: "0x",
     fontFamily: "Courier"
-}
-
-class WorkoutAPIFetcher {
-    constructor() {
-        this.retreiveEquipment = this.retreiveEquipment.bind(this);
-        this.setEquipment = this.setEquipment.bind(this);
-        this.equipment = [];
-    }
-    async retreiveEquipment() {
-        await fetch('/equipment').then(res => {
-            if (res.status >= 200 && res.status < 300) {
-                return res.json()
-            } else {
-                throw new Error()
-            }
-        }).then(
-            data=>this.setEquipment(data)
-        ).catch(
-            err=>console.log('workout client: fetch failed')
-        );
-    }
-    setEquipment(equipment) {
-        this.equipment = equipment;
-    }
 }
 
 function WorkoutDB ({view}) {
