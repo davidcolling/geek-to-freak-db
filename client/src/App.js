@@ -186,7 +186,7 @@ const HomeViewConnected = () => {
     const selectInfoConnected = () => useSelector(selectInfo);
 
     return(
-        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} testAPI={testAPI} list={selectInfoConnected} />
+        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} testAPI={testAPI} list={selectInfoConnected()} />
     );
 }
 
