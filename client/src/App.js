@@ -30,12 +30,8 @@ const SET_VIEW = "SET_VIEW";
 const STORE_INFO_SUCCESS = "STORE_INFO_SUCCESS";
 const STORE_INFO_FAILURE = "STORE_INFO_FAILURE";
 
-const setView = view => {
-    debug.post(view)
-    return {type:SET_VIEW, view}
-};
-
-const storeInfoSuccess = list => ({type:STORE_INFO_SUCCESS, list})
+const setView = payload => ({type:SET_VIEW, payload});
+const storeInfoSuccess = payload => ({type:STORE_INFO_SUCCESS, payload})
 const storeInfoFailure = e => ({type:STORE_INFO_FAILURE, e})
 
 // views
@@ -53,16 +49,16 @@ const initialState = {
 
 const viewReducer = function (state, action) {
     if (action.type === SET_VIEW) {
-        if (action.view === HOME_VIEW) {
+        if (action.payload === HOME_view) {
             return HOME_VIEW;
         }
-        if (action.view === WORKOUT_ADDER_VIEW) {
+        if (action.payload === WORKOUT_ADDER_view) {
             return WORKOUT_ADDER_VIEW;
         }
-        if (action.view === EQUIPMENT_VIEW) {
+        if (action.payload === EQUIPMENT_view) {
             return EQUIPMENT_VIEW;
         }
-        if (action.view === EQUIPMENT_ADDER_VIEW) {
+        if (action.payload === EQUIPMENT_ADDER_view) {
             return EQUIPMENT_ADDER_VIEW
         }
     }
@@ -71,7 +67,7 @@ const viewReducer = function (state, action) {
 
 const infoReducer = function(state, action) {
     if (action.type === STORE_INFO_SUCCESS) {
-        return action.list;
+        return action.payload;
     }
     if (action.type === STORE_INFO_FAILURE) {
         return "failed";
