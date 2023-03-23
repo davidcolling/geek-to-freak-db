@@ -16,23 +16,23 @@ class DebugMessager {
 }
 var debug = new DebugMessager();
 
-const getInfo = () => {
+const fetchEquipment = () => {
     return async (dispatch, setState) => {
         const response = await fetch('/equipment');
         const data = await response.json();
 
-        dispatch(storeInfoSuccess(data));
+        dispatch(setEquipmentSuccess(data));
     }
 }
 
 // actions
 const SET_VIEW = "SET_VIEW";
-const STORE_INFO_SUCCESS = "STORE_INFO_SUCCESS";
-const STORE_INFO_FAILURE = "STORE_INFO_FAILURE";
+const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
+const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
 
 const setView = payload => ({type:SET_VIEW, payload});
-const storeInfoSuccess = payload => ({type:STORE_INFO_SUCCESS, payload})
-const storeInfoFailure = e => ({type:STORE_INFO_FAILURE, e})
+const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
+const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
 
 // views
 const HOME_VIEW = "HOME";
@@ -44,7 +44,7 @@ const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
 
 const initialState = {
     view: HOME_VIEW,
-    info: [{name: "hello"}]
+    equipment: [{name: "hello"}]
 }
 
 const viewReducer = function (state, action) {
@@ -65,11 +65,11 @@ const viewReducer = function (state, action) {
     return HOME_VIEW;
 }
 
-const infoReducer = function(state, action) {
-    if (action.type === STORE_INFO_SUCCESS) {
+const equipmentReducer = function(state, action) {
+    if (action.type === SET_EQUIPMENT_SUCCESS) {
         return action.payload;
     }
-    if (action.type === STORE_INFO_FAILURE) {
+    if (action.type === SET_EQUIPMENT_FAILURE) {
         return "failed";
     }
     return "failed";
@@ -77,12 +77,12 @@ const infoReducer = function(state, action) {
 
 const rootReducer = combineReducers({
     view: viewReducer,
-    info: infoReducer
+    equipment: equipmentReducer
 });
 
 // selectors
 const getView = state => state.view;
-const selectInfo = state => state.info;
+const getEquipment = state => state.equipment;
 
 //store
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
@@ -178,11 +178,11 @@ const HomeViewConnected = () => {
     const dispatch = useDispatch();
     const viewWorkoutAdder = () => dispatch(setView(WORKOUT_ADDER_VIEW));
     const viewEquipmentView = () => dispatch(setView(EQUIPMENT_VIEW));
-    const testAPI = () => dispatch(getInfo());
-    const selectInfoConnected = () => useSelector(selectInfo);
+    const testAPI = () => dispatch(fetchEquipment());
+    const getEquipmentConnected = () => useSelector(getEquipment);
 
     return(
-        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} testAPI={testAPI} list={selectInfoConnected()} />
+        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} testAPI={testAPI} list={getEquipmentConnected()} />
     );
 }
 
