@@ -49,16 +49,16 @@ const initialState = {
 
 const viewReducer = function (state, action) {
     if (action.type === SET_VIEW) {
-        if (action.payload === HOME_view) {
+        if (action.payload === HOME_VIEW) {
             return HOME_VIEW;
         }
-        if (action.payload === WORKOUT_ADDER_view) {
+        if (action.payload === WORKOUT_ADDER_VIEW) {
             return WORKOUT_ADDER_VIEW;
         }
-        if (action.payload === EQUIPMENT_view) {
+        if (action.payload === EQUIPMENT_VIEW) {
             return EQUIPMENT_VIEW;
         }
-        if (action.payload === EQUIPMENT_ADDER_view) {
+        if (action.payload === EQUIPMENT_ADDER_VIEW) {
             return EQUIPMENT_ADDER_VIEW
         }
     }
