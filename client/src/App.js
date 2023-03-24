@@ -16,6 +16,19 @@ class DebugMessager {
 }
 var debug = new DebugMessager();
 
+const postEquipment = (payload) => {
+    return async (dispatch, setState, payload) => {
+        const response = await fetch('/equipment', {
+            method: 'post',
+            body: JSON.stringify({payload: payload}),
+                headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        dispatch(setView(POSTED_VIEW));
+     }
+}
+
 const fetchEquipment = () => {
     return async (dispatch, setState) => {
         const response = await fetch('/equipment');
@@ -39,6 +52,7 @@ const HOME_VIEW = "HOME";
 const WORKOUT_ADDER_VIEW = "WORKOUT_ADDER";
 const EQUIPMENT_VIEW = "EQUIPMENT_VIEW";
 const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
+const POSTED_VIEW = "POSTED_VIEW";
 
 //reducers
 
@@ -60,6 +74,9 @@ const viewReducer = function (state, action) {
         }
         if (action.payload === EQUIPMENT_ADDER_VIEW) {
             return EQUIPMENT_ADDER_VIEW
+        }
+        if (action.payload === POSTED_VIEW) {
+            return POSTED_VIEW
         }
     } else {
         if (typeof state !== 'undefined') {
@@ -131,7 +148,8 @@ function WorkoutDB ({view}) {
             {view === HOME_VIEW && <HomeViewConnected />}
             {view === WORKOUT_ADDER_VIEW && <WorkoutAdder />}
             {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
-            {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderView />}
+            {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
+            {view === POSTED_VIEW && <PostedView />}
         </div>
     )
 }
@@ -187,7 +205,7 @@ const EquipmentViewConnected = () => {
     );
 }
 
-const EquipmentAdderView = () => {
+const EquipmentAdderView = ({post}) => {
     return (
         <div>
             <p>Name</p>
@@ -196,8 +214,16 @@ const EquipmentAdderView = () => {
             <input id="isFreeWeight" type="checkbox" />
             <p>Notes</p>
             <input id="notes" type="text" />
-            <button onClick={this.post}>Add</button>
+            <button onClick={post}>Add</button>
         </div>
+    )
+}
+
+const EquipmentAdderViewConnected = () => {
+    const dispatch = useDispatch();
+    const post = () => dispatch(postEquipment());
+    return (
+        <EquipmentAdderView post={post}/>
     )
 }
 
@@ -210,6 +236,14 @@ class WorkoutAdder extends React.Component {
         )
     }
 
+}
+
+const PostedView = () => {
+    return (
+        <div>
+            <p>Posted</p>
+        </div>
+    )
 }
 
 class SetAdder extends React.Component {
