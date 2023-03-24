@@ -67,8 +67,12 @@ const viewReducer = function (state, action) {
         if (action.payload === EQUIPMENT_ADDER_VIEW) {
             return EQUIPMENT_ADDER_VIEW
         }
+    } else {
+        if (typeof state !== 'undefined') {
+            return state;
+        }
     }
-    return state.view;
+    return HOME_VIEW;
 }
 
 const equipmentReducer = function(state, action) {
