@@ -25,6 +25,12 @@ const fetchEquipment = () => {
     }
 }
 
+interface Equipment {
+    id: number;
+    name: String;
+    isFreeWeight: boolean;
+    notes: String;
+}
 // actions
 const SET_VIEW = "SET_VIEW";
 const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
@@ -44,7 +50,7 @@ const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
 
 const initialState = {
     view: HOME_VIEW,
-    equipment: [{name: "hello"}]
+    equipment: JSON.stringify([{id: 0, name: " ", isFreeWeight: false, notes: " "}])
 }
 
 const viewReducer = function (state, action) {
@@ -62,7 +68,7 @@ const viewReducer = function (state, action) {
             return EQUIPMENT_ADDER_VIEW
         }
     }
-    return HOME_VIEW;
+    return state.view;
 }
 
 const equipmentReducer = function(state, action) {
@@ -142,10 +148,6 @@ function HomeView({viewWorkoutAdder, viewEquipmentView, testAPI, list}) {
             <button onClick={viewWorkoutAdder} >Add Workout</button>
             <br />
             <button onClick={viewEquipmentView} >Manage Equipment</button>
-            <br />
-            <button onClick={testAPI} > Test API </button>
-            <br />
-            <p>{JSON.stringify(list)}</p>
         </div>
     );
 }
@@ -154,18 +156,19 @@ const HomeViewConnected = () => {
     const dispatch = useDispatch();
     const viewWorkoutAdder = () => dispatch(setView(WORKOUT_ADDER_VIEW));
     const viewEquipmentView = () => dispatch(setView(EQUIPMENT_VIEW));
-    const testAPI = () => dispatch(fetchEquipment());
-    const getEquipmentConnected = () => useSelector(getEquipment);
-
     return(
-        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} testAPI={testAPI} list={getEquipmentConnected()} />
+        <HomeView viewWorkoutAdder={viewWorkoutAdder} viewEquipmentView={viewEquipmentView} />
     );
 }
 
-const EquipmentView = ({viewEquipmentAdder}) => {
+const EquipmentView = ({viewEquipmentAdder, getEquipment, list}) => {
     return (
         <div>
             <button onClick={viewEquipmentAdder}>Add</button>
+            <br />
+            <button onClick={getEquipment}>Get Equipment</button>
+            <br />
+            <p>{JSON.stringify(list)}</p>
         </div>
     )
 }
@@ -173,9 +176,12 @@ const EquipmentView = ({viewEquipmentAdder}) => {
 const EquipmentViewConnected = () => {
     const dispatch = useDispatch();
     const viewEquipmentAdder = () => dispatch(setView(EQUIPMENT_ADDER_VIEW));
+    const fetchEquipmentConnected = () => dispatch(fetchEquipment());
+    const getEquipmentConnected = () => useSelector(getEquipment);
+
 
     return (
-        <EquipmentView viewEquipmentAdder={viewEquipmentAdder} />
+        <EquipmentView viewEquipmentAdder={viewEquipmentAdder} getEquipment={fetchEquipmentConnected} list={getEquipmentConnected()} />
     );
 }
 
