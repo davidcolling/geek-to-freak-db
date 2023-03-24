@@ -187,21 +187,18 @@ const EquipmentViewConnected = () => {
     );
 }
 
-class EquipmentAdderView extends React.Component {
-    render() {
-        return (
-            <div>
-                <p>Name</p>
-                <input id="name" type="text" />
-                <p>This is a free-weight.</p>
-                <input id="isFreeWeight" type="checkbox" />
-                <p>Notes</p>
-                <input id="notes" type="text" />
-                <button onClick={this.post}>Add</button>
-            </div>
-        )
-    }
-
+const EquipmentAdderView = () => {
+    return (
+        <div>
+            <p>Name</p>
+            <input id="name" type="text" />
+            <p>This is a free-weight.</p>
+            <input id="isFreeWeight" type="checkbox" />
+            <p>Notes</p>
+            <input id="notes" type="text" />
+            <button onClick={this.post}>Add</button>
+        </div>
+    )
 }
 
 class WorkoutAdder extends React.Component {
