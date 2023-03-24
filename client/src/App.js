@@ -25,12 +25,6 @@ const fetchEquipment = () => {
     }
 }
 
-interface Equipment {
-    id: number;
-    name: String;
-    isFreeWeight: boolean;
-    notes: String;
-}
 // actions
 const SET_VIEW = "SET_VIEW";
 const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
