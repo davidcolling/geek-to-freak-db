@@ -78,10 +78,14 @@ const viewReducer = function (state, action) {
 const equipmentReducer = function(state, action) {
     if (action.type === SET_EQUIPMENT_SUCCESS) {
         return action.payload;
-    }
-    if (action.type === SET_EQUIPMENT_FAILURE) {
+    } else if (action.type === SET_EQUIPMENT_FAILURE) {
         return "failed";
+    } else {
+        if (typeof state !== 'undefined') {
+            return state;
+        }
     }
+
     return "unknown action";
 }
 
