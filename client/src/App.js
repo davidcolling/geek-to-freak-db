@@ -42,10 +42,12 @@ const fetchEquipment = () => {
 const SET_VIEW = "SET_VIEW";
 const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
 const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
+const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
 
 const setView = payload => ({type:SET_VIEW, payload});
 const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
 const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
+const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payload});
 
 // views
 const HOME_VIEW = "HOME";
@@ -58,7 +60,12 @@ const POSTED_VIEW = "POSTED_VIEW";
 
 const initialState = {
     view: HOME_VIEW,
-    equipment: JSON.stringify([{id: 0, name: " ", isFreeWeight: false, notes: " "}])
+    equipment: JSON.stringify([{id: 0, name: " ", isFreeWeight: false, notes: " "}]),
+    currentEquipment: {
+        name: " ", 
+        isFreeWeight: false, 
+        notes: " "
+    }
 }
 
 const viewReducer = function (state, action) {
@@ -100,14 +107,30 @@ const equipmentReducer = function(state, action) {
     return "unknown action";
 }
 
+const currentEquipmentReducer = function(state, action) {
+    if (action.type === SET_CURRENT_EQUIPMENT && typeof state != 'undefined') {
+        var id  = action.payload.target.id;
+        var output = {
+            name: id == "name" ? action.payload.target.value : state.name,
+            isFreeWeight: id == "isFreeWeight" ? action.payload.target.value : state.isFreeWeight,
+            notes: id == "notes" ? action.payload.target.value : state.notes
+        }
+        debug.post("reducer: " + JSON.stringify(output));
+        return action.payload;
+    }
+    return {name: " ", isFreeWeight: false, notes: " "};
+}
+
 const rootReducer = combineReducers({
     view: viewReducer,
-    equipment: equipmentReducer
+    equipment: equipmentReducer,
+    currentEquipment: currentEquipmentReducer
 });
 
 // selectors
 const getView = state => state.view;
 const getEquipment = state => state.equipment;
+const getCurrentEquipment = state => state.currentEquipment;
 
 //store
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
@@ -205,15 +228,15 @@ const EquipmentViewConnected = () => {
     );
 }
 
-const EquipmentAdderView = ({post}) => {
+const EquipmentAdderView = ({post, handleChange}) => {
     return (
         <div>
             <p>Name</p>
-            <input id="name" type="text" />
+            <input id="name" type="text" onChange={(e) => handleChange(e)} />
             <p>This is a free-weight.</p>
-            <input id="isFreeWeight" type="checkbox" />
+            <input id="isFreeWeight" type="checkbox" onChange={(e) => handleChange(e)} />
             <p>Notes</p>
-            <input id="notes" type="text" />
+            <input id="notes" type="text" onChange={(e) => handleChange(e)} />
             <button onClick={post}>Add</button>
         </div>
     )
@@ -221,9 +244,12 @@ const EquipmentAdderView = ({post}) => {
 
 const EquipmentAdderViewConnected = () => {
     const dispatch = useDispatch();
-    const post = () => dispatch(postEquipment());
+    const post = () => dispatch(postEquipment({name: "test", isFreeWeight: false, notes: "test"}));
+    const handleChange = e => dispatch(setCurrentEquipment(e));
+    const getCurrentEquipmentConnected = () => useSelector(getCurrentEquipment);
+
     return (
-        <EquipmentAdderView post={post}/>
+        <EquipmentAdderView post={post} handleChange={handleChange}/>
     )
 }
 
