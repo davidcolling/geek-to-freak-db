@@ -116,7 +116,7 @@ const currentEquipmentReducer = function(state, action) {
             notes: id == "notes" ? action.payload.target.value : state.notes
         }
         debug.post("reducer: " + JSON.stringify(output));
-        return action.payload;
+        return output
     }
     return {name: " ", isFreeWeight: false, notes: " "};
 }
