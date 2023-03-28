@@ -3,18 +3,15 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider, useSelector, useDispatch} from 'react-redux';
 import thunk from 'redux-thunk';
 
-class DebugMessager {
-    post(message) {
-        fetch('/dbg', {
-            method: 'post',
-            body: JSON.stringify({message: message}),
-                headers: {
-                "Content-Type": "application/json"
-            }
-        });
-    }
+dpgPost(message) {
+    fetch('/dbg', {
+        method: 'post',
+        body: JSON.stringify({message: message}),
+            headers: {
+            "Content-Type": "application/json"
+        }
+    });
 }
-var debug = new DebugMessager();
 
 const postEquipment = () => {
     return async (dispatch, getState) => {
