@@ -3,7 +3,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider, useSelector, useDispatch} from 'react-redux';
 import thunk from 'redux-thunk';
 
-const dpgPost = (message) => {
+const dbgPost = (message) => {
     fetch('/dbg', {
         method: 'post',
         body: JSON.stringify({message: message}),
@@ -45,6 +45,7 @@ const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
 const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
 const SET_CURRENT_WORKOUT = "SET_CURRENT_WORKOUT";
 const SET_NEW_SET = "SET_NEW_SET";
+const SET_CURRENT_SET = "SET_CURRENT_SET"
 
 const setView = payload => ({type:SET_VIEW, payload});
 const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
@@ -52,6 +53,7 @@ const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
 const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payload});
 const setCurrentWorkout = payload => ({type: SET_CURRENT_WORKOUT, payload});
 const setNewSet = payload => ({type: SET_NEW_SET, payload});
+const setCurrentSet = payload => ({type: SET_CURRENT_SET, payload});
 
 // views
 const HOME_VIEW = "HOME";
@@ -59,6 +61,7 @@ const WORKOUT_ADDER_VIEW = "WORKOUT_ADDER";
 const EQUIPMENT_VIEW = "EQUIPMENT_VIEW";
 const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
 const POSTED_VIEW = "POSTED_VIEW";
+const SET_ADDER_VIEW = "SET_ADDER_VIEW";
 
 //reducers
 
@@ -72,26 +75,21 @@ const initialState = {
     },
     currentWorkout: {
         sets: []
+    },
+    currentSet: {
+        equipment: 20,
+        reps: 0,
+        weight: 0,
+        lastRepComplete: true,
+        isLR: true,
+        isL: false,
+        notes: " "
     }
 }
 
 const viewReducer = function (state, action) {
     if (action.type === SET_VIEW) {
-        if (action.payload === HOME_VIEW) {
-            return HOME_VIEW;
-        }
-        if (action.payload === WORKOUT_ADDER_VIEW) {
-            return WORKOUT_ADDER_VIEW;
-        }
-        if (action.payload === EQUIPMENT_VIEW) {
-            return EQUIPMENT_VIEW;
-        }
-        if (action.payload === EQUIPMENT_ADDER_VIEW) {
-            return EQUIPMENT_ADDER_VIEW
-        }
-        if (action.payload === POSTED_VIEW) {
-            return POSTED_VIEW
-        }
+        return action.payload;
     } else {
         if (typeof state !== 'undefined') {
             return state;
@@ -103,8 +101,6 @@ const viewReducer = function (state, action) {
 const equipmentReducer = function(state, action) {
     if (action.type === SET_EQUIPMENT_SUCCESS) {
         return action.payload;
-    } else if (action.type === SET_EQUIPMENT_FAILURE) {
-        return "failed";
     } else {
         if (typeof state !== 'undefined') {
             return state;
@@ -133,11 +129,40 @@ const currentWorkoutReducer = function(state, action) {
     return {sets:[]}
 }
 
+const currentSetReducer = function(state, action) {
+    if (action.type === SET_CURRENT_SET && typeof(state) !== 'undefined') {
+    dbgPost(action.payload.target.id);
+        var id = action.payload.target.id;
+        var input = action.payload.target.value;
+
+        return {
+            equipment: (id === "equipment") ? input : state.equipment,
+            reps: (id === "reps") ? input : state.reps,
+            weight: (id === "weight") ? input : state.weight,
+            lastRepComplete: (id === "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
+            isLR: (id === "isLR") ? !state.isLR : state.isLR,
+            isL: (id === "isL") ? !state.isL : state.isL,
+            notes: (id === "notes") ? input : state.notes
+        }
+    }
+ 
+    return {
+        equipment: 20,
+        reps: 0,
+        weight: 0,
+        lastRepComplete: true,
+        isLR: true,
+        isL: false,
+        notes: " "
+    }
+}
+
 const rootReducer = combineReducers({
     view: viewReducer,
     equipment: equipmentReducer,
     currentEquipment: currentEquipmentReducer,
-    currentWorkout: currentWorkoutReducer
+    currentWorkout: currentWorkoutReducer,
+    currentSet: currentSetReducer
 });
 
 // selectors
@@ -187,6 +212,7 @@ function WorkoutDB ({view}) {
             {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
             {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
             {view === POSTED_VIEW && <PostedView />}
+            {view === SET_ADDER_VIEW && <SetAdderConnected />}
         </div>
     )
 }
@@ -280,7 +306,7 @@ const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
 
 const WorkoutAdderConnected = () => {
     const dispatch = useDispatch();
-    const addSet = dispatch(setNewSet);
+    const addSet = () => dispatch(setView(SET_ADDER_VIEW));
     const getCurrentWorkoutConnected = useSelector(getCurrentWorkout);
 
     return (
@@ -296,86 +322,37 @@ const PostedView = () => {
     )
 }
 
-class SetAdder extends React.Component {
-    viewPostedViewEvent: React.PropTypes.func;
-    viewWorkoutAdderEvent: React.PropTypes.func;
+const SetAdder = ({handleChange, post}) => {
+   return (
+        <div>
+            <p> Equipment Selector </p>
+            <p>Reps</p>
+            <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={(e) => handleChange(e)} />
+            <br/>
+            <input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={(e) => handleChange(e)} />
+            <select id="unit" style={dropDownStyle} onChange={(e) => handleChange(e)} value="pounds" >
+                <option value="pounds">Pounds</option>
+                <option value="kilograms">Kilograms</option>
+            </select>
+            <p>Was the last rep complete?</p>
+            <input id="lastRepComplete" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
+            <p>Did you lift both sides of your body simultaneously?</p>
+            <input id="isLR" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
+            <input id="isL" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
+            <p>Notes</p>
+            <input id="notes" type="text" onChange={(e) => handleChange(e)} />
+            <button onClick={post} style={buttonStyle}>Add</button>
+        </div>
+    );
+}
 
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this)
-        this.viewPostedViewEvent = this.props.viewPostedViewEvent;
-        this.viewWorkoutAdderEvent = this.props.viewWorkoutAdderEvent;
-        this.post = this.post.bind(this)
-        this.state = {
-            movement: "incline_press",
-            reps: 6,
-            weight: 160,
-            unit: "pounds",
-            lastRepComplete: false,
-            isLR: true,
-            isL: false,
-            notes: ""
-        }
-    }
-    render() {
-        return (
-            <div>
-                <p> Equipment Selector </p>
-                <p>Reps</p>
-                <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={this.handleChange} value={this.state.reps} />
-                <br/>
-                <input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={this.handleChange} value={this.state.weight} />
-                <select id="unit" style={dropDownStyle} onChange={this.handleChange} value={this.state.unit}>
-                    <option value="pounds">Pounds</option>
-                    <option value="kilograms">Kilograms</option>
-                </select>
-                <p>Was the last rep complete?</p>
-                <input id="lastRepComplete" type="checkbox" onChange={this.handleChange} checked={this.state.lastRepComplete} />
-                <p>Did you lift both sides of your body simultaneously?</p>
-                <input id="isLR" type="checkbox" onChange={this.handleChange} checked={this.state.isLR} />
-                <input id="isL" type="checkbox" onChange={this.handleChange} checked={this.state.isL} />
-                <p>Notes</p>
-                <input id="notes" type="text" onChange={this.handleChange} value={this.state.notes} />
-                <button onClick={this.post} style={buttonStyle}>Add</button>
-            </div>
-        );
-    }
-    handleChange(e) {
-        var id = e.target.id;
-        var input = e.target.value;
+const SetAdderConnected = () => {
+    const dispatch = useDispatch();
+    const handleChange = e => dispatch(setCurrentSet(e));
 
-        this.setState( (state, props) => {
-            return {
-                movement: (id === "movement") ? input : state.movement,
-                reps: (id === "reps") ? input : state.reps,
-                weight: (id === "weight") ? input : state.weight,
-                unit: (id === "unit") ? input : state.unit,
-                lastRepComplete: (id === "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
-                isLR: (id === "isLR") ? !state.isLR : state.isLR,
-                isL: (id === "isL") ? !state.isL : state.isL,
-                notes: (id === "notes") ? input : state.notes
-            }
-        });
-    }
-    post() {
-        fetch('/sets', {
-            method: 'post',
-            body: JSON.stringify({
-                movement: this.state.movement, 
-                reps: this.state.reps, 
-                weight: this.state.weight, 
-                lastRepComplete: this.state.lastRepComplete, 
-                isLR: this.state.isLR, 
-                isL: this.state.isL, 
-                notes: this.state.notes
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        this.viewWorkoutAdderEvent();
-    }
-
+    return (
+        <SetAdder handleChange={handleChange} />
+    );
 }
 
 class App extends Component {
