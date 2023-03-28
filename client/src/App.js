@@ -44,12 +44,14 @@ const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
 const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
 const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
 const SET_CURRENT_WORKOUT = "SET_CURRENT_WORKOUT";
+const SET_NEW_SET = "SET_NEW_SET";
 
 const setView = payload => ({type:SET_VIEW, payload});
 const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
 const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
 const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payload});
 const setCurrentWorkout = payload => ({type: SET_CURRENT_WORKOUT, payload});
+const setNewSet = payload => ({type: SET_NEW_SET, payload});
 
 // views
 const HOME_VIEW = "HOME";
@@ -142,6 +144,7 @@ const rootReducer = combineReducers({
 const getView = state => state.view;
 const getEquipment = state => state.equipment;
 const getCurrentEquipment = state => state.currentEquipment;
+const getCurrentWorkout = state => state.currentWorkout;
 
 //store
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
@@ -180,7 +183,7 @@ function WorkoutDB ({view}) {
             }
         }>
             {view === HOME_VIEW && <HomeViewConnected />}
-            {view === WORKOUT_ADDER_VIEW && <WorkoutAdder />}
+            {view === WORKOUT_ADDER_VIEW && <WorkoutAdderConnected />}
             {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
             {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
             {view === POSTED_VIEW && <PostedView />}
@@ -264,13 +267,25 @@ const EquipmentAdderViewConnected = () => {
     )
 }
 
-const WorkoutAdder = () => {
+const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
     return (
         <div>
-            <p> Workout Adder </p>
+            {getCurrentWorkoutConnected.sets.map( (item) => (<p>set</p>) )}
+            <br />
+            <button onClick={addSet}> Add Set </button>
         </div>
     )
 
+}
+
+const WorkoutAdderConnected = () => {
+    const dispatch = useDispatch();
+    const addSet = dispatch(setNewSet);
+    const getCurrentWorkoutConnected = useSelector(getCurrentWorkout);
+
+    return (
+        <WorkoutAdder getCurrentWorkoutConnected={getCurrentWorkoutConnected} addSet={addSet} />
+    );
 }
 
 const PostedView = () => {
