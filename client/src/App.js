@@ -43,11 +43,13 @@ const SET_VIEW = "SET_VIEW";
 const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
 const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
 const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
+const SET_CURRENT_WORKOUT = "SET_CURRENT_WORKOUT";
 
 const setView = payload => ({type:SET_VIEW, payload});
 const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
 const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
 const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payload});
+const setCurrentWorkout = payload => ({type: SET_CURRENT_WORKOUT, payload});
 
 // views
 const HOME_VIEW = "HOME";
@@ -65,6 +67,9 @@ const initialState = {
         name: " ", 
         isFreeWeight: false, 
         notes: " "
+    },
+    currentWorkout: {
+        sets: []
     }
 }
 
@@ -120,10 +125,17 @@ const currentEquipmentReducer = function(state, action) {
     return {name: " ", isFreeWeight: false, notes: " "};
 }
 
+const currentWorkoutReducer = function(state, action) {
+    if (action.type === SET_CURRENT_WORKOUT && typeof state !== 'undefined') {
+    }
+    return {sets:[]}
+}
+
 const rootReducer = combineReducers({
     view: viewReducer,
     equipment: equipmentReducer,
-    currentEquipment: currentEquipmentReducer
+    currentEquipment: currentEquipmentReducer,
+    currentWorkout: currentWorkoutReducer
 });
 
 // selectors
