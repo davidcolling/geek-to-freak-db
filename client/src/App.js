@@ -16,11 +16,11 @@ class DebugMessager {
 }
 var debug = new DebugMessager();
 
-const postEquipment = (payload) => {
-    return async (dispatch, setState, payload) => {
+const postEquipment = () => {
+    return async (dispatch, setState) => {
         const response = await fetch('/equipment', {
             method: 'post',
-            body: JSON.stringify({payload: payload}),
+            body: JSON.stringify({name: "dip", isFreeWeight: true}),
                 headers: {
                 "Content-Type": "application/json"
             }
@@ -115,7 +115,6 @@ const currentEquipmentReducer = function(state, action) {
             isFreeWeight: id == "isFreeWeight" ? action.payload.target.value : state.isFreeWeight,
             notes: id == "notes" ? action.payload.target.value : state.notes
         }
-        debug.post("reducer: " + JSON.stringify(output));
         return output
     }
     return {name: " ", isFreeWeight: false, notes: " "};
@@ -244,9 +243,8 @@ const EquipmentAdderView = ({post, handleChange}) => {
 
 const EquipmentAdderViewConnected = () => {
     const dispatch = useDispatch();
-    const post = () => dispatch(postEquipment({name: "test", isFreeWeight: false, notes: "test"}));
+    const post = () => dispatch(postEquipment());
     const handleChange = e => dispatch(setCurrentEquipment(e));
-    const getCurrentEquipmentConnected = () => useSelector(getCurrentEquipment);
 
     return (
         <EquipmentAdderView post={post} handleChange={handleChange}/>
