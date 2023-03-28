@@ -17,10 +17,11 @@ class DebugMessager {
 var debug = new DebugMessager();
 
 const postEquipment = () => {
-    return async (dispatch, setState) => {
+    return async (dispatch, getState) => {
+        const s = await getState().currentEquipment;
         const response = await fetch('/equipment', {
             method: 'post',
-            body: JSON.stringify({name: "dip", isFreeWeight: true}),
+            body: JSON.stringify(s),
                 headers: {
                 "Content-Type": "application/json"
             }
@@ -243,6 +244,7 @@ const EquipmentAdderView = ({post, handleChange}) => {
 
 const EquipmentAdderViewConnected = () => {
     const dispatch = useDispatch();
+    const getCurrentEquipmentConnected = useSelector(getCurrentEquipment);
     const post = () => dispatch(postEquipment());
     const handleChange = e => dispatch(setCurrentEquipment(e));
 
