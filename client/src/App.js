@@ -13,6 +13,8 @@ const dpgPost = (message) => {
     });
 }
 
+// thunks
+
 const postEquipment = () => {
     return async (dispatch, getState) => {
         const s = await getState().currentEquipment;
