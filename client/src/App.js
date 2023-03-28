@@ -3,7 +3,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider, useSelector, useDispatch} from 'react-redux';
 import thunk from 'redux-thunk';
 
-dpgPost(message) {
+const dpgPost = (message) => {
     fetch('/dbg', {
         method: 'post',
         body: JSON.stringify({message: message}),
@@ -250,14 +250,12 @@ const EquipmentAdderViewConnected = () => {
     )
 }
 
-class WorkoutAdder extends React.Component {
-    render() {
-        return (
-            <div>
-                <p> Workout Adder </p>
-            </div>
-        )
-    }
+const WorkoutAdder = () => {
+    return (
+        <div>
+            <p> Workout Adder </p>
+        </div>
+    )
 
 }
 
