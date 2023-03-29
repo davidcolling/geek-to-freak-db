@@ -88,6 +88,9 @@ const initialState = {
 }
 
 const viewReducer = function (state, action) {
+    if (action.type === SET_NEW_SET) {
+        return SET_ADDER_VIEW;
+    }
     if (action.type === SET_VIEW) {
         return action.payload;
     } else {
@@ -124,14 +127,13 @@ const currentEquipmentReducer = function(state, action) {
 }
 
 const currentWorkoutReducer = function(state, action) {
-    if (action.type === SET_CURRENT_WORKOUT && typeof state !== 'undefined') {
+    if (action.type === SET_NEW_SET && typeof state !== 'undefined') {
     }
     return {sets:[]}
 }
 
 const currentSetReducer = function(state, action) {
     if (action.type === SET_CURRENT_SET && typeof(state) !== 'undefined') {
-    dbgPost(action.payload.target.id);
         var id = action.payload.target.id;
         var input = action.payload.target.value;
 
@@ -306,7 +308,7 @@ const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
 
 const WorkoutAdderConnected = () => {
     const dispatch = useDispatch();
-    const addSet = () => dispatch(setView(SET_ADDER_VIEW));
+    const addSet = () => dispatch(setNewSet({}));
     const getCurrentWorkoutConnected = useSelector(getCurrentWorkout);
 
     return (
