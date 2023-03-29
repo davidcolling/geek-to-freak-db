@@ -44,7 +44,6 @@ const SET_EQUIPMENT_SUCCESS = "SET_EQUIPMENT_SUCCESS";
 const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
 const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
 const SET_CURRENT_WORKOUT = "SET_CURRENT_WORKOUT";
-const SET_NEW_SET = "SET_NEW_SET";
 const SET_CURRENT_SET = "SET_CURRENT_SET"
 
 const setView = payload => ({type:SET_VIEW, payload});
@@ -52,7 +51,6 @@ const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
 const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
 const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payload});
 const setCurrentWorkout = payload => ({type: SET_CURRENT_WORKOUT, payload});
-const setNewSet = payload => ({type: SET_NEW_SET, payload});
 const setCurrentSet = payload => ({type: SET_CURRENT_SET, payload});
 
 // views
@@ -88,9 +86,6 @@ const initialState = {
 }
 
 const viewReducer = function (state, action) {
-    if (action.type === SET_NEW_SET) {
-        return SET_ADDER_VIEW;
-    }
     if (action.type === SET_VIEW) {
         return action.payload;
     } else {
@@ -310,7 +305,7 @@ const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
 
 const WorkoutAdderConnected = () => {
     const dispatch = useDispatch();
-    const addSet = () => dispatch(setNewSet({}));
+    const addSet = () => dispatch(setView(SET_ADDER_VIEW));
     const getCurrentWorkoutConnected = useSelector(getCurrentWorkout);
 
     return (
