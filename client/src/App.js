@@ -74,17 +74,17 @@ const initialState = {
         notes: " "
     },
     currentWorkout: {
-        sets: []
+        sets: [],
+        currentSet: {
+            equipment: 20,
+            reps: 0,
+            weight: 0,
+            lastRepComplete: true,
+            isLR: true,
+            isL: false,
+            notes: " "
+        }
     },
-    currentSet: {
-        equipment: 20,
-        reps: 0,
-        weight: 0,
-        lastRepComplete: true,
-        isLR: true,
-        isL: false,
-        notes: " "
-    }
 }
 
 const viewReducer = function (state, action) {
@@ -127,36 +127,40 @@ const currentEquipmentReducer = function(state, action) {
 }
 
 const currentWorkoutReducer = function(state, action) {
-    if (action.type === SET_NEW_SET && typeof state !== 'undefined') {
-    }
-    return {sets:[]}
-}
-
-const currentSetReducer = function(state, action) {
-    if (action.type === SET_CURRENT_SET && typeof(state) !== 'undefined') {
-        var id = action.payload.target.id;
-        var input = action.payload.target.value;
-
-        return {
-            equipment: (id === "equipment") ? input : state.equipment,
-            reps: (id === "reps") ? input : state.reps,
-            weight: (id === "weight") ? input : state.weight,
-            lastRepComplete: (id === "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
-            isLR: (id === "isLR") ? !state.isLR : state.isLR,
-            isL: (id === "isL") ? !state.isL : state.isL,
-            notes: (id === "notes") ? input : state.notes
+    if (typeof state !== 'undefined') {
+        if (action.type === SET_CURRENT_SET ) {
+            var id = action.payload.target.id;
+            dbgPost(id);
+            var input = action.payload.target.value;
+    
+            return {
+                sets: [],
+                currentSet: {
+                    equipment: (id === "equipment") ? input : state.equipment,
+                    reps: (id === "reps") ? input : state.reps,
+                    weight: (id === "weight") ? input : state.weight,
+                    lastRepComplete: (id === "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
+                    isLR: (id === "isLR") ? !state.isLR : state.isLR,
+                    isL: (id === "isL") ? !state.isL : state.isL,
+                    notes: (id === "notes") ? input : state.notes
+                }
+            }
         }
     }
  
     return {
-        equipment: 20,
-        reps: 0,
-        weight: 0,
-        lastRepComplete: true,
-        isLR: true,
-        isL: false,
-        notes: " "
+        sets: [],
+        currentSet: {
+            equipment: 20,
+            reps: 0,
+            weight: 0,
+            lastRepComplete: true,
+            isLR: true,
+            isL: false,
+            notes: " "
+        }
     }
+
 }
 
 const rootReducer = combineReducers({
@@ -164,7 +168,6 @@ const rootReducer = combineReducers({
     equipment: equipmentReducer,
     currentEquipment: currentEquipmentReducer,
     currentWorkout: currentWorkoutReducer,
-    currentSet: currentSetReducer
 });
 
 // selectors
