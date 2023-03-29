@@ -130,7 +130,6 @@ const currentWorkoutReducer = function(state, action) {
     if (typeof state !== 'undefined') {
         if (action.type === SET_CURRENT_SET ) {
             var id = action.payload.target.id;
-            dbgPost(id);
             var input = action.payload.target.value;
     
             return {
@@ -167,7 +166,7 @@ const rootReducer = combineReducers({
     view: viewReducer,
     equipment: equipmentReducer,
     currentEquipment: currentEquipmentReducer,
-    currentWorkout: currentWorkoutReducer,
+    currentWorkout: currentWorkoutReducer
 });
 
 // selectors
