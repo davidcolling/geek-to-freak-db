@@ -45,6 +45,7 @@ const SET_EQUIPMENT_FAILURE = "SET_EQUIPMENT_FAILURE";
 const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
 const SET_CURRENT_WORKOUT = "SET_CURRENT_WORKOUT";
 const SET_CURRENT_SET = "SET_CURRENT_SET"
+const ADD_CURRENT_SET = "ADD_CURRENT_SET";
 
 const setView = payload => ({type:SET_VIEW, payload});
 const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
@@ -52,6 +53,7 @@ const setEquipmentFailure = e => ({type:SET_EQUIPMENT_FAILURE, e})
 const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payload});
 const setCurrentWorkout = payload => ({type: SET_CURRENT_WORKOUT, payload});
 const setCurrentSet = payload => ({type: SET_CURRENT_SET, payload});
+const addCurrentSet = () => ({type: ADD_CURRENT_SET});
 
 // views
 const HOME_VIEW = "HOME";
@@ -86,7 +88,9 @@ const initialState = {
 }
 
 const viewReducer = function (state, action) {
-    if (action.type === SET_VIEW) {
+    if (action.type === ADD_CURRENT_SET) {
+        return WORKOUT_ADDER_VIEW;
+    } else if (action.type === SET_VIEW) {
         return action.payload;
     } else {
         if (typeof state !== 'undefined') {
@@ -139,6 +143,24 @@ const currentWorkoutReducer = function(state, action) {
                     notes: (id === "notes") ? input : state.notes
                 }
             }
+        }
+        if (action.type === ADD_CURRENT_SET) {
+            var sets  = state.sets;
+            sets.push(state.currentSet);
+
+            return {
+                sets: sets,
+                currentSet: {
+                    equipment: 20,
+                    reps: 0,
+                    weight: 0,
+                    lastRepComplete: true,
+                    isLR: true,
+                    isL: false,
+                    notes: " "
+                }
+            }
+
         }
     }
  
@@ -348,9 +370,10 @@ const SetAdder = ({handleChange, post}) => {
 const SetAdderConnected = () => {
     const dispatch = useDispatch();
     const handleChange = e => dispatch(setCurrentSet(e));
+    const post = () => dispatch(addCurrentSet());
 
     return (
-        <SetAdder handleChange={handleChange} />
+        <SetAdder handleChange={handleChange} post={post}/>
     );
 }
 
