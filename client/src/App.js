@@ -7,14 +7,13 @@ const dbgPost = (message) => {
     fetch('/dbg', {
         method: 'post',
         body: JSON.stringify({message: message}),
-            headers: {
+        headers: {
             "Content-Type": "application/json"
         }
     });
 }
 
 // thunks
-
 const postEquipment = () => {
     return async (dispatch, getState) => {
         const s = await getState().currentEquipment;
@@ -22,7 +21,7 @@ const postEquipment = () => {
         const response = await fetch('/equipment', {
             method: 'post',
             body: JSON.stringify(s),
-                headers: {
+            headers: {
                 "Content-Type": "application/json"
             }
         })
