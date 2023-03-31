@@ -67,7 +67,7 @@ const SET_ADDER_VIEW = "SET_ADDER_VIEW";
 
 const initialState = {
     view: HOME_VIEW,
-    equipment: JSON.stringify([{id: 0, name: " ", isFreeWeight: false, notes: " "}]),
+    equipment: [{id: 0, name: " ", isFreeWeight: false, notes: " "}],
     currentEquipment: {
         name: " ", 
         isFreeWeight: false, 
@@ -275,7 +275,7 @@ const EquipmentView = ({viewEquipmentAdder, getEquipment, list}) => {
             <br />
             <button onClick={getEquipment}>Get Equipment</button>
             <br />
-            <p>{JSON.stringify(list)}</p>
+            <p>{list.map( (item) => (<p>{item.name}</p>))}</p>
         </div>
     )
 }
