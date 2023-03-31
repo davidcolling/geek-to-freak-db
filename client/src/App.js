@@ -127,12 +127,13 @@ const currentEquipmentReducer = function(state, action) {
 
 const currentWorkoutReducer = function(state, action) {
     if (typeof state !== 'undefined') {
+        var sets  = state.sets;
         if (action.type === SET_CURRENT_SET ) {
             var id = action.payload.target.id;
             var input = action.payload.target.value;
     
             return {
-                sets: [],
+                sets: sets,
                 currentSet: {
                     equipment: (id === "equipment") ? input : state.equipment,
                     reps: (id === "reps") ? input : state.reps,
@@ -145,23 +146,22 @@ const currentWorkoutReducer = function(state, action) {
             }
         }
         if (action.type === ADD_CURRENT_SET) {
-            var sets  = state.sets;
             sets.push(state.currentSet);
-
-            return {
-                sets: sets,
-                currentSet: {
-                    equipment: 20,
-                    reps: 0,
-                    weight: 0,
-                    lastRepComplete: true,
-                    isLR: true,
-                    isL: false,
-                    notes: " "
-                }
-            }
-
         }
+
+        return {
+            sets: sets,
+            currentSet: {
+                equipment: 20,
+                reps: 0,
+                weight: 0,
+                lastRepComplete: true,
+                isLR: true,
+                isL: false,
+                notes: " "
+            }
+        }
+
     }
  
     return {
@@ -317,7 +317,7 @@ const EquipmentAdderViewConnected = () => {
 const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
     return (
         <div>
-            {getCurrentWorkoutConnected.sets.map( (item) => (<p>set</p>) )}
+            {getCurrentWorkoutConnected.sets.map( (item) => (<p>set</p>) )} 
             <br />
             <button onClick={addSet}> Add Set </button>
         </div>
