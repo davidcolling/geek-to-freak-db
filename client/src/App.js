@@ -18,6 +18,7 @@ const dbgPost = (message) => {
 const postEquipment = () => {
     return async (dispatch, getState) => {
         const s = await getState().currentEquipment;
+        await dispatch(setView(POSTED_VIEW));
         const response = await fetch('/equipment', {
             method: 'post',
             body: JSON.stringify(s),
@@ -25,7 +26,6 @@ const postEquipment = () => {
                 "Content-Type": "application/json"
             }
         })
-        dispatch(setView(POSTED_VIEW));
      }
 }
 
