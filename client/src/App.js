@@ -219,7 +219,7 @@ var inputStyle = {
     fontFamily: "Courier"
 }
 
-function WorkoutDB ({view}) {
+function WorkoutDB ({view, home}) {
       return (
         <div style={
             {
@@ -237,15 +237,18 @@ function WorkoutDB ({view}) {
             {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
             {view === POSTED_VIEW && <PostedView />}
             {view === SET_ADDER_VIEW && <SetAdderConnected />}
+            <button onClick={home}>Home</button>
         </div>
     )
 }
 
 const WorkoutDBConnected = () => {
+    const dispatch = useDispatch();
     const getViewConnected = useSelector(getView);
+    const home = () => dispatch(setView(HOME_VIEW));
     
     return (
-        <WorkoutDB view={getViewConnected} />
+        <WorkoutDB view={getViewConnected} home={home} />
     );
 }
 
