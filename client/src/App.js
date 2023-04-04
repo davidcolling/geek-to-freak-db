@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider, useSelector, useDispatch} from 'react-redux';
 import thunk from 'redux-thunk';
+import styled from 'styled-components';
 
 const dbgPost = (message) => {
     fetch('/dbg', {
