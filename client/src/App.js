@@ -249,9 +249,9 @@ const WorkoutDBConnected = () => {
 function HomeView({viewWorkoutAdder, viewEquipmentView, testAPI, list}) {
     return (
         <div>
-            <button onClick={viewWorkoutAdder} >Add Workout</button>
+            <Button onClick={viewWorkoutAdder} >Add Workout</Button>
             <br />
-            <button onClick={viewEquipmentView} >Manage Equipment</button>
+            <Button onClick={viewEquipmentView} >Manage Equipment</Button>
         </div>
     );
 }
@@ -268,9 +268,9 @@ const HomeViewConnected = () => {
 const EquipmentView = ({viewEquipmentAdder, getEquipment, list}) => {
     return (
         <div>
-            <button onClick={viewEquipmentAdder}>Add</button>
+            <Button onClick={viewEquipmentAdder}>Add</Button>
             <br />
-            <button onClick={getEquipment}>Get Equipment</button>
+            <Button onClick={getEquipment}>Get Equipment</Button>
             <br />
             <p>{list.map( (item) => (<p>{item.name}</p>))}</p>
         </div>
@@ -298,7 +298,7 @@ const EquipmentAdderView = ({post, handleChange}) => {
             <input id="isFreeWeight" type="checkbox" onChange={(e) => handleChange(e)} />
             <p>Notes</p>
             <input id="notes" type="text" onChange={(e) => handleChange(e)} />
-            <button onClick={post}>Add</button>
+            <Button onClick={post}>Add</Button>
         </div>
     )
 }
@@ -319,7 +319,7 @@ const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
         <div>
             {getCurrentWorkoutConnected.sets.map( (item) => (<p>set</p>) )} 
             <br />
-            <button onClick={addSet}> Add Set </button>
+            <Button onClick={addSet}> Add Set </Button>
         </div>
     )
 
@@ -362,7 +362,7 @@ const SetAdder = ({handleChange, post}) => {
             <input id="isL" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
             <p>Notes</p>
             <input id="notes" type="text" onChange={(e) => handleChange(e)} />
-            <button onClick={post} >Add</button>
+            <Button onClick={post} >Add</Button>
         </div>
     );
 }
@@ -407,7 +407,7 @@ const Spacer = () => {
     );
 }
 
-const Button = ({additionalStyles, children, onClick}) => {
+const Button = ({children, onClick}) => {
     return (
         <div>
             <button
@@ -418,8 +418,7 @@ const Button = ({additionalStyles, children, onClick}) => {
                         borderWidth: "1px", 
                         borderRadius: "0px",
                         color: "black"
-                    },
-                    additionalStyles
+                    }
                 }
                 onClick={onClick}
             >
@@ -433,7 +432,7 @@ const SquareButton = ({children, onClick}) => {
     return (
         <div >
             <Button
-                additionalStyles= {
+                style={
                     {
                         width: "30px",
                         height: "30px"
