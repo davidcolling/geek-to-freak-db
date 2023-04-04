@@ -421,23 +421,10 @@ const Button = styled.button`
     color: black;
 `
 
-const SquareButton = ({children, onClick}) => {
-    return (
-        <div >
-            <Button
-                style={
-                    {
-                        width: "30px",
-                        height: "30px"
-                    }
-                }
-                onClick={onClick}
-            >
-                {children}
-            </Button>
-        </div>
-    );
-}
+const SquareButton = styled(Button)`
+    width: 300px;
+    height: 30px;
+`
 
 class App extends Component {
     render() {
