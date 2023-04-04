@@ -198,14 +198,6 @@ const getCurrentWorkout = state => state.currentWorkout;
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
 //css
-var buttonStyle = {
-    fontFamily: "Courier",
-    borderStyle: "solid",
-    borderWidth: "1px", 
-    borderRadius: "0px",
-    color: "black"
-}
-
 var dropDownStyle = {
     border: "none",
     borderRadius: "0px",
@@ -239,7 +231,7 @@ function WorkoutDB ({view, home}) {
             <Spacer />
             <LineDivider />
             <Spacer />
-            <button onClick={home}>Home</button>
+            <SquareButton onClick={home}>H</SquareButton>
         </div>
     )
 }
@@ -370,7 +362,7 @@ const SetAdder = ({handleChange, post}) => {
             <input id="isL" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
             <p>Notes</p>
             <input id="notes" type="text" onChange={(e) => handleChange(e)} />
-            <button onClick={post} style={buttonStyle}>Add</button>
+            <button onClick={post} >Add</button>
         </div>
     );
 }
@@ -411,6 +403,46 @@ const Spacer = () => {
                 }
             }
         >
+        </div>
+    );
+}
+
+const Button = ({additionalStyles, children, onClick}) => {
+    return (
+        <div>
+            <button
+                style={
+                    {
+                        fontFamily: "Courier",
+                        borderStyle: "solid",
+                        borderWidth: "1px", 
+                        borderRadius: "0px",
+                        color: "black"
+                    },
+                    additionalStyles
+                }
+                onClick={onClick}
+            >
+                {children}
+            </button>
+        </div>
+    );
+}
+
+const SquareButton = ({children, onClick}) => {
+    return (
+        <div >
+            <Button
+                additionalStyles= {
+                    {
+                        width: "30px",
+                        height: "30px"
+                    }
+                }
+                onClick={onClick}
+            >
+                {children}
+            </Button>
         </div>
     );
 }
