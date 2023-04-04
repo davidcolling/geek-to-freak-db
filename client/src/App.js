@@ -203,19 +203,6 @@ const getCurrentWorkout = state => state.currentWorkout;
 //store
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
-//css
-var dropDownStyle = {
-    border: "none",
-    borderRadius: "0px",
-    color: "#000000",
-    fontFamily: "Courier"
-}
-
-var inputStyle = {
-    borderRadius: "0x",
-    fontFamily: "Courier"
-}
-
 function WorkoutDB ({view, home}) {
       return (
         <div style={
@@ -359,10 +346,10 @@ const SetAdder = ({handleChange, post}) => {
         <div>
             <p> Equipment Selector </p>
             <p>Reps</p>
-            <input id="reps" style={inputStyle} type="number" min="0" max="8" onChange={(e) => handleChange(e)} />
+            <input id="reps" type="number" min="0" max="8" onChange={(e) => handleChange(e)} />
             <br/>
-            <input id="weight" style={inputStyle} type="number" min="0" max="5000" onChange={(e) => handleChange(e)} />
-            <select id="unit" style={dropDownStyle} onChange={(e) => handleChange(e)} value="pounds" >
+            <input id="weight" type="number" min="0" max="5000" onChange={(e) => handleChange(e)} />
+            <select id="unit" onChange={(e) => handleChange(e)} value="pounds" >
                 <option value="pounds">Pounds</option>
                 <option value="kilograms">Kilograms</option>
             </select>
