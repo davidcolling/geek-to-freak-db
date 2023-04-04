@@ -214,12 +214,6 @@ function WorkoutDB ({view, home}) {
       return (
         <div style={
             {
-                width: '250px', 
-                display: 'block', 
-                margin: 'auto', 
-                borderColor: 'black', 
-                borderStyle: 'solid', 
-                borderWidth: '1px'
             }
         }>
             {view === HOME_VIEW && <HomeViewConnected />}
