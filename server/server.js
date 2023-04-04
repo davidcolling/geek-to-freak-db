@@ -26,10 +26,9 @@ class WorkoutDBFacade {
         this.con = con;
         this.db = db;
     }
-    query(query, successMessage) {
-        return this.con.query(
-            query,
-            function (err, result) {
+    query(query, successMessage, cb) {
+        if (typeof cb === 'undefined') {
+            cb = (err, result) => {
                 if (err) {
                     throw err;
                 } else {
@@ -37,9 +36,23 @@ class WorkoutDBFacade {
                     return result;
                 }
             }
+       }
+        return this.con.query(
+            query,
+            cb
         )
     }
-    insertEquipment(name, isFreeWeight) {
+    insertEquipment(name, isFreeWeight, cb) {
+        var nextCb;
+        if (typeof cb !== 'undefined') {
+            nextCb = (err, result) => {
+                if (err) {
+                    cb(err, null);
+                } else {
+                    cb(null, result);
+                }
+            }
+        }
         this.query(
             "INSERT INTO equipment (name, isFreeWeight) " +
                 "SELECT '" + name + "', " + isFreeWeight + " " +
@@ -48,7 +61,8 @@ class WorkoutDBFacade {
                             "SELECT name, isFreeWeight " +
                             "FROM equipment " +
                             "WHERE equipment.name='" + name + "' AND equipment.isFreeWeight=" + isFreeWeight + ") LIMIT 1; ",
-            "workout server: inserting equipment to db;"
+            "workout server: inserting equipment to db;",
+            nextCb
         )
     }
     insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes) {
@@ -145,7 +159,14 @@ app.post('/sets', function(request, response) {
 app.post('/equipment', function(request, response) {
     facade.insertEquipment(
         request.body.name, 
-        request.body.isFreeWeight
+        request.body.isFreeWeight, 
+        function(err, data) {
+            if(err) {
+                console.log("workout server: ", err);
+            } else {
+                response.send(data);
+            }
+        }
     );
 });
 
