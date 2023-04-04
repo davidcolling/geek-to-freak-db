@@ -383,35 +383,17 @@ const SetAdderConnected = () => {
     );
 }
 
-const LineDivider = () => {
-    return (
-        <div
-            style={
-                {
-                    borderTop: "solid",
-                    width: "90%",
-                    display: "block",
-                    margin: "auto",
-                    borderWidth: "1px"
-                }
-            }
-        >
-        </div>
-    );
-}
+const LineDivider = styled.div`
+    border-top: solid;
+    width: 90%;
+    display: block;
+    margin: auto;
+    border-width: 1px;
+`
 
-const Spacer = () => {
-    return (
-        <div
-            style={
-                {
-                    height: "15px"
-                }
-            }
-        >
-        </div>
-    );
-}
+const Spacer = styled.div`
+    height: 15px;
+`
 
 const Button = styled.button`
     font-family: Courier;
