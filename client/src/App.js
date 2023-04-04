@@ -413,26 +413,13 @@ const Spacer = () => {
     );
 }
 
-const Button = ({children, onClick}) => {
-    return (
-        <div>
-            <button
-                style={
-                    {
-                        fontFamily: "Courier",
-                        borderStyle: "solid",
-                        borderWidth: "1px", 
-                        borderRadius: "0px",
-                        color: "black"
-                    }
-                }
-                onClick={onClick}
-            >
-                {children}
-            </button>
-        </div>
-    );
-}
+const Button = styled.button`
+    font-family: Courier;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0px;
+    color: black;
+`
 
 const SquareButton = ({children, onClick}) => {
     return (
