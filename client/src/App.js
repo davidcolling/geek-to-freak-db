@@ -236,6 +236,9 @@ function WorkoutDB ({view, home}) {
             {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
             {view === POSTED_VIEW && <PostedView />}
             {view === SET_ADDER_VIEW && <SetAdderConnected />}
+            <Spacer />
+            <LineDivider />
+            <Spacer />
             <button onClick={home}>Home</button>
         </div>
     )
@@ -379,6 +382,36 @@ const SetAdderConnected = () => {
 
     return (
         <SetAdder handleChange={handleChange} post={post}/>
+    );
+}
+
+const LineDivider = () => {
+    return (
+        <div
+            style={
+                {
+                    borderTop: "solid",
+                    width: "90%",
+                    display: "block",
+                    margin: "auto",
+                    borderWidth: "1px"
+                }
+            }
+        >
+        </div>
+    );
+}
+
+const Spacer = () => {
+    return (
+        <div
+            style={
+                {
+                    height: "15px"
+                }
+            }
+        >
+        </div>
     );
 }
 
