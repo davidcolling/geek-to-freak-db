@@ -8,5 +8,5 @@ const dbgPost = (message) => {
     });
 }
 
-export default dbgPost:
+export default dbgPost;
 
