@@ -10,7 +10,7 @@ export const LineDivider = styled.div`
 `
 
 export const Spacer = styled.div`
-    height: 15px;
+    height: ${ (props) => (props.height)};
 `
 
 export const Button = styled.button`

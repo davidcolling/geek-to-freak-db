@@ -36,8 +36,10 @@ function WorkoutDB ({view, home}) {
             >
                 <Spacer />
                 <LineDivider />
-                <Spacer />
+                <Spacer height={"15px"} />
+                <Spacer height={"15px"} />
                 <SquareButton onClick={home}>H</SquareButton>
+                <Spacer height={"15px"} />
             </div>
         </div>
     )
