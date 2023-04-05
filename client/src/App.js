@@ -13,16 +13,6 @@ import rootReducer from './redux/reducers/root.js';
 import WorkoutDBConnected from './redux/WorkoutDBConnected.js';
 import {HOME_VIEW} from './redux/views.js';
 
-const dbgPost = (message) => {
-    fetch('/dbg', {
-        method: 'post',
-        body: JSON.stringify({message: message}),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-}
-
 const initialState = {
     view: HOME_VIEW,
     equipment: [{id: 0, name: " ", isFreeWeight: false, notes: " "}],
