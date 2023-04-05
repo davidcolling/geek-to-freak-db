@@ -59,3 +59,10 @@ export const Centered = ({height, children}) => {
     )
 }
 
+export const ContentContainer = styled.div`
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    padding-bottom: 30px;
+`
+
