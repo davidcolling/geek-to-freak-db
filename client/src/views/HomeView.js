@@ -1,12 +1,12 @@
 import React from 'react';
-import {Button} from '../Elements.js';
+import {WideButton} from '../Elements.js';
 
 export function HomeView({viewWorkoutAdder, viewEquipmentView, testAPI, list}) {
     return (
         <div>
-            <Button onClick={viewWorkoutAdder} >Add Workout</Button>
+            <WideButton onClick={viewWorkoutAdder} >Add Workout</WideButton>
             <br />
-            <Button onClick={viewEquipmentView} >Manage Equipment</Button>
+            <WideButton onClick={viewEquipmentView} >Manage Equipment</WideButton>
         </div>
     );
 }

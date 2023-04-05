@@ -21,6 +21,15 @@ export const Button = styled.button`
     color: black;
 `
 
+export const WideButton = styled(Button)`
+    width: 90%;
+    max-width:800px;
+    height: 60px;
+    margin: auto;
+    display: block;
+    padding:30px;
+`
+
 export const SquareButton = styled(Button)`
     width: 60px;
     height: 60px;
