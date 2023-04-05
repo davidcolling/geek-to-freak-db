@@ -22,6 +22,6 @@ export const Button = styled.button`
 `
 
 export const SquareButton = styled(Button)`
-    width: 300px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
 `
