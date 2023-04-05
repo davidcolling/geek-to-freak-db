@@ -29,7 +29,6 @@ const initialState = {
     },
 }
 
-//store
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
 class App extends Component {

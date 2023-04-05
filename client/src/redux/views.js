@@ -1,3 +1,5 @@
+// define the options for views with strings to serialize easily
+
 export const HOME_VIEW = "HOME_VIEW";
 export const WORKOUT_ADDER_VIEW = "WORKOUT_ADDER_VIEW";
 export const EQUIPMENT_VIEW = "EQUIPMENT_VIEW";

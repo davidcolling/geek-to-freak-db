@@ -1,3 +1,6 @@
+// outmost shell of the non-boilerplate side of the application
+    // manages view
+    // displays persistently visible components
 import React from 'react';
 
 import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, POSTED_VIEW, SET_ADDER_VIEW} from './redux/views.js';

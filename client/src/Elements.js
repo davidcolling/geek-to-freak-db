@@ -1,3 +1,4 @@
+// basic design objects
 import styled from 'styled-components';
 
 export const LineDivider = styled.div`
