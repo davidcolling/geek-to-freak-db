@@ -1,4 +1,4 @@
-import {Provider, useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import HomeView from '../../views/HomeView.js';
 import {WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW} from '../views.js';
 import {setView} from '../actions.js';

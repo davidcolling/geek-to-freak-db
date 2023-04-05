@@ -5,7 +5,7 @@ import {POSTED_VIEW} from './views.js';
 export const postEquipment = () => {
     return async (dispatch, getState) => {
         const s = await getState().currentEquipment;
-        const response = await fetch('/equipment', {
+        await fetch('/equipment', {
             method: 'post',
             body: JSON.stringify(s),
             headers: {

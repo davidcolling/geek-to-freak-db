@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import {Provider, useSelector, useDispatch} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
-import {
-    Button,
-    SquareButton,
-    Spacer,
-    LineDivider 
-} from './Elements.js';
 import rootReducer from './redux/reducers/root.js';
 import WorkoutDBConnected from './redux/WorkoutDBConnected.js';
 import {HOME_VIEW} from './redux/views.js';

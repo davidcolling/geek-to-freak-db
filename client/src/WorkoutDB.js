@@ -7,7 +7,7 @@ import EquipmentViewConnected from './redux/views/EquipmentViewConnected.js';
 import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnected.js';
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import PostedView from './views/PostedView.js';
-import {Spacer, LineDivider, Button, SquareButton} from './Elements.js';
+import {Spacer, LineDivider, SquareButton} from './Elements.js';
 
 function WorkoutDB ({view, home}) {
       return (

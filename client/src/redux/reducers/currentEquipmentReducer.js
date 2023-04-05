@@ -1,15 +1,15 @@
 import {SET_CURRENT_EQUIPMENT} from '../actions.js';
 
 export const currentEquipmentReducer = (state, action) => {
-    if (action.type === SET_CURRENT_EQUIPMENT && typeof state != 'undefined') {
+    if (action.type === SET_CURRENT_EQUIPMENT && typeof state !== 'undefined') {
         var id  = action.payload.target.id;
         var output = {
-            name: id == "name" ? action.payload.target.value : state.name,
+            name: id === "name" ? action.payload.target.value : state.name,
             isFreeWeight: 
-                id == "isFreeWeight" ? 
-                    (action.payload.target.value == "on" ? true : false):
+                id === "isFreeWeight" ? 
+                    (action.payload.target.value === "on" ? true : false):
                     state.isFreeWeight,
-            notes: id == "notes" ? action.payload.target.value : state.notes
+            notes: id === "notes" ? action.payload.target.value : state.notes
         }
         return output
     }
