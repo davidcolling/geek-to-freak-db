@@ -11,10 +11,10 @@ export const EquipmentViewConnected = () => {
     const viewEquipmentAdder = () => dispatch(setView(EQUIPMENT_ADDER_VIEW));
     const fetchEquipmentConnected = () => dispatch(fetchEquipment());
     const getEquipmentConnected = () => useSelector(getEquipment);
-
+    fetchEquipmentConnected()
 
     return (
-        <EquipmentView viewEquipmentAdder={viewEquipmentAdder} getEquipment={fetchEquipmentConnected} list={getEquipmentConnected()} />
+        <EquipmentView viewEquipmentAdder={viewEquipmentAdder} list={getEquipmentConnected()} />
     );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {CenteredHorizontally, WideButton} from '../Elements.js';
+import {WideButton} from '../Elements.js';
 
 export const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
     return (
