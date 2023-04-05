@@ -27,19 +27,21 @@ function WorkoutDB ({view, home}) {
             <div
                 style={
                     {
-                        padding: "10px",
                         position: "fixed",
                         bottom: "0",
-                        width: "100%"
+                        left: "5%",
+                        right: "5%",
+                        width: "90%",
+                        display: "block",
+                        margin: "auto"
                     }
                 }
             >
                 <Spacer />
                 <LineDivider />
-                <Spacer height={"15px"} />
-                <Spacer height={"15px"} />
+                <Spacer height={"30px"} />
                 <SquareButton onClick={home}>H</SquareButton>
-                <Spacer height={"15px"} />
+                <Spacer height={"30px"} />
             </div>
         </div>
     )
