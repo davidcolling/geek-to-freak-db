@@ -28,6 +28,7 @@ export const WideButton = styled(Button)`
     min-width:300px;
     height: 60px;
     display: block;
+    margin: auto;
     padding:30px;
 `
 

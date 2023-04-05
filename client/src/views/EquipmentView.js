@@ -1,14 +1,14 @@
 import React from 'react';
-import {Button} from '../Elements.js';
+import {WideButton} from '../Elements.js';
 
 export const EquipmentView = ({viewEquipmentAdder, getEquipment, list}) => {
     return (
         <div>
-            <Button onClick={viewEquipmentAdder}>Add</Button>
-            <br />
-            <Button onClick={getEquipment}>Get Equipment</Button>
+            <WideButton onClick={getEquipment}>Get Equipment</WideButton>
             <br />
             <p>{list.map( (item) => (<p>{item.name}</p>))}</p>
+            <br />
+            <WideButton onClick={viewEquipmentAdder}>Add</WideButton>
         </div>
     )
 }

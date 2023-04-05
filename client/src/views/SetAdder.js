@@ -1,5 +1,5 @@
 import React from 'react'; 
-import {Button} from '../Elements.js';
+import {WideButton} from '../Elements.js';
 
 export const SetAdder = ({handleChange, post}) => {
    return (
@@ -20,7 +20,7 @@ export const SetAdder = ({handleChange, post}) => {
             <input id="isL" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
             <p>Notes</p>
             <input id="notes" type="text" onChange={(e) => handleChange(e)} />
-            <Button onClick={post} >Add</Button>
+            <WideButton onClick={post} >Add</WideButton>
         </div>
     );
 }

@@ -37,7 +37,7 @@ function WorkoutDB ({view, home}) {
                 {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
                 {view === POSTED_VIEW && <PostedView />}
                 {view === SET_ADDER_VIEW && <SetAdderConnected />}
-                 <Spacer />
+                <Spacer height={"30px"} />
                 <LineDivider />
                 <Spacer height={"30px"} />
                 <SquareButton onClick={home}>H</SquareButton>
