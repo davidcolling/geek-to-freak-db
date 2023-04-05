@@ -9,7 +9,7 @@ import {HOME_VIEW} from './redux/views.js';
 
 const initialState = {
     view: HOME_VIEW,
-    equipment: [{id: 0, name: " ", isFreeWeight: false, notes: " "}],
+    equipment: [{name: " ", isFreeWeight: false, notes: " "}],
     currentEquipment: {
         name: " ", 
         isFreeWeight: false, 
