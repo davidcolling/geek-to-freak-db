@@ -89,13 +89,14 @@ export const P = styled.p`
     font-size: 1.1em;
 `
 
-const CheckInside = ({checked}) => {
+const CheckInside = ({color, onClick}) => {
     return (
         <div
+            onClick={onClick}
             style={{
                 width: "15px",
                 height: "15px",
-                backgroundColor: checked,
+                backgroundColor: color,
             }}
         >
         </div>
@@ -121,7 +122,7 @@ export const Check = ({checked}) => {
         <div>
             <CheckOutside>
                 <Centered height={"20px"} >
-                    <CheckInside checked={checked} ></CheckInside>
+                    <CheckInside color={checked ? "black" : "white"} ></CheckInside>
                 </Centered>
             </CheckOutside>
         </div>

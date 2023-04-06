@@ -1,15 +1,14 @@
 import React from 'react';
-import CheckConnected from '../redux/elements/CheckConnected.js';
-import {P, ContentContainer, WideButton} from '../Elements.js';
+import {Check, P, ContentContainer, WideButton} from '../Elements.js';
 
-export const EquipmentAdderView = ({post, handleChange, handleCheck}) => {
+export const EquipmentAdderView = ({post, handleChange}) => {
     return (
         <div>
             <ContentContainer>
                 <P>Name</P>
                 <input id="name" type="text" onChange={(e) => handleChange(e)} />
                 <P>This is a free-weight.</P>
-                <CheckConnected id="isFreeWeight" onClick={handleCheck} />
+                <Check id="isFreeWeight" checked={false} />
                 <P>Notes</P>
                 <input id="notes" type="text" onChange={(e) => handleChange(e)} />
             </ContentContainer>
