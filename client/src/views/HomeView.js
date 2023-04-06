@@ -7,7 +7,7 @@ export function HomeView({viewWorkoutAdder, viewEquipmentView, testAPI, list}) {
             <Centered height={"600px"} >
                 <WideButton onClick={viewWorkoutAdder} >Add Workout</WideButton>
                 <br />
-                <WideButton onClick={viewEquipmentView} >Manage Equipment</WideButton>
+                <WideButton onClick={viewEquipmentView} >Equipment</WideButton>
             </Centered>
         </div>
     );

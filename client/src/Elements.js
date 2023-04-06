@@ -1,6 +1,7 @@
 // basic design objects
 import styled from 'styled-components';
 import React from 'react';
+import lato from 'typeface-lato';
 
 export const LineDivider = styled.div`
     border-top: solid;
@@ -15,7 +16,16 @@ export const Spacer = styled.div`
 `
 
 export const Button = styled.button`
-    font-family: Courier;
+    @font-face {
+      font-family: lato;
+      src: url(${lato}) format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+	font-size: 20;
+	text-transform: uppercase;
+	letter-spacing: 1em;
+    font-family: lato;
     border-style: solid;
     border-width: 1px;
     border-radius: 0px;
