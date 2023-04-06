@@ -30,6 +30,7 @@ export const Button = styled.button`
     border-width: 1px;
     border-radius: 0px;
     color: black;
+    background: transparent;
 `
 
 export const WideButton = styled(Button)`
@@ -39,7 +40,6 @@ export const WideButton = styled(Button)`
     height: 60px;
     display: block;
     margin: auto;
-    padding:30px;
 `
 
 export const SquareButton = styled(Button)`
