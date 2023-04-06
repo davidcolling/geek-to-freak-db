@@ -8,7 +8,7 @@ export const EquipmentAdderView = ({post, handleChange, isFreeWeight, isFreeWeig
                 <P>Name</P>
                 <input id="name" type="text" onChange={(e) => handleChange(e)} />
                 <P>This is a free-weight.</P>
-                <Check id="isFreeWeight" checked={isFreeWeight} onClick={(e) => isFreeWeightClick({target: {id: "idFreeWeight"}})} />
+                <Check id="isFreeWeight" checked={isFreeWeight} onClick={(e) => isFreeWeightClick({target: {id: "isFreeWeight"}})} />
                 <P>Notes</P>
                 <input id="notes" type="text" onChange={(e) => handleChange(e)} />
             </ContentContainer>
