@@ -122,7 +122,7 @@ export const Check = ({checked}) => {
         <div>
             <CheckOutside>
                 <Centered height={"20px"} >
-                    <CheckInside color={checked ? "black" : "white"} ></CheckInside>
+                    <CheckInside color={!checked ? "white" : "black"} ></CheckInside>
                 </Centered>
             </CheckOutside>
         </div>
