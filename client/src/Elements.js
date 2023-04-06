@@ -89,3 +89,41 @@ export const P = styled.p`
     font-size: 1.1em;
 `
 
+const CheckInside = ({checked}) => {
+    return (
+        <div
+            style={{
+                width: "15px",
+                height: "15px",
+                backgroundColor: checked,
+            }}
+        >
+        </div>
+    )
+}
+
+const CheckOutside = ({children}) => {
+    return (
+        <div
+            style={{
+                width: "20px",
+                height: "20px",
+                backgroundColor: "black",
+            }}
+        >
+            {children}
+        </div>
+    );
+}
+
+export const Check = ({checked}) => {
+    return (
+        <div>
+            <CheckOutside>
+                <Centered height={"20px"} >
+                    <CheckInside checked={checked} ></CheckInside>
+                </Centered>
+            </CheckOutside>
+        </div>
+    );
+}

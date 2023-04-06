@@ -1,5 +1,6 @@
 import React from 'react'; 
-import {P, ContentContainer, Spacer, WideButton} from '../Elements.js';
+import {P, ContentContainer, WideButton} from '../Elements.js';
+import {CheckConnected} from '../redux/elements/CheckConnected.js';
 
 export const SetAdder = ({handleChange, post}) => {
    return (
@@ -15,10 +16,10 @@ export const SetAdder = ({handleChange, post}) => {
                     <option value="kilograms">Kilograms</option>
                 </select>
                 <P>Was the last rep complete?</P>
-                <input id="lastRepComplete" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
+                <CheckConnected id="lastRepComplete" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
                 <P>Did you lift both sides of your body simultaneously?</P>
-                <input id="isLR" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
-                <input id="isL" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
+                <CheckConnected id="isLR" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
+                <CheckConnected id="isL" type="checkbox" onChange={(e) => handleChange(e)} checked="on" />
                 <P>Notes</P>
                 <input id="notes" type="text" onChange={(e) => handleChange(e)} />
             </ContentContainer>
