@@ -5,10 +5,7 @@ export const currentEquipmentReducer = (state, action) => {
         var id  = action.payload.target.id;
         var output = {
             name: id === "name" ? action.payload.target.value : state.name,
-            isFreeWeight: 
-                id === "isFreeWeight" ? 
-                    (action.payload.target.value === "on" ? true : false):
-                    state.isFreeWeight,
+            isFreeWeight: id === "isFreeWeight" ?  !state.isFreeWeight : state.isFreeWeight,
             notes: id === "notes" ? action.payload.target.value : state.notes
         }
         return output

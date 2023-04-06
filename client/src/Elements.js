@@ -117,12 +117,12 @@ const CheckOutside = ({children}) => {
     );
 }
 
-export const Check = ({checked}) => {
+export const Check = ({checked, onClick}) => {
     return (
         <div>
             <CheckOutside>
                 <Centered height={"20px"} >
-                    <CheckInside color={!checked ? "white" : "black"} ></CheckInside>
+                    <CheckInside color={!checked ? "white" : "black"} onClick={onClick} ></CheckInside>
                 </Centered>
             </CheckOutside>
         </div>

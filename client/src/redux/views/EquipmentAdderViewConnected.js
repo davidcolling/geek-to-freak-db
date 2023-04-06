@@ -8,9 +8,10 @@ export const EquipmentAdderViewConnected = () => {
     const dispatch = useDispatch();
     const post = () => dispatch(postEquipment());
     const handleChange = e => dispatch(setCurrentEquipment(e));
+    const handleFreeWeight = e => dispatch(setCurrentEquipment(e));
 
     return (
-        <EquipmentAdderView post={post} handleChange={handleChange}/>
+        <EquipmentAdderView post={post} handleChange={handleChange} isFreeWeight={false} isFreeWeightClick={handleFreeWeight} />
     )
 }
 
