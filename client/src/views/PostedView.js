@@ -1,9 +1,10 @@
 import React from 'react';
+import {P} from '../Elements.js';
 
 export const PostedView = () => {
     return (
         <div>
-            <p>Posted</p>
+            <P>Posted</P>
         </div>
     )
 }

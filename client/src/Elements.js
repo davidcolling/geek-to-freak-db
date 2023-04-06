@@ -76,3 +76,16 @@ export const ContentContainer = styled.div`
     padding-bottom: 30px;
 `
 
+export const P = styled.p`
+    @font-face {
+      font-family: lato;
+      src: url(${lato}) format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    font-family: lato;
+    letter-spacing 0.2em;
+    font-weight: 100;
+    font-size: 1.1em;
+`
+

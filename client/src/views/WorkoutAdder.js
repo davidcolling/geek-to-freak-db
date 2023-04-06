@@ -1,10 +1,10 @@
 import React from 'react';
-import {WideButton} from '../Elements.js';
+import {P, WideButton} from '../Elements.js';
 
 export const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
     return (
         <div>
-            {getCurrentWorkoutConnected.sets.map( (item) => (<p>set</p>) )} 
+            {getCurrentWorkoutConnected.sets.map( (item) => (<P>set</P>) )} 
             <br />
             <WideButton onClick={addSet}> Add Set </WideButton>
         </div>
