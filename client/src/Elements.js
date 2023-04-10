@@ -23,18 +23,23 @@ const fontFace = `
       font-style: normal;
     }
 `
-export const Button = styled.button`
-	font-size: 20;
-	text-transform: uppercase;
-	letter-spacing: 1em;
-    font-family: lato;
+
+const border = `
     border-style: solid;
     border-color: black;
     border-width: 1px;
     border-radius: 0px;
+`
+
+ export const Button = styled.button`
+	font-size: 20;
+	text-transform: uppercase;
+	letter-spacing: 1em;
+    font-family: lato;
     color: black;
     background: transparent;
     ${fontFace}
+    ${border}
 `
 
 export const WideButton = styled(Button)`
@@ -136,13 +141,9 @@ export const NumberInput = styled.input `
 
 const DropDownSelect = styled.select`
     width: 150px;
-    border-radius: 0px;
     color: black;
     height: 45px;
-    background-color: white;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    ${border}
     ${fontFace}
 `
 
