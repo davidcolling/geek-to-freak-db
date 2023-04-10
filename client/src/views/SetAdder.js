@@ -1,5 +1,5 @@
 import React from 'react'; 
-import {Check, P, ContentContainer, WideButton} from '../Elements.js';
+import {Check, P, ContentContainer, WideButton, NumberInput} from '../Elements.js';
 
 export const SetAdder = ({handleChange, post, getLastRepComplete, handleLastRepComplete}) => {
    return (
@@ -7,6 +7,7 @@ export const SetAdder = ({handleChange, post, getLastRepComplete, handleLastRepC
             <ContentContainer>
                 <P> Equipment Selector </P>
                 <P>Reps</P>
+                <NumberInput type="number" />
                 <P>Was the last rep complete?</P>
                 <Check id="lastRepComplete" checked={getLastRepComplete} onClick={(e) => handleLastRepComplete({target: {id: "lastRepComplete"}} )} />
                 <P>Did you lift both sides of your body simultaneously?</P>

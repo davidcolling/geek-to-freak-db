@@ -128,3 +128,10 @@ export const Check = ({checked, onClick}) => {
         </div>
     );
 }
+
+export const NumberInput = styled.input `
+    ${props =>   props.type === 'password' && `
+        width: 300px;
+    `}
+`
+
