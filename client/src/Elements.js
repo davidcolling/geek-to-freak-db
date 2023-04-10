@@ -35,7 +35,6 @@ const border = `
 	font-size: 20;
 	text-transform: uppercase;
 	letter-spacing: 1em;
-    font-family: lato;
     color: black;
     background: transparent;
     ${fontFace}
