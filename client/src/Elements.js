@@ -130,8 +130,26 @@ export const Check = ({checked, onClick}) => {
 }
 
 export const NumberInput = styled.input `
-    ${props =>   props.type === 'password' && `
-        width: 300px;
+    ${props =>   props.type === 'number' && `
+        width: 150px;
     `}
 `
+
+const DropDownSelect = styled.select`
+    width: 150px;
+`
+
+const DropDownOption = styled.option`
+    width: 100px;
+`
+
+export const DropDown = ({items}) => {
+    return (
+        <div>
+            <DropDownSelect>
+                {items.map( (item) => (<DropDownOption>{item}</DropDownOption>) )}
+            </DropDownSelect>
+        </div>
+    );
+}
 
