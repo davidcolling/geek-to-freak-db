@@ -21,7 +21,7 @@ const initialState = {
             equipment: 20,
             reps: 0,
             weight: 0,
-            lastRepComplete: true,
+            lastRepComplete: false,
             isLR: true,
             isL: false,
             notes: " "
@@ -38,3 +38,4 @@ class App extends Component {
 }
 
 export default App;
+
