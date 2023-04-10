@@ -29,6 +29,7 @@ export const Button = styled.button`
 	letter-spacing: 1em;
     font-family: lato;
     border-style: solid;
+    border-color: black;
     border-width: 1px;
     border-radius: 0px;
     color: black;
@@ -135,6 +136,14 @@ export const NumberInput = styled.input `
 
 const DropDownSelect = styled.select`
     width: 150px;
+    border-radius: 0px;
+    color: black;
+    height: 45px;
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    ${fontFace}
 `
 
 const DropDownOption = styled.option`
