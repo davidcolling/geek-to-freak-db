@@ -15,13 +15,15 @@ export const Spacer = styled.div`
     height: ${ (props) => (props.height)};
 `
 
-export const Button = styled.button`
+const fontFace = `
     @font-face {
       font-family: lato;
       src: url(${lato}) format('truetype');
       font-weight: 400;
       font-style: normal;
     }
+`
+export const Button = styled.button`
 	font-size: 20;
 	text-transform: uppercase;
 	letter-spacing: 1em;
@@ -31,6 +33,7 @@ export const Button = styled.button`
     border-radius: 0px;
     color: black;
     background: transparent;
+    ${fontFace}
 `
 
 export const WideButton = styled(Button)`
@@ -77,12 +80,7 @@ export const ContentContainer = styled.div`
 `
 
 export const P = styled.p`
-    @font-face {
-      font-family: lato;
-      src: url(${lato}) format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
+    ${fontFace}
     font-family: lato;
     letter-spacing 0.2em;
     font-weight: 100;
@@ -141,6 +139,7 @@ const DropDownSelect = styled.select`
 
 const DropDownOption = styled.option`
     width: 100px;
+    ${fontFace}
 `
 
 export const DropDown = ({items}) => {
