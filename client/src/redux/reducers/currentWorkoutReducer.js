@@ -20,7 +20,7 @@ const currentWorkoutReducer = function(state, action) {
 
                 var id = action.payload.target.id;
                 var input = action.payload.target.value;
-        
+
                 output.sets = state.sets;
                 output.currentSet = {
                     equipment: (id === "equipment") ? input : state.currentSet.equipment,

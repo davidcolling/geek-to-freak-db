@@ -7,8 +7,10 @@ export const SetAdder = ({handleChange, post, getLastRepComplete, handleLastRepC
             <ContentContainer>
                 <P> Equipment Selector </P>
                 <P>Reps</P>
-                <NumberInput type="number" />
+                <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number" />
                 <DropDown items={[1, 2, 3, 4]} />
+                <P>Weight</P>
+                <NumberInput id="weight" onChange={(e) => handleChange(e)}  type="number" />
                 <P>Was the last rep complete?</P>
                 <Check id="lastRepComplete" checked={getLastRepComplete} onClick={(e) => handleLastRepComplete({target: {id: "lastRepComplete"}} )} />
                 <P>Did you lift both sides of your body simultaneously?</P>
