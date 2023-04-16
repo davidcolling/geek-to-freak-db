@@ -1,16 +1,16 @@
 import React from 'react'; 
 import {DropDown, Check, P, ContentContainer, WideButton, NumberInput} from '../Elements.js';
 
-export const SetAdder = ({handleChange, post, getLastRepComplete, handleLastRepComplete}) => {
+export const SetAdder = ({currentSet, handleChange, post, getLastRepComplete, handleLastRepComplete}) => {
    return (
         <div>
             <ContentContainer>
                 <P> Equipment Selector </P>
                 <P>Reps</P>
-                <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number" />
+                <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number"  value={currentSet.reps} />
                 <DropDown items={[1, 2, 3, 4]} />
                 <P>Weight</P>
-                <NumberInput id="weight" onChange={(e) => handleChange(e)}  type="number" />
+                <NumberInput id="weight" onChange={(e) => handleChange(e)}  type="number" value={currentSet.weight}/>
                 <P>Was the last rep complete?</P>
                 <Check id="lastRepComplete" checked={getLastRepComplete} onClick={(e) => handleLastRepComplete({target: {id: "lastRepComplete"}} )} />
                 <P>Did you lift both sides of your body simultaneously?</P>
