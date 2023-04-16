@@ -23,13 +23,13 @@ const currentWorkoutReducer = function(state, action) {
         
                 output.sets = state.sets;
                 output.currentSet = {
-                    equipment: (id === "equipment") ? input : state.equipment,
-                    reps: (id === "reps") ? input : state.reps,
-                    weight: (id === "weight") ? input : state.weight,
-                    lastRepComplete: (id === "lastRepComplete") ? !state.lastRepComplete : state.lastRepComplete, 
-                    isLR: (id === "isLR") ? !state.isLR : state.isLR,
-                    isL: (id === "isL") ? !state.isL : state.isL,
-                    notes: (id === "notes") ? input : state.notes
+                    equipment: (id === "equipment") ? input : state.currentSet.equipment,
+                    reps: (id === "reps") ? input : state.currentSet.reps,
+                    weight: (id === "weight") ? input : state.currentSet.weight,
+                    lastRepComplete: (id === "lastRepComplete") ? !state.currentSet.lastRepComplete : state.currentSet.lastRepComplete, 
+                    isLR: (id === "isLR") ? !state.currentSet.isLR : state.currentSet.isLR,
+                    isL: (id === "isL") ? !state.currentSet.isL : state.currentSet.isL,
+                    notes: (id === "notes") ? input : state.currentSet.notes
                 }
             }
             break;
