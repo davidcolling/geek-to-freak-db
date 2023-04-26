@@ -1,11 +1,11 @@
 import React from 'react'; 
 import {DropDown, Check, P, ContentContainer, WideButton, NumberInput} from '../Elements.js';
 
-export const SetAdder = ({currentSet, handleChange, post, getLastRepComplete, handleLastRepComplete}) => {
+export const SetAdder = ({currentSet, handleChange, post, getLastRepComplete, handleLastRepComplete, equipment}) => {
    return (
         <div>
             <ContentContainer>
-                <P> Equipment Selector </P>
+                <DropDown items={equipment} />
                 <P>Reps</P>
                 <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number"  value={currentSet.reps} />
                 <DropDown items={[1, 2, 3, 4]} />
