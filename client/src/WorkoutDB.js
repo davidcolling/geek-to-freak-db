@@ -35,7 +35,9 @@ function WorkoutDB ({view, home}) {
                         right: "5%",
                         width: "90%",
                         display: "block",
-                        margin: "auto"
+                        margin: "auto",
+                        backgroundColor: "white",
+                        opacity: "90%"
                     }
                 }
             >
