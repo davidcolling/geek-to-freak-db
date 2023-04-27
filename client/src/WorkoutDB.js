@@ -33,8 +33,8 @@ function WorkoutDB ({view, home}) {
                     {
                         position: "fixed",
                         bottom: "0",
-                        width: "90%",
                         display: "block",
+                        width: "100%",
                         margin: "auto",
                         backgroundColor: "white",
                         opacity: "90%"
