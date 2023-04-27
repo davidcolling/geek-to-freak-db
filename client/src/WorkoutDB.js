@@ -18,7 +18,15 @@ function WorkoutDB ({view, home}) {
             {
             }
         }>
-           <div
+            <Spacer height={"30px"} />
+            {view === HOME_VIEW && <HomeViewConnected />}
+            {view === WORKOUT_ADDER_VIEW && <WorkoutAdderConnected />}
+            {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
+            {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
+            {view === POSTED_VIEW && <PostedView />}
+            {view === SET_ADDER_VIEW && <SetAdderConnected />}
+            <Spacer height={"200px"} />
+            <div
                 style={
                     {
                         position: "fixed",
@@ -31,14 +39,7 @@ function WorkoutDB ({view, home}) {
                     }
                 }
             >
-                {view === HOME_VIEW && <HomeViewConnected />}
-                {view === WORKOUT_ADDER_VIEW && <WorkoutAdderConnected />}
-                {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
-                {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
-                {view === POSTED_VIEW && <PostedView />}
-                {view === SET_ADDER_VIEW && <SetAdderConnected />}
-                <Spacer height={"30px"} />
-                <LineDivider />
+               <LineDivider />
                 <Spacer height={"30px"} />
                 <SquareButton onClick={home}>H</SquareButton>
                 <Spacer height={"30px"} />
