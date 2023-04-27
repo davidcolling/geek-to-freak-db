@@ -1,17 +1,15 @@
 import React from 'react';
-import {Check, P, ContentContainer, WideButton} from '../Elements.js';
+import {Check, P, WideButton} from '../Elements.js';
 
 export const EquipmentAdderView = ({post, handleChange, isFreeWeight, isFreeWeightClick}) => {
     return (
         <div>
-            <ContentContainer>
-                <P>Name</P>
-                <input id="name" type="text" onChange={(e) => handleChange(e)} />
-                <P>This is a free-weight.</P>
-                <Check id="isFreeWeight" checked={isFreeWeight} onClick={(e) => isFreeWeightClick({target: {id: "isFreeWeight"}})} />
-                <P>Notes</P>
-                <input id="notes" type="text" onChange={(e) => handleChange(e)} />
-            </ContentContainer>
+            <P>Name</P>
+            <input id="name" type="text" onChange={(e) => handleChange(e)} />
+            <P>This is a free-weight.</P>
+            <Check id="isFreeWeight" checked={isFreeWeight} onClick={(e) => isFreeWeightClick({target: {id: "isFreeWeight"}})} />
+            <P>Notes</P>
+            <input id="notes" type="text" onChange={(e) => handleChange(e)} />
             <WideButton onClick={post}>Add</WideButton>
         </div>
     )
