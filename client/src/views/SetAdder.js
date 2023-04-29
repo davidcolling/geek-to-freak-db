@@ -1,7 +1,7 @@
 import React from 'react'; 
 import {DropDown, Check, P, WideButton, NumberInput} from '../Elements.js';
 
-export const SetAdder = ({currentSet, handleChange, post, getLastRepComplete, handleLastRepComplete, equipment}) => {
+export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete, equipment}) => {
    return (
         <div>
             <DropDown items={equipment} />
@@ -11,8 +11,14 @@ export const SetAdder = ({currentSet, handleChange, post, getLastRepComplete, ha
             <P>Weight</P>
             <NumberInput id="weight" onChange={(e) => handleChange(e)}  type="number" value={currentSet.weight}/>
             <P>Was the last rep complete?</P>
-            <Check id="lastRepComplete" checked={getLastRepComplete} onClick={(e) => handleLastRepComplete({target: {id: "lastRepComplete"}} )} />
+            <Check id="lastRepComplete" checked={currentSet.lastRepComplete} onClick={(e) => handleLastRepComplete({target: {id: "lastRepComplete"}} )} />
             <P>Did you lift both sides of your body simultaneously?</P>
+            <Check id="isLR" checked={currentSet.isLR} onClick={(e) => handleLastRepComplete({target: {id: "isLR"}} )} />
+            { 
+                !currentSet.isLR 
+                && 
+                <DropDown id="isL" items={["right", "left"]} onChange={(e) => handleChange({target: {id: "isL"}})} />
+            }
             <P>Notes</P>
             <input id="notes" type="text" onChange={(e) => handleChange(e)} />
             <WideButton onClick={post} >Add</WideButton>
