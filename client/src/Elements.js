@@ -103,7 +103,7 @@ const CheckInside = ({color, onClick}) => {
             style={{
                 width: "15px",
                 height: "15px",
-                backgroundColor: color,
+                backgroundColor: color
             }}
         >
         </div>
@@ -116,7 +116,7 @@ const CheckOutside = ({children}) => {
             style={{
                 width: "20px",
                 height: "20px",
-                backgroundColor: "black",
+                backgroundColor: "black"
             }}
         >
             {children}
@@ -126,15 +126,20 @@ const CheckOutside = ({children}) => {
 
 export const Check = ({checked, onClick}) => {
     return (
-        <div>
+        <StyledDiv>
             <CheckOutside>
                 <Centered height={"20px"} >
                     <CheckInside color={!checked ? "white" : "black"} onClick={onClick} ></CheckInside>
                 </Centered>
             </CheckOutside>
-        </div>
+        </StyledDiv>
     );
 }
+
+const StyledDiv = styled.div`
+    ${spacing}
+    overflow: auto;
+`
 
 export const NumberInput = styled.input `
     ${props =>   props.type === 'number' && `
