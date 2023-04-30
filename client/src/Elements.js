@@ -23,7 +23,12 @@ const fontFace = `
       font-style: normal;
     }
 `
-
+const textStyles = `
+    font-family: lato;
+    letter-spacing 0.2em;
+    font-weight: 100;
+    font-size: 1.1em;
+`
 
 const spacing = `
     margin-bottom: 30px;
@@ -90,10 +95,7 @@ export const ContentContainer = styled.div`
 
 export const P = styled.p`
     ${fontFace}
-    font-family: lato;
-    letter-spacing 0.2em;
-    font-weight: 100;
-    font-size: 1.1em;
+    ${textStyles}
 `
 
 const CheckInside = ({color, onClick}) => {
@@ -156,17 +158,16 @@ export const TextInput = styled.input `
 `
 
 const DropDownSelect = styled.select`
-    width: 150px;
+    width: 200px;
     color: black;
     height: 45px;
     ${border}
-    ${fontFace}
+    ${textStyles}
     ${spacing}
 `
 
 const DropDownOption = styled.option`
-    width: 100px;
-    ${fontFace}
+    width: 200px;
 `
 
 export const DropDown = ({items}) => {
