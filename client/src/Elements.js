@@ -24,6 +24,10 @@ const fontFace = `
     }
 `
 
+
+const spacing = `
+    margin-bottom: 30px;
+`
 const border = `
     border-style: solid;
     border-color: black;
@@ -39,6 +43,7 @@ const border = `
     background: transparent;
     ${fontFace}
     ${border}
+    ${spacing}
 `
 
 export const WideButton = styled(Button)`
@@ -81,7 +86,6 @@ export const ContentContainer = styled.div`
     margin: auto;
     display: block;
     max-width: 90%;
-    padding-bottom: 30px;
 `
 
 export const P = styled.p`
@@ -136,6 +140,14 @@ export const NumberInput = styled.input `
     ${props =>   props.type === 'number' && `
         width: 150px;
     `}
+    ${spacing}
+`
+
+export const TextInput = styled.input `
+    ${props =>   props.type === 'text' && `
+        width: 150px;
+    `}
+    ${spacing}
 `
 
 const DropDownSelect = styled.select`
@@ -144,6 +156,7 @@ const DropDownSelect = styled.select`
     height: 45px;
     ${border}
     ${fontFace}
+    ${spacing}
 `
 
 const DropDownOption = styled.option`

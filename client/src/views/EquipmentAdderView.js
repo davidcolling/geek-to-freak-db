@@ -1,5 +1,5 @@
 import React from 'react';
-import {Check, P, WideButton} from '../Elements.js';
+import {TextInput, Check, P, WideButton} from '../Elements.js';
 
 export const EquipmentAdderView = ({post, handleChange, isFreeWeight, isFreeWeightClick}) => {
     return (
@@ -9,7 +9,7 @@ export const EquipmentAdderView = ({post, handleChange, isFreeWeight, isFreeWeig
             <P>This is a free-weight.</P>
             <Check id="isFreeWeight" checked={isFreeWeight} onClick={(e) => isFreeWeightClick({target: {id: "isFreeWeight"}})} />
             <P>Notes</P>
-            <input id="notes" type="text" onChange={(e) => handleChange(e)} />
+            <TextInput id="notes" type="text" onChange={(e) => handleChange(e)} />
             <WideButton onClick={post}>Add</WideButton>
         </div>
     )
