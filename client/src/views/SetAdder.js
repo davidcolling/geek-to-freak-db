@@ -1,5 +1,5 @@
 import React from 'react'; 
-import {TextInput, DropDown, Check, P, WideButton, NumberInput} from '../Elements.js';
+import {BigTextInput, DropDown, Check, P, WideButton, NumberInput} from '../Elements.js';
 
 export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete, equipment}) => {
    return (
@@ -20,7 +20,7 @@ export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete,
                 <DropDown id="isL" items={["right", "left"]} onChange={(e) => handleChange({target: {id: "isL"}})} />
             }
             <P>Notes</P>
-            <TextInput id="notes" type="text" onChange={(e) => handleChange(e)} />
+            <BigTextInput id="notes" type="text" onChange={(e) => handleChange(e)} />
             <WideButton onClick={post} >Add</WideButton>
         </div>
     );

@@ -155,6 +155,14 @@ export const TextInput = styled.input `
         width: 150px;
     `}
     ${spacing}
+    ${textStyles}
+`
+
+export const BigTextInput = styled.textarea`
+    width: 100%;
+    height: 150px;
+    ${spacing}
+    ${textStyles}
 `
 
 const DropDownSelect = styled.select`
