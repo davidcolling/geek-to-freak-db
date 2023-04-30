@@ -11,6 +11,7 @@ import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnect
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import PostedView from './views/PostedView.js';
 import {Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
+import homeImg from './images/home.svg';
 
 function WorkoutDB ({view, home}) {
       return (
@@ -44,7 +45,7 @@ function WorkoutDB ({view, home}) {
                 <ContentContainer>
                     <LineDivider />
                     <Spacer height={"30px"} />
-                    <SquareButton onClick={home}>H</SquareButton>
+                    <SquareButton onClick={home}><img src={homeImg} /></SquareButton>
                 </ ContentContainer>
             </div>
         </div>

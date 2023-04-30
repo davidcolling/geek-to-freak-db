@@ -4,7 +4,11 @@ import {P, WideButton} from '../Elements.js';
 export const EquipmentView = ({viewEquipmentAdder, list}) => {
     return (
         <div>
-            <P>{list.map( (item) => (<P>{item.name}</P>))}</P>
+            {list.map( 
+                (item) => (
+                    <P>{item.name}</P>
+                )
+            )}
             <br />
             <WideButton onClick={viewEquipmentAdder}>Add</WideButton>
         </div>
