@@ -6,7 +6,10 @@ export const EquipmentView = ({viewEquipmentAdder, list}) => {
         <div>
             {list.map( 
                 (item) => (
-                    <P>{item.name}</P>
+                    <div>
+                        <P>{item.name}</P>
+                        {item.isFreeWeight ? <P>FW</P> : <P></P> }
+                    </div>
                 )
             )}
             <br />
