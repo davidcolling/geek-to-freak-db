@@ -5,6 +5,8 @@ export const SET_CURRENT_EQUIPMENT = "SET_CURRENT_EQUIPMENT";
 export const SET_CURRENT_WORKOUT = "SET_CURRENT_WORKOUT";
 export const SET_CURRENT_SET = "SET_CURRENT_SET"
 export const ADD_CURRENT_SET = "ADD_CURRENT_SET";
+export const SHOW_POPUP = "SHOW_POPUP";
+export const HIDE_POPUP = "HIDE_POPUP";
 
 export const setView = payload => ({type:SET_VIEW, payload});
 export const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
@@ -13,5 +15,6 @@ export const setCurrentEquipment = payload => ({type:SET_CURRENT_EQUIPMENT, payl
 export const setCurrentWorkout = payload => ({type: SET_CURRENT_WORKOUT, payload});
 export const setCurrentSet = payload => ({type: SET_CURRENT_SET, payload});
 export const addCurrentSet = () => ({type: ADD_CURRENT_SET});
-
+export const showPopup = payload => ({type: SHOW_POPUP, payload});
+export const hidePopup = () => ({type: HIDE_POPUP});
 

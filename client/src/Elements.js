@@ -212,3 +212,26 @@ export const RightAlign = styled.span`
     float: right;
 `
 
+const PopupContainer = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+`
+
+export const Popup = ({message, cb}) => {
+    return (
+        <PopupContainer>
+            <P>{message}</P>
+            <Bar>
+                <SquareButton onClick={() => cb(true)} >Ok</SquareButton>
+                <SquareButton onClick={() => cb(false)} >Cancel</SquareButton>
+            </Bar>
+        </PopupContainer>
+    )
+}
+

@@ -27,6 +27,7 @@ const initialState = {
             notes: " "
         }
     },
+    popup: false
 }
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
