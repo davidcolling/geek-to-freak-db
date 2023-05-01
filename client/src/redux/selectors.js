@@ -5,4 +5,5 @@ export const getCurrentWorkout = state => state.currentWorkout;
 export const getCurrentSet = state => state.currentWorkout.currentSet;
 export const getPopup = state => state.popup;
 export const getSelectedEquipment = state => state.selectedEquipment;
+export const getIsLight = state => state.isLight;
 

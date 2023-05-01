@@ -8,6 +8,7 @@ export const ADD_CURRENT_SET = "ADD_CURRENT_SET";
 export const SHOW_POPUP = "SHOW_POPUP";
 export const HIDE_POPUP = "HIDE_POPUP";
 export const SET_SELECTED_EQUIPMENT = "SET_SELECTED_EQUIPMENT";
+export const SET_LIGHT = "SET_LIGHT";
 
 export const setView = payload => ({type:SET_VIEW, payload});
 export const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
@@ -19,4 +20,5 @@ export const addCurrentSet = () => ({type: ADD_CURRENT_SET});
 export const showPopup = payload => ({type: SHOW_POPUP, payload});
 export const hidePopup = () => ({type: HIDE_POPUP});
 export const setSelectedEquipment = payload => ({type: SET_SELECTED_EQUIPMENT, payload});
+export const setLight = payload => ({type: SET_LIGHT});
 

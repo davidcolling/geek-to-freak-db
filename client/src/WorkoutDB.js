@@ -3,17 +3,18 @@
     // displays persistently visible components
 import React from 'react';
 
-import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, POSTED_VIEW, SET_ADDER_VIEW} from './redux/views.js';
+import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, POSTED_VIEW, SET_ADDER_VIEW, SETTINGS_VIEW} from './redux/views.js';
 import HomeViewConnected from './redux/views/HomeViewConnected.js';
 import WorkoutAdderConnected from './redux/views/WorkoutAdderConnected.js';
 import EquipmentViewConnected from './redux/views/EquipmentViewConnected.js';
 import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnected.js';
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
+import SettingsViewConnected from './redux/views/SettingsViewConnected.js';
 import PostedView from './views/PostedView.js';
-import {ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
+import {Bar, ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
 import homeImg from './images/home.svg';
 
-function WorkoutDB ({view, home, popup}) {
+function WorkoutDB ({view, home, settings, popup}) {
     return (
         <div>
             <div>
@@ -25,6 +26,7 @@ function WorkoutDB ({view, home, popup}) {
                     {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
                     {view === POSTED_VIEW && <PostedView />}
                     {view === SET_ADDER_VIEW && <SetAdderConnected />}
+                    {view === SETTINGS_VIEW && <SettingsViewConnected />}
                 </ ContentContainer>
                 <Spacer height={"200px"} />
                 <div
@@ -43,7 +45,10 @@ function WorkoutDB ({view, home, popup}) {
                     <ContentContainer>
                         <LineDivider />
                         <Spacer height={"30px"} />
-                        <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
+                        <Bar>
+                            <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
+                            <SquareButton onClick={settings}>S</SquareButton>
+                        </Bar>
                     </ ContentContainer>
                 </div>
             </div>

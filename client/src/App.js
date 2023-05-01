@@ -28,7 +28,8 @@ const initialState = {
             notes: " "
         }
     },
-    popup: false
+    popup: false,
+    isLight: true
 }
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
