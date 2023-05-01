@@ -1,15 +1,19 @@
 import React from 'react';
-import {P, WideButton} from '../Elements.js';
+import {RightAlign, Bar, P, WideButton} from '../Elements.js';
+import removeImg from '../images/remove-square.svg';
 
 export const EquipmentView = ({viewEquipmentAdder, list}) => {
     return (
         <div>
             {list.map( 
                 (item) => (
-                    <div>
+                    <Bar>
                         <P>{item.name}</P>
-                        {item.isFreeWeight ? <P>FW</P> : <P></P> }
-                    </div>
+                        <RightAlign>
+                            {item.isFreeWeight ? <P>FW</P> : <P></P> }
+                            <img src={removeImg} />
+                        </RightAlign>
+                    </Bar>
                 )
             )}
             <br />

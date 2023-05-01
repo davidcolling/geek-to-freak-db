@@ -188,3 +188,26 @@ export const DropDown = ({items}) => {
     );
 }
 
+const BarUnstyled  = styled.div`
+    * {
+        display: inline;
+        padding-right: 15px;
+    }
+`
+
+export const Bar = ({children}) => {
+    return (
+        <div 
+            style={{
+                width: "100%"
+            }}
+        >
+            <StyledDiv><BarUnstyled>{children}</BarUnstyled></StyledDiv>
+        </div>
+    )
+}
+
+export const RightAlign = styled.span`
+    float: right;
+`
+
