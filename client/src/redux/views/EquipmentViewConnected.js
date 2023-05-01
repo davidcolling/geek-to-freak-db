@@ -4,20 +4,25 @@ import {EQUIPMENT_ADDER_VIEW} from '../views.js';
 import React from 'react';
 import {showPopup, hidePopup, setView} from '../actions.js';
 import {getEquipment} from '../selectors.js';
-import {fetchEquipment} from '../thunk.js';
+import {fetchEquipment, removeEquipment} from '../thunk.js';
 
 export const EquipmentViewConnected = () => {
     const dispatch = useDispatch();
     const viewEquipmentAdder = () => dispatch(setView(EQUIPMENT_ADDER_VIEW));
     const fetchEquipmentConnected = () => dispatch(fetchEquipment());
+    const removeEquipmentConnected = () => dispatch(removeEquipment());
     const getEquipmentConnected = () => useSelector(getEquipment);
     const showPopupConnected = payload => dispatch(showPopup(payload));
     const hidePopupConnected = () => dispatch(hidePopup());
-    const removeItem = (message) => {
+    const removeItem = (message, id) => {
         showPopupConnected({
             message: message,
-            cb: () => {
+            cb: (response) => {
+                if (response) {
+                    removeEquipmentConnected(id);
+                }
                 hidePopupConnected();
+                fetchEquipmentConnected()
             }
         })
     }

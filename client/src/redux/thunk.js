@@ -25,4 +25,16 @@ export const fetchEquipment = () => {
     }
 }
 
+export const removeEquipment = (id) => {
+    return async (dispatch, getState) => {
+        await fetch('/equipment', {
+            method: 'delete',
+            body: JSON.stringify({id: id}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        await dispatch(setView(POSTED_VIEW));
+     }
+}
 

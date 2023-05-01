@@ -84,6 +84,12 @@ class WorkoutDBFacade {
             }
         )
     }
+    deleteEquipment(id) {
+        this.query(
+            `delete from equipment where id=${id};`,
+            "workout server: deleteing equipment from db"
+        )
+    }
 }
 var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 
@@ -168,6 +174,11 @@ app.post('/equipment', function(request, response) {
             }
         }
     );
+});
+
+app.delete('/equipment', function(request, response) {
+    console.log("here" + request.body.id);
+    facade.deleteEquipment(request.body.id);
 });
 
 app.get('/equipment', function(request, response) {

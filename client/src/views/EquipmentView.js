@@ -11,7 +11,7 @@ export const EquipmentView = ({viewEquipmentAdder, list, removeItem}) => {
                         <P>{item.name}</P>
                         <RightAlign>
                             {item.isFreeWeight ? <P>FW</P> : <P></P> }
-                            <img src={removeImg} alt="remove" onClick={() => removeItem(`Remove ${item.name}?`)} />
+                            <img src={removeImg} alt="remove" onClick={() => removeItem(`Remove ${item.name}?`, item.id)} />
                         </RightAlign>
                     </Bar>
                 )
