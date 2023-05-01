@@ -25,8 +25,9 @@ export const fetchEquipment = () => {
     }
 }
 
-export const removeEquipment = (id) => {
+export const removeEquipment = () => {
     return async (dispatch, getState) => {
+        const id = await getState().selectedEquipment;
         await fetch('/equipment', {
             method: 'delete',
             body: JSON.stringify({id: id}),

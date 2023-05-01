@@ -177,7 +177,6 @@ app.post('/equipment', function(request, response) {
 });
 
 app.delete('/equipment', function(request, response) {
-    console.log("here" + request.body.id);
     facade.deleteEquipment(request.body.id);
 });
 

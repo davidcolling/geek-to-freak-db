@@ -2,7 +2,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import EquipmentView from '../../views/EquipmentView.js';
 import {EQUIPMENT_ADDER_VIEW} from '../views.js';
 import React from 'react';
-import {showPopup, hidePopup, setView} from '../actions.js';
+import {setSelectedEquipment, showPopup, hidePopup, setView} from '../actions.js';
 import {getEquipment} from '../selectors.js';
 import {fetchEquipment, removeEquipment} from '../thunk.js';
 
@@ -14,11 +14,13 @@ export const EquipmentViewConnected = () => {
     const getEquipmentConnected = () => useSelector(getEquipment);
     const showPopupConnected = payload => dispatch(showPopup(payload));
     const hidePopupConnected = () => dispatch(hidePopup());
+    const setSelectedEquipmentConnected  = id => dispatch(setSelectedEquipment(id));
     const removeItem = (message, id) => {
         showPopupConnected({
             message: message,
             cb: (response) => {
                 if (response) {
+                    setSelectedEquipmentConnected(id);
                     removeEquipmentConnected(id);
                 }
                 hidePopupConnected();

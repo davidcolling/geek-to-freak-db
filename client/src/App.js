@@ -15,6 +15,7 @@ const initialState = {
         isFreeWeight: false, 
         notes: " "
     },
+    selectedEquipment: false,
     currentWorkout: {
         sets: [],
         currentSet: {
