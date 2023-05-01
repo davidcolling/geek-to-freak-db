@@ -220,6 +220,7 @@ const PopupContainer = styled.div`
     text-align: center;
     padding: 30px;
     background-color: white;
+    opacity: 90%;
     ${border}
 `
 
