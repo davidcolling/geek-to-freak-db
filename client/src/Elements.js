@@ -236,6 +236,7 @@ export const Popup = ({message, cb}) => {
     )
 }
 
+// put this after elements that you want to not be clicked
 export const ClickBlocker = styled.div`
     position: fixed;
     top: 0%;

@@ -14,40 +14,40 @@ import {ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer
 import homeImg from './images/home.svg';
 
 function WorkoutDB ({view, home, popup}) {
-      return (
+    return (
         <div>
-        <div>
-            <ContentContainer>
-                <Spacer height={"30px"} />
-                {view === HOME_VIEW && <HomeViewConnected />}
-                {view === WORKOUT_ADDER_VIEW && <WorkoutAdderConnected />}
-                {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
-                {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
-                {view === POSTED_VIEW && <PostedView />}
-                {view === SET_ADDER_VIEW && <SetAdderConnected />}
-            </ ContentContainer>
-            <Spacer height={"200px"} />
-            <div
-                style={
-                    {
-                        position: "fixed",
-                        bottom: "0",
-                        display: "block",
-                        width: "100%",
-                        margin: "auto",
-                        backgroundColor: "white",
-                        opacity: "90%"
-                    }
-                }
-            >
+            <div>
                 <ContentContainer>
-                    <LineDivider />
                     <Spacer height={"30px"} />
-                    <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
+                    {view === HOME_VIEW && <HomeViewConnected />}
+                    {view === WORKOUT_ADDER_VIEW && <WorkoutAdderConnected />}
+                    {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
+                    {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
+                    {view === POSTED_VIEW && <PostedView />}
+                    {view === SET_ADDER_VIEW && <SetAdderConnected />}
                 </ ContentContainer>
+                <Spacer height={"200px"} />
+                <div
+                    style={
+                        {
+                            position: "fixed",
+                            bottom: "0",
+                            display: "block",
+                            width: "100%",
+                            margin: "auto",
+                            backgroundColor: "white",
+                            opacity: "90%"
+                        }
+                    }
+                >
+                    <ContentContainer>
+                        <LineDivider />
+                        <Spacer height={"30px"} />
+                        <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
+                    </ ContentContainer>
+                </div>
             </div>
-        </div>
-        { popup && <ClickBlocker><Popup message={popup.message} cb={popup.cb} /></ClickBlocker> }
+            { popup && <ClickBlocker><Popup message={popup.message} cb={popup.cb} /></ClickBlocker> }
         </div>
     )
 }
