@@ -43,7 +43,7 @@ function WorkoutDB ({view, home, popup}) {
                 <ContentContainer>
                     <LineDivider />
                     <Spacer height={"30px"} />
-                    <SquareButton onClick={home}><img src={homeImg} /></SquareButton>
+                    <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
                 </ ContentContainer>
             </div>
         </div>
