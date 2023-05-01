@@ -10,11 +10,12 @@ import EquipmentViewConnected from './redux/views/EquipmentViewConnected.js';
 import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnected.js';
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import PostedView from './views/PostedView.js';
-import {Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
+import {ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
 import homeImg from './images/home.svg';
 
 function WorkoutDB ({view, home, popup}) {
       return (
+        <div>
         <div>
             <ContentContainer>
                 <Spacer height={"30px"} />
@@ -24,7 +25,6 @@ function WorkoutDB ({view, home, popup}) {
                 {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
                 {view === POSTED_VIEW && <PostedView />}
                 {view === SET_ADDER_VIEW && <SetAdderConnected />}
-                { popup && <Popup message={popup.message} cb={popup.cb} /> }
             </ ContentContainer>
             <Spacer height={"200px"} />
             <div
@@ -46,6 +46,8 @@ function WorkoutDB ({view, home, popup}) {
                     <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
                 </ ContentContainer>
             </div>
+        </div>
+        { popup && <ClickBlocker><Popup message={popup.message} cb={popup.cb} /></ClickBlocker> }
         </div>
     )
 }

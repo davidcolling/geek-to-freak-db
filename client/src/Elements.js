@@ -40,7 +40,7 @@ const border = `
     border-radius: 0px;
 `
 
- export const Button = styled.button`
+export const Button = styled.button`
 	font-size: 20;
 	text-transform: uppercase;
 	letter-spacing: 1em;
@@ -235,4 +235,12 @@ export const Popup = ({message, cb}) => {
         </PopupContainer>
     )
 }
+
+export const ClickBlocker = styled.div`
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+`
 
