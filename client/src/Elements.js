@@ -46,6 +46,7 @@ const border = `
 	letter-spacing: 1em;
     color: black;
     background: transparent;
+    height: 60px;
     ${fontFace}
     ${border}
     ${spacing}
@@ -55,14 +56,12 @@ export const WideButton = styled(Button)`
     width: 90%;
     max-width:800px;
     min-width:300px;
-    height: 60px;
     display: block;
     margin: auto;
 `
 
 export const SquareButton = styled(Button)`
     width: 60px;
-    height: 60px;
 `
 
 const CenteredInner = styled.div`
@@ -192,7 +191,7 @@ export const DropDown = ({items, textTransform}) => {
 const BarUnstyled  = styled.div`
     * {
         display: inline;
-        padding-right: 15px;
+        margin-right: 15px;
     }
 `
 
@@ -221,6 +220,7 @@ const PopupContainer = styled.div`
     text-align: center;
     padding: 30px;
     background-color: white;
+    ${border}
 `
 
 export const Popup = ({message, cb}) => {
@@ -228,8 +228,8 @@ export const Popup = ({message, cb}) => {
         <PopupContainer>
             <P>{message}</P>
             <Bar>
-                <SquareButton onClick={() => cb(true)} >Ok</SquareButton>
-                <SquareButton onClick={() => cb(false)} >Cancel</SquareButton>
+                <Button onClick={() => cb(true)} >Ok</Button>
+                <Button onClick={() => cb(false)} >Cancel</Button>
             </Bar>
         </PopupContainer>
     )
