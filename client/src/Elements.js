@@ -172,16 +172,17 @@ const DropDownSelect = styled.select`
     ${border}
     ${textStyles}
     ${spacing}
+    text-transform: ${props => props.textTransform};
 `
 
 const DropDownOption = styled.option`
     width: 200px;
 `
 
-export const DropDown = ({items}) => {
+export const DropDown = ({items, textTransform}) => {
     return (
         <div>
-            <DropDownSelect>
+            <DropDownSelect textTransform={textTransform}>
                 {items.map( (item) => (<DropDownOption>{item}</DropDownOption>) )}
             </DropDownSelect>
         </div>

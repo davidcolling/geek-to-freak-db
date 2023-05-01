@@ -4,10 +4,9 @@ import {BigTextInput, DropDown, Check, P, WideButton, NumberInput} from '../Elem
 export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete, equipment}) => {
    return (
         <div>
-            <DropDown items={equipment} />
+            <DropDown items={equipment} textTransform="capitalize" />
             <P>Reps</P>
             <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number"  value={currentSet.reps} />
-            <DropDown items={[1, 2, 3, 4]} />
             <P>Weight</P>
             <NumberInput id="weight" onChange={(e) => handleChange(e)}  type="number" value={currentSet.weight}/>
             <P>Was the last rep complete?</P>
@@ -17,7 +16,7 @@ export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete,
             { 
                 !currentSet.isLR 
                 && 
-                <DropDown id="isL" items={["right", "left"]} onChange={(e) => handleChange({target: {id: "isL"}})} />
+                <DropDown id="isL" items={["right", "left"]} onChange={(e) => handleChange({target: {id: "isL"}})} textTransform="uppercase" />
             }
             <P>Notes</P>
             <BigTextInput id="notes" type="text" onChange={(e) => handleChange(e)} />
