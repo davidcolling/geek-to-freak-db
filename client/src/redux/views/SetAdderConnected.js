@@ -17,7 +17,7 @@ export const SetAdderConnected = () => {
 
     return (
         <SetAdder 
-            equipment={getEquipmentConnected().map( (item) => (item.name) )} 
+            equipment={getEquipmentConnected()} 
             currentSet={getCurrentSetConnected()} 
             handleChange={handleChange} 
             post={post} 

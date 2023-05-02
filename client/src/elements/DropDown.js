@@ -20,10 +20,10 @@ const DropDownOption = styled.option`
     width: 200px;
 `
 
-const DropDown = ({items, textTransform}) => {
+const DropDown = ({items, textTransform, value, onChange}) => {
     return (
         <div>
-            <DropDownSelect textTransform={textTransform}>
+            <DropDownSelect textTransform={textTransform} value={value} onChange={onChange} >
                 {items.map( (item) => (<DropDownOption>{item}</DropDownOption>) )}
             </DropDownSelect>
         </div>

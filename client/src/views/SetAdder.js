@@ -6,7 +6,13 @@ import DropDown from '../elements/DropDown.js';
 export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete, equipment}) => {
    return (
         <div>
-            <DropDown items={equipment} textTransform="capitalize" />
+            <DropDown items={equipment.map( (item) => {
+                var output = item.name;
+                if (item.isFreeWeight) {
+                    output += " FW";
+                }
+                return output;
+            } ) } textTransform="capitalize" onChange={(e) => handleChange(e)} value={currentSet.equipment} />
             <P>Reps</P>
             <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number"  value={currentSet.reps} />
             <P>Weight</P>
