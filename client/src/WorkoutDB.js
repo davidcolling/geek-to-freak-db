@@ -14,6 +14,7 @@ import PostedView from './views/PostedView.js';
 import {FixedFooter, Bar, ClickBlocker, Spacer, LineDivider, SquareButton, ContentContainer} from './elements/elements.js';
 import Popup from './elements/Popup.js';
 import homeImg from './images/home.svg';
+import settingsImg from './images/settings.svg';
 
 function WorkoutDB ({view, home, settings, popup}) {
     return (
@@ -36,7 +37,7 @@ function WorkoutDB ({view, home, settings, popup}) {
                         <Spacer height={"30px"} />
                         <Bar>
                             <SquareButton onClick={home}><img src={homeImg} alt="home" /></SquareButton>
-                            <SquareButton onClick={settings}>S</SquareButton>
+                            <SquareButton onClick={settings}><img src={settingsImg} alt="settings" /></SquareButton>
                         </Bar>
                     </ ContentContainer>
                 </FixedFooter>
