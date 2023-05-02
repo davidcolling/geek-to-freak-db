@@ -147,7 +147,7 @@ export const FixedFooter = styled.div`
     display: block;
     width: 100%;
     margin: auto;
-    backgroundColor: white;
+    background-color: white;
     opacity: 90%;
 `
 
