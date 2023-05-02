@@ -245,3 +245,13 @@ export const ClickBlocker = styled.div`
     height: 100%;
 `
 
+export const FixedFooter = styled.div`
+    position: fixed;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    margin: auto;
+    backgroundColor: white;
+    opacity: 90%;
+`
+

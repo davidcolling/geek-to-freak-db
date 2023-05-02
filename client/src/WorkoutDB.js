@@ -11,7 +11,7 @@ import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnect
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import SettingsViewConnected from './redux/views/SettingsViewConnected.js';
 import PostedView from './views/PostedView.js';
-import {Bar, ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
+import {FixedFooter, Bar, ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
 import homeImg from './images/home.svg';
 
 function WorkoutDB ({view, home, settings, popup}) {
@@ -29,19 +29,7 @@ function WorkoutDB ({view, home, settings, popup}) {
                     {view === SETTINGS_VIEW && <SettingsViewConnected />}
                 </ ContentContainer>
                 <Spacer height={"200px"} />
-                <div
-                    style={
-                        {
-                            position: "fixed",
-                            bottom: "0",
-                            display: "block",
-                            width: "100%",
-                            margin: "auto",
-                            backgroundColor: "white",
-                            opacity: "90%"
-                        }
-                    }
-                >
+                <FixedFooter>
                     <ContentContainer>
                         <LineDivider />
                         <Spacer height={"30px"} />
@@ -50,7 +38,7 @@ function WorkoutDB ({view, home, settings, popup}) {
                             <SquareButton onClick={settings}>S</SquareButton>
                         </Bar>
                     </ ContentContainer>
-                </div>
+                </FixedFooter>
             </div>
             { popup && <ClickBlocker><Popup message={popup.message} cb={popup.cb} /></ClickBlocker> }
         </div>
