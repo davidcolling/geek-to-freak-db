@@ -20,7 +20,7 @@ export const Spacer = styled.div`
     height: ${ (props) => (props.height)};
 `
 
-export const Button = styled.button`
+const ButtonStyles = styled.button`
 	font-size: 20;
 	text-transform: uppercase;
 	letter-spacing: 1em;
@@ -32,7 +32,12 @@ export const Button = styled.button`
     ${spacing}
 `
 
-export const WideButton = styled(Button)`
+export const Button = styled(ButtonStyles)`
+    text-align: center;
+    padding-left: 15px;
+`
+
+export const WideButton = styled(ButtonStyles)`
     width: 90%;
     max-width:800px;
     min-width:300px;
@@ -40,7 +45,7 @@ export const WideButton = styled(Button)`
     margin: auto;
 `
 
-export const SquareButton = styled(Button)`
+export const SquareButton = styled(ButtonStyles)`
     width: 60px;
 `
 
