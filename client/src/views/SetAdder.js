@@ -1,5 +1,7 @@
 import React from 'react'; 
-import {BigTextInput, DropDown, Check, P, WideButton, NumberInput} from '../Elements.js';
+import {BigTextInput, P, WideButton, NumberInput} from '../elements/elements.js';
+import Check from '../elements/Check.js';
+import DropDown from '../elements/DropDown.js';
 
 export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete, equipment}) => {
    return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import {P, WideButton} from '../Elements.js';
+import {P, WideButton} from '../elements/elements.js';
 
 export const WorkoutAdder = ({getCurrentWorkoutConnected, addSet}) => {
     return (

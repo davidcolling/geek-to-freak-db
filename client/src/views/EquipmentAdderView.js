@@ -1,5 +1,6 @@
 import React from 'react';
-import {BigTextInput, TextInput, Check, P, WideButton} from '../Elements.js';
+import {BigTextInput, TextInput, P, WideButton} from '../elements/elements.js';
+import Check from '../elements/Check.js';
 
 export const EquipmentAdderView = ({post, handleChange, currentEquipment, isFreeWeightClick}) => {
     return (

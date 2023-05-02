@@ -1,7 +1,12 @@
 // basic design objects
 import styled from 'styled-components';
 import React from 'react';
-import lato from 'typeface-lato';
+import {
+    fontFace, 
+    textStyles, 
+    spacing, 
+    border
+} from './global.js'
 
 export const LineDivider = styled.div`
     border-top: solid;
@@ -13,31 +18,6 @@ export const LineDivider = styled.div`
 
 export const Spacer = styled.div`
     height: ${ (props) => (props.height)};
-`
-
-const fontFace = `
-    @font-face {
-      font-family: lato;
-      src: url(${lato}) format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-`
-const textStyles = `
-    font-family: lato;
-    letter-spacing 0.2em;
-    font-weight: 100;
-    font-size: 1.1em;
-`
-
-const spacing = `
-    margin-bottom: 30px;
-`
-const border = `
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
-    border-radius: 0px;
 `
 
 export const Button = styled.button`
@@ -97,47 +77,7 @@ export const P = styled.p`
     ${textStyles}
 `
 
-const CheckInside = ({color, onClick}) => {
-    return (
-        <div
-            onClick={onClick}
-            style={{
-                width: "15px",
-                height: "15px",
-                backgroundColor: color
-            }}
-        >
-        </div>
-    )
-}
-
-const CheckOutside = ({children}) => {
-    return (
-        <div
-            style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: "black"
-            }}
-        >
-            {children}
-        </div>
-    );
-}
-
-export const Check = ({checked, onClick}) => {
-    return (
-        <StyledDiv>
-            <CheckOutside>
-                <Centered height={"20px"} >
-                    <CheckInside color={!checked ? "white" : "black"} onClick={onClick} ></CheckInside>
-                </Centered>
-            </CheckOutside>
-        </StyledDiv>
-    );
-}
-
-const StyledDiv = styled.div`
+export const StyledDiv = styled.div`
     ${spacing}
     overflow: auto;
 `
@@ -164,30 +104,6 @@ export const BigTextInput = styled.textarea`
     ${textStyles}
 `
 
-const DropDownSelect = styled.select`
-    width: 200px;
-    color: black;
-    height: 45px;
-    ${border}
-    ${textStyles}
-    ${spacing}
-    text-transform: ${props => props.textTransform};
-`
-
-const DropDownOption = styled.option`
-    width: 200px;
-`
-
-export const DropDown = ({items, textTransform}) => {
-    return (
-        <div>
-            <DropDownSelect textTransform={textTransform}>
-                {items.map( (item) => (<DropDownOption>{item}</DropDownOption>) )}
-            </DropDownSelect>
-        </div>
-    );
-}
-
 const BarUnstyled  = styled.div`
     * {
         display: inline;
@@ -210,31 +126,6 @@ export const Bar = ({children}) => {
 export const RightAlign = styled.span`
     float: right;
 `
-
-const PopupContainer = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 65%;
-    text-align: center;
-    padding: 30px;
-    background-color: white;
-    opacity: 90%;
-    ${border}
-`
-
-export const Popup = ({message, cb}) => {
-    return (
-        <PopupContainer>
-            <P>{message}</P>
-            <Bar>
-                <Button onClick={() => cb(true)} >Ok</Button>
-                <Button onClick={() => cb(false)} >Cancel</Button>
-            </Bar>
-        </PopupContainer>
-    )
-}
 
 // put this after elements that you want to not be clicked
 export const ClickBlocker = styled.div`

@@ -1,5 +1,5 @@
 import React from 'react';
-import {WideButton, Centered} from '../Elements.js';
+import {WideButton, Centered} from '../elements/elements.js';
 
 export function HomeView({viewWorkoutAdder, viewEquipmentView}) {
     return (

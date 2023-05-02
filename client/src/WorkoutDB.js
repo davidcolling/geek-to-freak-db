@@ -11,7 +11,8 @@ import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnect
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import SettingsViewConnected from './redux/views/SettingsViewConnected.js';
 import PostedView from './views/PostedView.js';
-import {FixedFooter, Bar, ClickBlocker, Popup, Spacer, LineDivider, SquareButton, ContentContainer} from './Elements.js';
+import {FixedFooter, Bar, ClickBlocker, Spacer, LineDivider, SquareButton, ContentContainer} from './elements/elements.js';
+import Popup from './elements/Popup.js';
 import homeImg from './images/home.svg';
 
 function WorkoutDB ({view, home, settings, popup}) {

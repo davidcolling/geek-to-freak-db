@@ -1,5 +1,5 @@
 import React from 'react';
-import {P} from '../Elements.js';
+import {P} from '../elements/elements.js';
 
 export const PostedView = () => {
     return (
