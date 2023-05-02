@@ -105,7 +105,7 @@ export const BigTextInput = styled.textarea`
 `
 
 const BarUnstyled  = styled.div`
-    * {
+    > * {
         display: inline;
         margin-right: 15px;
     }
