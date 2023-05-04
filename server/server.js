@@ -21,6 +21,7 @@ const db = mysql.createConnection({
   database : keys.DB_DATABASE
 });
 
+// return the input with the character after each ' ' uppercase
 const capitalize = string => {
     var output = '';
     if (string.length > 0) {
