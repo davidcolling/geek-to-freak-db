@@ -8,7 +8,7 @@ export const HomeViewConnected = () => {
     const setLightConnected = () => dispatch(setLight());
     
     return(
-        <SettingsView setLight={setLightConnected} />
+        <SettingsView toggleLight={setLightConnected} />
     );
 }
 
