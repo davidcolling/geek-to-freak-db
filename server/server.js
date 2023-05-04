@@ -79,14 +79,15 @@ class WorkoutDBFacade {
                 }
             }
         }
+        var formattedName = capitalize(name);
         this.query(
             "INSERT INTO equipment (name, isFreeWeight) " +
-                "SELECT '" + name + "', " + isFreeWeight + " " +
+                "SELECT '" + formattedName + "', " + isFreeWeight + " " +
                 "FROM dual " +
                 "WHERE NOT EXISTS ( " +
                             "SELECT name, isFreeWeight " +
                             "FROM equipment " +
-                            "WHERE equipment.name='" + name + "' AND equipment.isFreeWeight=" + isFreeWeight + ") LIMIT 1; ",
+                            "WHERE equipment.name='" + formattedName + "' AND equipment.isFreeWeight=" + isFreeWeight + ") LIMIT 1; ",
             "workout server: inserting equipment to db;",
             nextCb
         )
@@ -190,7 +191,7 @@ app.post('/sets', function(request, response) {
 
 app.post('/equipment', function(request, response) {
     facade.insertEquipment(
-        capitalize(request.body.name), 
+        request.body.name, 
         request.body.isFreeWeight, 
         function(err, data) {
             if(err) {
