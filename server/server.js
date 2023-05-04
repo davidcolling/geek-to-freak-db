@@ -21,6 +21,32 @@ const db = mysql.createConnection({
   database : keys.DB_DATABASE
 });
 
+const capitalize = string => {
+    var output = '';
+    if (string.length > 0) {
+        if (string.charAt(0) !== ' ') {
+            output += string.charAt(0).toUpperCase();
+        } else {
+            output += ' ';
+        }
+    }
+
+    var previousChar = null;
+
+    for (var i = 0; i < string.length; i++) {
+        if(previousChar != null ) {
+            if (previousChar === ' '  && string.charAt(i) !== ' ' ) {
+                output += string.charAt(i).toUpperCase();
+            } else {
+                output += string.charAt(i);
+            }
+        }
+        previousChar = string.charAt(i);
+    }
+
+    return output;
+}
+
 class WorkoutDBFacade {
     constructor(con, db) {
         this.con = con;
@@ -164,7 +190,7 @@ app.post('/sets', function(request, response) {
 
 app.post('/equipment', function(request, response) {
     facade.insertEquipment(
-        request.body.name, 
+        capitalize(request.body.name), 
         request.body.isFreeWeight, 
         function(err, data) {
             if(err) {
