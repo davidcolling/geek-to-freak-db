@@ -4,7 +4,7 @@ const currentWorkoutReducer = function(state, action) {
     var output = {
         sets: [],
         currentSet: {
-            equipment: 20,
+            equipment: 'none',
             reps: 0,
             weight: 0,
             lastRepComplete: true,

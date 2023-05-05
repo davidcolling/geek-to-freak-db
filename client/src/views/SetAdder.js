@@ -15,8 +15,8 @@ export const SetAdder = ({currentSet, handleChange, post, handleLastRepComplete,
                     return output;
                 } ) } 
                 textTransform="capitalize" 
+                id="equipment"
                 onChange={(e) => handleChange(e)} 
-                value={currentSet.equipment} 
             />
             <P>Reps</P>
             <NumberInput id="reps" onChange={(e) => handleChange(e)}  type="number"  value={currentSet.reps} />
