@@ -118,6 +118,43 @@ class WorkoutDBFacade {
             "workout server: deleteing equipment from db"
         )
     }
+    insertWorkout(set1, set2, set3, set4, set5, set6, set7) {
+        this.query(
+            `insert into 
+                workouts(
+                    startTime,
+                    endTime,
+                    set1,
+                    set2,
+                    set3,
+                    set4,
+                    set5,
+                    set6,
+                    set7,
+                    set8,
+                    set9,
+                    set10,
+                    notes
+                )
+                values(
+                    CURTIME(),
+                    CURTIME(),
+                    ${set1},
+                    ${set2},
+                    ${set3},
+                    ${set4},
+                    ${set5},
+                    ${set6},
+                    ${set7},
+                    null,
+                    null,
+                    null,
+                    null
+                );
+            `,
+            "workout server: inserting workout to db"
+        )
+    }
 }
 var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 
@@ -217,6 +254,18 @@ app.get('/equipment', function(request, response) {
                 response.send(data);
             }
         }
+    );
+});
+
+app.post('/workout', function(request, response) {
+    facade.insertWorkout(
+        request.body.set1,
+        request.body.set2,
+        request.body.set3,
+        request.body.set4,
+        request.body.set5,
+        request.body.set6,
+        request.body.set7
     );
 });
 
