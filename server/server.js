@@ -63,7 +63,7 @@ class WorkoutDBFacade {
                     return result;
                 }
             }
-       }
+        }
         return this.con.query(
             query,
             cb
@@ -93,7 +93,7 @@ class WorkoutDBFacade {
             nextCb
         )
     }
-    insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes) {
+    insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes, cb) {
         this.query(
             "insert into sets(startTime, endTime, movement, equipment, reps, lastRepComplete, weight, isLR, isL, notes) values(CURTIME(), CURTIME(), '" + movement + "', 1, " + reps + ", " + lastRepComplete + ", " + weight + ", " + isLR + ", " + isL + ", '" + notes + "');",
             "workout server: inserting set to db;"
@@ -222,9 +222,23 @@ app.post('/dbg', function(request, response) {
     console.log("workoutdb client debug message: " + request.body.message);
 })
 
-app.post('/sets', function(request, response) {
-    console.log('workout server: test request received');
-    facade.insertSet(request.body.movement, request.body.reps, request.body.weight, request.body.lastRepComplete, request.body.isLR, request.body.isL, request.body.notes);
+app.post('/set', function(request, response) {
+    facade.insertSet(
+        request.body.movement, 
+        request.body.reps, 
+        request.body.weight, 
+        request.body.lastRepComplete, 
+        request.body.isLR, 
+        request.body.isL, 
+        request.body.notes,
+        function(err, data) {
+            if(err) {
+                console.log("workout server: ", err);
+            } else {
+                response.send(data);
+            }
+        }
+    )
 })
 
 app.post('/equipment', function(request, response) {
