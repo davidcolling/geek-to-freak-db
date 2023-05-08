@@ -231,13 +231,7 @@ app.post('/set', function(request, response) {
         request.body.isLR, 
         request.body.isL, 
         request.body.notes,
-        function(err, data) {
-            if(err) {
-                console.log("workout server: ", err);
-            } else {
-                response.send(data);
-            }
-        }
+        makeCallbackResponse(response)
     )
 })
 
@@ -245,13 +239,7 @@ app.post('/equipment', function(request, response) {
     facade.insertEquipment(
         request.body.name, 
         request.body.isFreeWeight, 
-        function(err, data) {
-            if(err) {
-                console.log("workout server: ", err);
-            } else {
-                response.send(data);
-            }
-        }
+        makeCallbackResponse(response)
     );
 });
 
@@ -261,13 +249,7 @@ app.delete('/equipment', function(request, response) {
 
 app.get('/equipment', function(request, response) {
     facade.selectEquipment(
-        function(err, data) {
-            if(err) {
-                console.log("workout server: ", err);
-            } else {
-                response.send(data);
-            }
-        }
+        makeCallbackResponse(response)
     );
 });
 
@@ -287,4 +269,14 @@ app.post('/workout', function(request, response) {
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 })
+
+function makeCallbackResponse(response) {
+    return function (err, data) {
+        if (err) {
+            console.log("workout server: ", err);
+        } else {
+            response.send(data);
+        }
+    };
+}
 
