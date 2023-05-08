@@ -1,4 +1,4 @@
-import {ADD_CURRENT_SET , SET_CURRENT_SET} from '../actions.js';
+import {ADD_CURRENT_SET , SET_CURRENT_SET, CLEAR_CURRENT_WORKOUT} from '../actions.js';
 
 const currentWorkoutReducer = function(state, action) {
     var output = {
@@ -38,6 +38,8 @@ const currentWorkoutReducer = function(state, action) {
                 output.sets = state.sets;
                 output.sets.push(state.currentSet);
             }
+            break;
+        case(CLEAR_CURRENT_WORKOUT):
             break;
         default: 
             if (typeof state !== 'undefined') {

@@ -85,7 +85,30 @@ class WorkoutDBFacade {
     }
     insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes, cb) {
         this.query(
-            "insert into sets(startTime, endTime, movement, equipment, reps, lastRepComplete, weight, isLR, isL, notes) values(CURTIME(), CURTIME(), '" + movement + "', 1, " + reps + ", " + lastRepComplete + ", " + weight + ", " + isLR + ", " + isL + ", '" + notes + "');",
+            `insert into 
+                sets(
+                    startTime, 
+                    endTime, 
+                    movement, 
+                    equipment, 
+                    reps, 
+                    lastRepComplete, 
+                    weight, 
+                    isLR, 
+                    isL, 
+                    notes) 
+                values(
+                    CURTIME(), 
+                    CURTIME(), 
+                    '${movement}',
+                    1, 
+                    ${reps},
+                    ${lastRepComplete},
+                    ${weight},
+                    ${isLR},
+                    ${isL},
+                    '${notes}')
+            ;`,
             "workout server: inserting set to db;",
             cb
         )
@@ -103,7 +126,7 @@ class WorkoutDBFacade {
             "workout server: deleteing equipment from db"
         )
     }
-    insertWorkout(set1, set2, set3, set4, set5, set6, set7) {
+    insertWorkout(set1, set2, set3, set4, set5, set6, set7, cb) {
         this.query(
             `insert into 
                 workouts(
@@ -137,7 +160,8 @@ class WorkoutDBFacade {
                     null
                 );
             `,
-            "workout server: inserting workout to db"
+            "workout server: inserting workout to db",
+            cb
         )
     }
 }
@@ -209,7 +233,7 @@ app.post('/dbg', function(request, response) {
 
 app.post('/set', function(request, response) {
     facade.insertSet(
-        request.body.movement, 
+        request.body.equipment, 
         request.body.reps, 
         request.body.weight, 
         request.body.lastRepComplete, 
@@ -240,13 +264,15 @@ app.get('/equipment', function(request, response) {
 
 app.post('/workout', function(request, response) {
     facade.insertWorkout(
-        request.body.set1,
-        request.body.set2,
-        request.body.set3,
-        request.body.set4,
-        request.body.set5,
-        request.body.set6,
-        request.body.set7
+        request.body.set1.id,
+        request.body.set2.id,
+        request.body.set3.id,
+        request.body.set4.id,
+        request.body.set5.id,
+        request.body.set6.id,
+        request.body.set7.id,
+        request.body.set8.id,
+        makeCallbackResponse()
     );
 });
 

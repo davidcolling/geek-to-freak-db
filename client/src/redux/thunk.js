@@ -1,5 +1,5 @@
 import {setView} from './actions.js';
-import {setEquipmentSuccess, addCurrentSet} from './actions.js';
+import {setEquipmentSuccess, addCurrentSet, clearCurrentWorkout} from './actions.js';
 import {POSTED_VIEW} from './views.js';
 
 export const postEquipment = () => {
@@ -42,14 +42,29 @@ export const removeEquipment = () => {
 export const postCurrentSet = () => {
     return async (dispatch, getState) => {
         const set = await getState().currentWorkout.currentSet;
-        await fetch('/set', {
+        const response = await fetch('/set', {
             method: 'post',
             body: JSON.stringify(set),
             headers: {
                 "Content-Type": "application/json"
             }
         })
-        await dispatch(addCurrentSet());
+        await dispatch(addCurrentSet(response));
+        await dispatch(setView(POSTED_VIEW));
+    }
+}
+
+export const postCurrentWorkout = () => {
+    return async (dispatch, getState) => {
+        const workout = await getState().currentWorkout;
+        await fetch('/workout', {
+            method: 'post',
+            body: JSON.stringify(workout),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        await dispatch(clearCurrentWorkout());
         await dispatch(setView(POSTED_VIEW));
     }
 }
