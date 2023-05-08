@@ -70,16 +70,6 @@ class WorkoutDBFacade {
         )
     }
     insertEquipment(name, isFreeWeight, cb) {
-        var nextCb;
-        if (typeof cb !== 'undefined') {
-            nextCb = (err, result) => {
-                if (err) {
-                    cb(err, null);
-                } else {
-                    cb(null, result);
-                }
-            }
-        }
         var formattedName = capitalize(name);
         this.query(
             "INSERT INTO equipment (name, isFreeWeight) " +
@@ -90,7 +80,7 @@ class WorkoutDBFacade {
                             "FROM equipment " +
                             "WHERE equipment.name='" + formattedName + "' AND equipment.isFreeWeight=" + isFreeWeight + ") LIMIT 1; ",
             "workout server: inserting equipment to db;",
-            nextCb
+            cb
         )
     }
     insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes, cb) {
@@ -103,13 +93,7 @@ class WorkoutDBFacade {
     selectEquipment(cb) {
         this.con.query(
             "select * from equipment;",
-            function (err, result) {
-                if (err) {
-                    cb(err, null);
-                } else {
-                    cb(null, result);
-                }
-            }
+            cb
         )
     }
     deleteEquipment(id) {
