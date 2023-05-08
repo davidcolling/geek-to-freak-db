@@ -270,6 +270,7 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 })
 
+// read function name as "make callback (imperative): response (declarative)"
 function makeCallbackResponse(response) {
     return function (err, data) {
         if (err) {
