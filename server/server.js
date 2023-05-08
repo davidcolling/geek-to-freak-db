@@ -86,7 +86,8 @@ class WorkoutDBFacade {
     insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes, cb) {
         this.query(
             "insert into sets(startTime, endTime, movement, equipment, reps, lastRepComplete, weight, isLR, isL, notes) values(CURTIME(), CURTIME(), '" + movement + "', 1, " + reps + ", " + lastRepComplete + ", " + weight + ", " + isLR + ", " + isL + ", '" + notes + "');",
-            "workout server: inserting set to db;"
+            "workout server: inserting set to db;",
+            cb
         )
 
     }

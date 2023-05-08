@@ -53,4 +53,3 @@ export const postCurrentSet = () => {
         await dispatch(setView(POSTED_VIEW));
     }
 }
-
