@@ -22,13 +22,7 @@ function WorkoutDB ({view, home, settings, popup}) {
             <div>
                 <ContentContainer>
                     <Spacer height={"30px"} />
-                    {view === HOME_VIEW && <HomeViewConnected />}
-                    {view === WORKOUT_ADDER_VIEW && <WorkoutAdderConnected />}
-                    {view === EQUIPMENT_VIEW && <EquipmentViewConnected />}
-                    {view === EQUIPMENT_ADDER_VIEW && <EquipmentAdderViewConnected />}
-                    {view === POSTED_VIEW && <PostedView />}
-                    {view === SET_ADDER_VIEW && <SetAdderConnected />}
-                    {view === SETTINGS_VIEW && <SettingsViewConnected />}
+                    {matchView(view)}
                 </ ContentContainer>
                 <Spacer height={"200px"} />
                 <FixedFooter>
@@ -45,6 +39,27 @@ function WorkoutDB ({view, home, settings, popup}) {
             { popup && <ClickBlocker><Popup message={popup.message} cb={popup.cb} /></ClickBlocker> }
         </div>
     )
+}
+
+const matchView = view => {
+    switch(view){
+        case HOME_VIEW: 
+            return <HomeViewConnected />
+        case WORKOUT_ADDER_VIEW: 
+            return <WorkoutAdderConnected />
+        case EQUIPMENT_VIEW:
+             return <EquipmentViewConnected />
+        case EQUIPMENT_ADDER_VIEW:
+             return <EquipmentAdderViewConnected />
+        case POSTED_VIEW :
+            return <PostedView />
+        case SET_ADDER_VIEW :
+            return <SetAdderConnected />
+        case SETTINGS_VIEW :
+            return <SettingsViewConnected />
+        default:
+            return <HomeViewConnected />
+    }
 }
 
 export default WorkoutDB;
