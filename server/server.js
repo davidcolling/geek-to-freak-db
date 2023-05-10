@@ -280,7 +280,7 @@ app.post('/workout', function(request, response) {
         inputSets[5],
         inputSets[6],
         inputSets[7],
-        makeCallbackResponse()
+        makeCallbackResponse(response)
     );
 });
 
