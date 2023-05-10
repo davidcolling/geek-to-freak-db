@@ -49,7 +49,8 @@ export const postCurrentSet = () => {
                 "Content-Type": "application/json"
             }
         })
-        await dispatch(addCurrentSet(response));
+        var data = await response.json();
+        await dispatch(addCurrentSet(data.insertId));
         await dispatch(setView(POSTED_VIEW));
     }
 }

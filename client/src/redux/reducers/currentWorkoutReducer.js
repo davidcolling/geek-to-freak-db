@@ -35,8 +35,10 @@ const currentWorkoutReducer = function(state, action) {
             break;
         case(ADD_CURRENT_SET):
             if (typeof state !== 'undefined') {
+                var toInsert = state.currentSet;
+                toInsert.id = action.payload;
                 output.sets = state.sets;
-                output.sets.push(state.currentSet);
+                output.sets.push(toInsert);
             }
             break;
         case(CLEAR_CURRENT_WORKOUT):
