@@ -6,6 +6,7 @@ import currentWorkoutReducer from './currentWorkoutReducer.js';
 import popupReducer from './popupReducer.js';
 import selectedEquipmentReducer from './selectedEquipmentReducer.js';
 import isLightReducer from './isLightReducer.js';
+import workoutsReducer from './workoutsReducer.js';
 
 export const rootReducer = combineReducers({
     view: viewReducer,
@@ -14,7 +15,8 @@ export const rootReducer = combineReducers({
     selectedEquipment: selectedEquipmentReducer,
     currentWorkout: currentWorkoutReducer,
     popup: popupReducer,
-    isLight: isLightReducer
+    isLight: isLightReducer,
+    workouts: workoutsReducer
 });
 
 export default rootReducer;

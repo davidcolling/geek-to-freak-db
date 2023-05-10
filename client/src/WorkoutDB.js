@@ -3,11 +3,12 @@
     // displays persistently visible components
 import React from 'react';
 
-import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, POSTED_VIEW, SET_ADDER_VIEW, SETTINGS_VIEW} from './redux/views.js';
+import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, POSTED_VIEW, SET_ADDER_VIEW, SETTINGS_VIEW, WORKOUTS_VIEW} from './redux/views.js';
 import HomeViewConnected from './redux/views/HomeViewConnected.js';
 import WorkoutAdderConnected from './redux/views/WorkoutAdderConnected.js';
 import EquipmentViewConnected from './redux/views/EquipmentViewConnected.js';
 import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnected.js';
+import WorkoutsViewConnected from './redux/views/WorkoutsViewConnected.js';
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import SettingsViewConnected from './redux/views/SettingsViewConnected.js';
 import PostedView from './views/PostedView.js';
@@ -57,6 +58,8 @@ const matchView = view => {
             return <SetAdderConnected />
         case SETTINGS_VIEW :
             return <SettingsViewConnected />
+        case WORKOUTS_VIEW :
+            return <WorkoutsViewConnected />
         default:
             return <HomeViewConnected />
     }

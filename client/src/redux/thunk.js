@@ -1,5 +1,10 @@
 import {setView} from './actions.js';
-import {setEquipmentSuccess, addCurrentSet, clearCurrentWorkout} from './actions.js';
+import {
+    setEquipmentSuccess, 
+    addCurrentSet, 
+    clearCurrentWorkout, 
+    setWorkouts
+} from './actions.js';
 import {POSTED_VIEW} from './views.js';
 
 export const postEquipment = () => {
@@ -67,5 +72,14 @@ export const postCurrentWorkout = () => {
         })
         await dispatch(clearCurrentWorkout());
         await dispatch(setView(POSTED_VIEW));
+    }
+}
+
+export const fetchWorkouts = () => {
+    return async (dispatch, getState) => {
+        const response = await fetch('/workout');
+        const data = await response.json();
+
+        dispatch(setWorkouts(data));
     }
 }

@@ -120,6 +120,12 @@ class WorkoutDBFacade {
             cb
         )
     }
+    selectWorkouts(cb) {
+        this.con.query(
+            "select * from workouts;",
+            cb
+        )
+    }
     deleteEquipment(id) {
         this.query(
             `delete from equipment where id=${id};`,
@@ -258,6 +264,12 @@ app.delete('/equipment', function(request, response) {
 
 app.get('/equipment', function(request, response) {
     facade.selectEquipment(
+        makeCallbackResponse(response)
+    );
+});
+
+app.get('/workout', function(request, response) {
+    facade.selectWorkouts(
         makeCallbackResponse(response)
     );
 });

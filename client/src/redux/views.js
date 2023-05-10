@@ -7,4 +7,5 @@ export const EQUIPMENT_ADDER_VIEW = "EQUIPMENT_ADDER_VIEW";
 export const POSTED_VIEW = "POSTED_VIEW";
 export const SET_ADDER_VIEW = "SET_ADDER_VIEW";
 export const SETTINGS_VIEW = "SETTINGS_VIEW";
+export const WORKOUTS_VIEW = "WORKOUTS_VIEW";
 

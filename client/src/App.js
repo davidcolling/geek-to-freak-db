@@ -29,7 +29,8 @@ const initialState = {
         }
     },
     popup: false,
-    isLight: true
+    isLight: true,
+    workouts: []
 }
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
@@ -41,4 +42,3 @@ class App extends Component {
 }
 
 export default App;
-
