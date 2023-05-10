@@ -126,7 +126,7 @@ class WorkoutDBFacade {
             "workout server: deleteing equipment from db"
         )
     }
-    insertWorkout(set1, set2, set3, set4, set5, set6, set7, cb) {
+    insertWorkout(set1, set2, set3, set4, set5, set6, set7, set8, cb) {
         this.query(
             `insert into 
                 workouts(
@@ -263,15 +263,23 @@ app.get('/equipment', function(request, response) {
 });
 
 app.post('/workout', function(request, response) {
+    var inputSets = [];
+    for (var i = 0; i < 8; i ++) {
+        if (i < request.body.sets.length) {
+            inputSets.push(request.body.sets[i].id);
+        } else {
+            inputSets.push(null);
+        }
+    }
     facade.insertWorkout(
-        request.body.set1.id,
-        request.body.set2.id,
-        request.body.set3.id,
-        request.body.set4.id,
-        request.body.set5.id,
-        request.body.set6.id,
-        request.body.set7.id,
-        request.body.set8.id,
+        inputSets[0],
+        inputSets[1],
+        inputSets[2],
+        inputSets[3],
+        inputSets[4],
+        inputSets[5],
+        inputSets[6],
+        inputSets[7],
         makeCallbackResponse()
     );
 });
