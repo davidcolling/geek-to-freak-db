@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 
 //CREATE CONNECTION
 const db = mysql.createConnection({
-  host     : keys.DB_HOST,
-  user     : keys.DB_USER,
-  password : keys.DB_PASSWORD,
-  database : keys.DB_DATABASE
+    host     : keys.DB_HOST,
+    user     : keys.DB_USER,
+    password : keys.DB_PASSWORD,
+    database : keys.DB_DATABASE
 });
 
 // return the input with the character after each ' ' uppercase
@@ -72,13 +72,20 @@ class WorkoutDBFacade {
     insertEquipment(name, isFreeWeight, cb) {
         var formattedName = capitalize(name);
         this.query(
-            "INSERT INTO equipment (name, isFreeWeight) " +
-                "SELECT '" + formattedName + "', " + isFreeWeight + " " +
-                "FROM dual " +
-                "WHERE NOT EXISTS ( " +
-                            "SELECT name, isFreeWeight " +
-                            "FROM equipment " +
-                            "WHERE equipment.name='" + formattedName + "' AND equipment.isFreeWeight=" + isFreeWeight + ") LIMIT 1; ",
+            `INSERT INTO 
+                equipment (
+                    name, 
+                    isFreeWeight) SELECT '${formattedName}', 
+                    ${isFreeWeight} 
+                    FROM dual WHERE NOT EXISTS ( 
+                        SELECT name, isFreeWeight 
+                        FROM equipment 
+                        WHERE 
+                            equipment.name='${formattedName}' 
+                            AND 
+                            equipment.isFreeWeight=${isFreeWeight}) 
+                        LIMIT 1; 
+            `,
             "workout server: inserting equipment to db;",
             cb
         )
@@ -180,49 +187,60 @@ db.connect( (err) => {
     facade.query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
     facade.query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
     facade.query(
-        "create table if not exists workouts ( " +
-            "id int auto_increment, " +
-            "startTime datetime not null, " +
-            "endTime datetime not null, " +
-            "set1 int not null,  " +
-            "set2 int, set3 int, set4 int, set5 int, set6 int, set7 int, set8 int, set9 int, set10 int, " +
-            "notes text, " +
-            "primary key (id) ) ", 
+        `create table if not exists 
+            workouts ( id int auto_increment, 
+                    startTime datetime not null, 
+                    endTime datetime not null, 
+                    set1 int not null,  
+                    set2 int, 
+                    set3 int, 
+                    set4 int, 
+                    set5 int, 
+                    set6 int, 
+                    set7 int, 
+                    set8 int, 
+                    set9 int, 
+                    set10 int, 
+                    notes text, 
+                    primary key (id) ) 
+        `, 
         "workout db: table 'workouts' exists;"
     );
     facade.query(
-        "create table if not exists sets (" +
-            "id int auto_increment, " +
-            "startTime datetime not null, "  +
-            "endTime datetime not null, " +
-            "movement text not null, " +
-            "equipment int not null, " +
-            "reps tinyint not null, " +
-            "lastRepComplete boolean not null, " +
-            "weight float not null, " +
-            "isLR boolean not null, " +
-            "isL boolean not null, " +
-            "notes text, " + 
-            "primary key (id) )", 
+        `create table if not exists 
+            sets (
+                id int auto_increment, 
+                    startTime datetime not null, 
+                    endTime datetime not null, 
+                    movement text not null, 
+                    equipment int not null, 
+                    reps tinyint not null, 
+                    lastRepComplete boolean not null, 
+                    weight float not null, 
+                    isLR boolean not null, 
+                    isL boolean not null, 
+                    notes text, 
+                    primary key (id) )
+        `, 
         "workout db: table 'sets' exists;"
     );
     facade.query(
-        "create table if not exists equipment ( " +
-            "id int auto_increment, " +
-            "name text not null unique, " +
-            "isFreeWeight boolean not null, " +
-            "notes text, " +
-            "primary key (id) )", 
+        `create table if not exists equipment ( 
+            id int auto_increment, 
+            name text not null unique, 
+            isFreeWeight boolean not null, 
+            notes text, 
+            primary key (id) )`,
         "workout db: table 'equipment' exists;"
     );
     facade.query(
-        "create table if not exists movement ( " + 
-            "id int auto_increment, " + 
-            "name text , " + 
-            "upCadence int not null , " + 
-            "downCadence int not null, " + 
-            "notes text, " + 
-            "primary key (id) )", 
+        `create table if not exists movement ( 
+            id int auto_increment, 
+            name text , 
+            upCadence int not null , 
+            downCadence int not null, 
+            notes text, 
+            primary key (id) )`,
         "workout db: table 'movement' exists;"
     );
     facade.insertEquipment("incline press", 0);
@@ -311,4 +329,3 @@ function makeCallbackResponse(response) {
         }
     };
 }
-
