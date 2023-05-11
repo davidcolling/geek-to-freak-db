@@ -4,6 +4,8 @@ import {P, WideButton} from '../elements/elements.js';
 export const WorkoutAdder = ({getCurrentWorkoutConnected, addSet, post}) => {
     return (
         <div>
+            <WideButton onClick={addSet}> Add Set </WideButton>
+            <br />
             {getCurrentWorkoutConnected.sets.map( 
                 (item) => {
                     var lastRepComplete = item.lastRepComplete ? "" : "to failure";
@@ -11,7 +13,6 @@ export const WorkoutAdder = ({getCurrentWorkoutConnected, addSet, post}) => {
                 }
             )} 
             <br />
-            <WideButton onClick={addSet}> Add Set </WideButton>
             <WideButton onClick={post}> Add Workout </WideButton>
         </div>
     )
