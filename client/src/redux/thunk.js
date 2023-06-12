@@ -83,3 +83,19 @@ export const fetchWorkouts = () => {
         dispatch(setWorkouts(data));
     }
 }
+
+export const fetchSetsForWorkout = id => {
+    return async (disptch, getState) => {
+        const response = await fetch(
+            '/set',
+            {
+                method: 'post',
+                body: JSON.stringify({id: id}),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+    }
+}
+

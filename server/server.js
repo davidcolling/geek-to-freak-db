@@ -256,16 +256,20 @@ app.post('/dbg', function(request, response) {
 })
 
 app.post('/set', function(request, response) {
-    facade.insertSet(
-        request.body.equipment, 
-        request.body.reps, 
-        request.body.weight, 
-        request.body.lastRepComplete, 
-        request.body.isLR, 
-        request.body.isL, 
-        request.body.notes,
-        makeCallbackResponse(response)
-    )
+    if ( typeof request.body === 'undefined') {
+        facade.insertSet(
+            request.body.equipment, 
+            request.body.reps, 
+            request.body.weight, 
+            request.body.lastRepComplete, 
+            request.body.isLR, 
+            request.body.isL, 
+            request.body.notes,
+            makeCallbackResponse(response)
+        )
+    } else {
+        console.log(request.body.id);
+    }
 })
 
 app.post('/equipment', function(request, response) {
