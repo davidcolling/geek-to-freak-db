@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-const facade2 = require('./src');
+const {capitalize, makeCallbackResponse} = require('./src');
 
 //STATIC FOLDER
 app.use(express.static(path.join(__dirname,'../client/build')));
@@ -45,7 +45,7 @@ class WorkoutDBFacade {
         )
     }
     insertEquipment(name, isFreeWeight, cb) {
-        var formattedName = facade2.capitalize(name);
+        var formattedName = capitalize(name);
         this.query(
             `INSERT INTO 
                 equipment (
@@ -303,13 +303,3 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 })
 
-// read function name as "make callback (imperative): response (declarative)"
-function makeCallbackResponse(response) {
-    return function (err, data) {
-        if (err) {
-            console.log("workout server: ", err);
-        } else {
-            response.send(data);
-        }
-    };
-}

@@ -26,7 +26,5 @@ const capitalize = string => {
     return output;
 }
 
-module.exports = {
-    capitalize: capitalize
-}
+module.exports = capitalize;
 
