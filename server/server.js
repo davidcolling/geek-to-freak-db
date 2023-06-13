@@ -127,9 +127,14 @@ class WorkoutDBFacade {
             cb
         )
     }
-    selectWorkouts(cb) {
-        this.con.query(
-            "select * from workouts;",
+    selectWorkouts(cb, id) {
+        var idClause = '';
+        if (typeof id !== 'undefined') {
+            idClause = `where id=${id}`;
+        }
+        return this.query(
+            `select * from workouts ${idClause};`,
+            "workout server: workout seleted from db",
             cb
         )
     }
@@ -175,6 +180,12 @@ class WorkoutDBFacade {
             `,
             "workout server: inserting workout to db",
             cb
+        )
+    }
+    selectSets(id) {
+        return this.query(
+            `select * from sets where id=${id};`,
+            "workout server: selecting set from db"
         )
     }
 }
@@ -256,20 +267,16 @@ app.post('/dbg', function(request, response) {
 })
 
 app.post('/set', function(request, response) {
-    if ( typeof request.body === 'undefined') {
-        facade.insertSet(
-            request.body.equipment, 
-            request.body.reps, 
-            request.body.weight, 
-            request.body.lastRepComplete, 
-            request.body.isLR, 
-            request.body.isL, 
-            request.body.notes,
-            makeCallbackResponse(response)
-        )
-    } else {
-        console.log(request.body.id);
-    }
+    facade.insertSet(
+        request.body.equipment, 
+        request.body.reps, 
+        request.body.weight, 
+        request.body.lastRepComplete, 
+        request.body.isLR, 
+        request.body.isL, 
+        request.body.notes,
+        makeCallbackResponse(response)
+    )
 })
 
 app.post('/equipment', function(request, response) {
@@ -297,25 +304,30 @@ app.get('/workout', function(request, response) {
 });
 
 app.post('/workout', function(request, response) {
-    var inputSets = [];
-    for (var i = 0; i < 8; i ++) {
-        if (i < request.body.sets.length) {
-            inputSets.push(request.body.sets[i].id);
-        } else {
-            inputSets.push(null);
+    if ( request.body.type === "new" ) {
+        var inputSets = [];
+        for (var i = 0; i < 8; i ++) {
+            if (i < request.body.payload.sets.length) {
+                inputSets.push(request.body.payload.sets[i].id);
+            } else {
+                inputSets.push(null);
+            }
         }
+        facade.insertWorkout(
+            inputSets[0],
+            inputSets[1],
+            inputSets[2],
+            inputSets[3],
+            inputSets[4],
+            inputSets[5],
+            inputSets[6],
+            inputSets[7],
+            makeCallbackResponse(response)
+        );
+    } else {
+        var workout = facade.selectWorkouts(undefined, request.body.payload.id);
+        console.log("workout: " + workout.startTime);
     }
-    facade.insertWorkout(
-        inputSets[0],
-        inputSets[1],
-        inputSets[2],
-        inputSets[3],
-        inputSets[4],
-        inputSets[5],
-        inputSets[6],
-        inputSets[7],
-        makeCallbackResponse(response)
-    );
 });
 
 // start server

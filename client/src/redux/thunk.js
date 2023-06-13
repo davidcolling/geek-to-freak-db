@@ -65,7 +65,7 @@ export const postCurrentWorkout = () => {
         const workout = await getState().currentWorkout;
         await fetch('/workout', {
             method: 'post',
-            body: JSON.stringify(workout),
+            body: JSON.stringify({type: 'new', payload: workout}),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -87,10 +87,10 @@ export const fetchWorkouts = () => {
 export const fetchSetsForWorkout = id => {
     return async (disptch, getState) => {
         const response = await fetch(
-            '/set',
+            '/workout',
             {
                 method: 'post',
-                body: JSON.stringify({id: id}),
+                body: JSON.stringify({type: 'old', payload: {id: id}}),
                 headers: {
                     "Content-Type": "application/json"
                 }
