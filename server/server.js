@@ -144,7 +144,15 @@ class WorkoutDBFacade {
             "workout server: deleteing equipment from db"
         )
     }
-    insertWorkout(set1, set2, set3, set4, set5, set6, set7, set8, cb) {
+    insertWorkout(workout, cb) {
+        var sets = [];
+        for (var i = 0; i < 8; i++) {
+            if (i < workout.sets.length) {
+                sets.push(workout.sets[i].id);
+            } else {
+                sets.push(null);
+            }
+        }
         this.query(
             `insert into 
                 workouts(
@@ -165,14 +173,14 @@ class WorkoutDBFacade {
                 values(
                     CURTIME(),
                     CURTIME(),
-                    ${set1},
-                    ${set2},
-                    ${set3},
-                    ${set4},
-                    ${set5},
-                    ${set6},
-                    ${set7},
-                    null,
+                    ${sets[0]},
+                    ${sets[1]},
+                    ${sets[2]},
+                    ${sets[3]},
+                    ${sets[4]},
+                    ${sets[5]},
+                    ${sets[6]},
+                    ${sets[7]},
                     null,
                     null,
                     null
@@ -305,23 +313,8 @@ app.get('/workout', function(request, response) {
 
 app.post('/workout', function(request, response) {
     if ( request.body.type === "new" ) {
-        var inputSets = [];
-        for (var i = 0; i < 8; i ++) {
-            if (i < request.body.payload.sets.length) {
-                inputSets.push(request.body.payload.sets[i].id);
-            } else {
-                inputSets.push(null);
-            }
-        }
-        facade.insertWorkout(
-            inputSets[0],
-            inputSets[1],
-            inputSets[2],
-            inputSets[3],
-            inputSets[4],
-            inputSets[5],
-            inputSets[6],
-            inputSets[7],
+       facade.insertWorkout(
+            request.body.payload, 
             makeCallbackResponse(response)
         );
     } else {
