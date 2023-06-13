@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+const facade2 = require('./src');
+
 //STATIC FOLDER
 app.use(express.static(path.join(__dirname,'../client/build')));
 
@@ -20,33 +22,6 @@ const db = mysql.createConnection({
     password : keys.DB_PASSWORD,
     database : keys.DB_DATABASE
 });
-
-// return the input with the character after each ' ' uppercase
-const capitalize = string => {
-    var output = '';
-    if (string.length > 0) {
-        if (string.charAt(0) !== ' ') {
-            output += string.charAt(0).toUpperCase();
-        } else {
-            output += ' ';
-        }
-    }
-
-    var previousChar = null;
-
-    for (var i = 0; i < string.length; i++) {
-        if(previousChar != null ) {
-            if (previousChar === ' '  && string.charAt(i) !== ' ' ) {
-                output += string.charAt(i).toUpperCase();
-            } else {
-                output += string.charAt(i);
-            }
-        }
-        previousChar = string.charAt(i);
-    }
-
-    return output;
-}
 
 class WorkoutDBFacade {
     constructor(con, db) {
@@ -70,7 +45,7 @@ class WorkoutDBFacade {
         )
     }
     insertEquipment(name, isFreeWeight, cb) {
-        var formattedName = capitalize(name);
+        var formattedName = facade2.capitalize(name);
         this.query(
             `INSERT INTO 
                 equipment (
