@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-const {capitalize, makeCallbackResponse} = require('./src');
+const {capitalize, makeCallbackResponse, facade2} = require('./src');
 
 //STATIC FOLDER
 app.use(express.static(path.join(__dirname,'../client/build')));
@@ -23,30 +23,16 @@ const db = mysql.createConnection({
     database : keys.DB_DATABASE
 });
 
+const query = (query, successMessage, cb) => facade2.query(db, query, successMessage, cb);
+
 class WorkoutDBFacade {
     constructor(con, db) {
         this.con = con;
         this.db = db;
     }
-    query(query, successMessage, cb) {
-        if (typeof cb === 'undefined') {
-            cb = (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log(successMessage);
-                    return result;
-                }
-            }
-        }
-        return this.con.query(
-            query,
-            cb
-        )
-    }
     insertEquipment(name, isFreeWeight, cb) {
         var formattedName = capitalize(name);
-        this.query(
+        query(
             `INSERT INTO 
                 equipment (
                     name, 
@@ -66,7 +52,7 @@ class WorkoutDBFacade {
         )
     }
     insertSet(movement, reps, weight, lastRepComplete, isLR, isL, notes, cb) {
-        this.query(
+        query(
             `insert into 
                 sets(
                     startTime, 
@@ -107,14 +93,14 @@ class WorkoutDBFacade {
         if (typeof id !== 'undefined') {
             idClause = `where id=${id}`;
         }
-        return this.query(
+        return query(
             `select * from workouts ${idClause};`,
             "workout server: workout seleted from db",
             cb
         )
     }
     deleteEquipment(id) {
-        this.query(
+        query(
             `delete from equipment where id=${id};`,
             "workout server: deleteing equipment from db"
         )
@@ -128,7 +114,7 @@ class WorkoutDBFacade {
                 sets.push(null);
             }
         }
-        this.query(
+        query(
             `insert into 
                 workouts(
                     startTime,
@@ -166,7 +152,7 @@ class WorkoutDBFacade {
         )
     }
     selectSets(id) {
-        return this.query(
+        return query(
             `select * from sets where id=${id};`,
             "workout server: selecting set from db"
         )
@@ -178,9 +164,9 @@ var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 db.connect( (err) => {
     if(err) throw err;
         console.log('MySQL Connected...');
-    facade.query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
-    facade.query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
-    facade.query(
+    query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
+    query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
+    query(
         `create table if not exists 
             workouts ( id int auto_increment, 
                     startTime datetime not null, 
@@ -200,7 +186,7 @@ db.connect( (err) => {
         `, 
         "workout db: table 'workouts' exists;"
     );
-    facade.query(
+    query(
         `create table if not exists 
             sets (
                 id int auto_increment, 
@@ -218,7 +204,7 @@ db.connect( (err) => {
         `, 
         "workout db: table 'sets' exists;"
     );
-    facade.query(
+    query(
         `create table if not exists equipment ( 
             id int auto_increment, 
             name text not null unique, 
@@ -227,7 +213,7 @@ db.connect( (err) => {
             primary key (id) )`,
         "workout db: table 'equipment' exists;"
     );
-    facade.query(
+    query(
         `create table if not exists movement ( 
             id int auto_increment, 
             name text , 
