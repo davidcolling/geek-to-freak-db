@@ -163,7 +163,7 @@ var facade = new WorkoutDBFacade(db, keys.DB_DATABASE);
 // initialize db
 db.connect( (err) => {
     if(err) throw err;
-        console.log('MySQL Connected...');
+    console.log('MySQL Connected...');
     query("CREATE DATABASE IF NOT EXISTS " + keys.DB_DATABASE + "; ", "workout db: exists;");
     query("USE " + keys.DB_DATABASE + ";", "workout db: selected;");
     query(
