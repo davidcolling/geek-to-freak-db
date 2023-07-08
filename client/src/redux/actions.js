@@ -12,6 +12,7 @@ export const SET_LIGHT = "SET_LIGHT";
 export const CLEAR_CURRENT_WORKOUT = "CLEAR_CURRENT_WORKOUT";
 export const SET_WORKOUTS = "SET_WORKOUTS";
 export const GET_WORKOUTS = "GET_WORKOUTS";
+export const ADD_PREVIOUS_WORKOUT = "ADD_PREVIOUS_WORKOUT";
 
 export const setView = payload => ({type:SET_VIEW, payload});
 export const setEquipmentSuccess = payload => ({type:SET_EQUIPMENT_SUCCESS, payload})
@@ -27,3 +28,5 @@ export const setLight = payload => ({type: SET_LIGHT});
 export const clearCurrentWorkout = () => ({type: CLEAR_CURRENT_WORKOUT});
 export const setWorkouts = payload => ({type: SET_WORKOUTS, payload});
 export const getWorkouts = payload => ({type: GET_WORKOUTS, payload});
+export const addPreviousWorkout = payload => ({type: ADD_PREVIOUS_WORKOUT, payload});
+

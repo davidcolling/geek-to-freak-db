@@ -3,7 +3,8 @@ import {
     setEquipmentSuccess, 
     addCurrentSet, 
     clearCurrentWorkout, 
-    setWorkouts
+    setWorkouts,
+    addPreviousWorkout
 } from './actions.js';
 import {POSTED_VIEW} from './views.js';
 
@@ -85,7 +86,7 @@ export const fetchWorkouts = () => {
 }
 
 export const fetchSetsForWorkout = id => {
-    return async (disptch, getState) => {
+    return async (dispatch, getState) => {
         const response = await fetch(
             '/workout',
             {
@@ -96,6 +97,8 @@ export const fetchSetsForWorkout = id => {
                 }
             }
         )
+        const data = await response.json();
+        dispatch(addPreviousWorkout(data));
     }
 }
 
