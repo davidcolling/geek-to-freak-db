@@ -152,18 +152,29 @@ class WorkoutDBFacade {
         )
     }
     selectSetsForWorkout(id, cb) {
-        console.log("workout");
         return query(
-            `select s1.id, s2.id, s3.id, s4.id, s5.id, s6.id, s7.id, s8.id from workouts w 
-                left join sets s1 on s1.id = w.set1 
-                left join sets s2 on s2.id = w.set2 
-                left join sets s3 on s3.id = w.set3 
-                left join sets s4 on s4.id = w.set4 
-                left join sets s5 on s5.id = w.set5 
-                left join sets s6 on s6.id = w.set6 
-                left join sets s7 on s7.id = w.set7 
-                left join sets s8 on s8.id = w.set8 
-                where w.id=${id};`,
+            `select id, movement
+            from sets as s
+            where 
+            s.id in (select set1 from workouts where id=${id})
+            or 
+            s.id in (select set2 from workouts where id=${id})
+            or 
+            s.id in (select set3 from workouts where id=${id})
+            or 
+            s.id in (select set4 from workouts where id=${id})
+            or 
+            s.id in (select set5 from workouts where id=${id})
+            or 
+            s.id in (select set6 from workouts where id=${id})
+            or 
+            s.id in (select set7 from workouts where id=${id})
+            or 
+            s.id in (select set8 from workouts where id=${id})
+            or 
+            s.id in (select set9 from workouts where id=${id})
+            or 
+            s.id in (select set10 from workouts where id=${id}) ;`,
             "workout server: selecting sets from db",
             cb
         )
