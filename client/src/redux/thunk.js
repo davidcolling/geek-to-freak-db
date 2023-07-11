@@ -98,7 +98,7 @@ export const fetchSetsForWorkout = id => {
             }
         )
         const data = await response.json();
-        await dispatch(addPreviousWorkout(data));
+        dispatch(addPreviousWorkout(data));
     }
 }
 

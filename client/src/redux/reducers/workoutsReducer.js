@@ -12,7 +12,11 @@ const workoutsReducer = function(state, action) {
         case(ADD_PREVIOUS_WORKOUT):
             if (typeof state !== 'undefined') {
                 output = state;
-                output.push(action.payload);
+                for (var i = 0; i < output.length; i++) {
+                    if (output[i].set1 === action.payload[0].id) {
+                        output[i].set1 = action.payload;
+                    }
+                }
             }
             break;
         default: 
