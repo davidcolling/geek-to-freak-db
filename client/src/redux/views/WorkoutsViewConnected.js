@@ -8,10 +8,12 @@ export const WorkoutsViewConnected = () => {
     const dispatch = useDispatch();
     const fetchSetsForWorkoutConnected = id => dispatch(fetchSetsForWorkout(id));
     const fetchWorkoutsConnected = () => dispatch(fetchWorkouts());
-    const getWorkoutsConnected = useSelector(getWorkouts);
+    const getWorkoutsConnected = () =>  useSelector(getWorkouts);
+
+    fetchWorkoutsConnected();
 
     return (
-        <WorkoutsView list={getWorkoutsConnected} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} fetchWorkoutsConnected={fetchWorkoutsConnected} />
+        <WorkoutsView list={getWorkoutsConnected()} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} />
     );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {WideButton, RightAlign, Bar, P} from '../elements/elements.js';
 
-export const WorkoutsView = ({list, fetchSetsForWorkoutConnected, fetchWorkoutsConnected}) => {
+export const WorkoutsView = ({list, fetchSetsForWorkoutConnected}) => {
     return (
         <div>
             {list.map( 
@@ -18,7 +18,6 @@ export const WorkoutsView = ({list, fetchSetsForWorkoutConnected, fetchWorkoutsC
                     </Bar>
                 )
             )}
-            <WideButton onClick={fetchWorkoutsConnected}>Fetch</WideButton>
             <br />
         </div>
     )

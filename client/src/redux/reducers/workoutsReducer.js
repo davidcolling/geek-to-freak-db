@@ -7,7 +7,15 @@ const workoutsReducer = function(state, action) {
 
     switch(action.type) {
         case(SET_WORKOUTS):
-            output = action.payload;
+            if (typeof state !== 'undefined') {
+                if (action.payload.length !== state.length) {
+                    output = action.payload;
+                } else {
+                    output = state;
+                }
+            } else {
+                output = action.paylaod;
+            }
             break;
         case(ADD_PREVIOUS_WORKOUT):
             if (typeof state !== 'undefined') {
