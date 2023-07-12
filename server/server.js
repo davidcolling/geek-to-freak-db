@@ -153,7 +153,7 @@ class WorkoutDBFacade {
     }
     selectSetsForWorkout(id, cb) {
         return query(
-            `select id, movement
+            `select *
             from sets as s
             where 
             s.id in (select set1 from workouts where id=${id})
