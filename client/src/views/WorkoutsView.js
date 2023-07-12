@@ -1,5 +1,5 @@
 import React from 'react';
-import {WideButton, RightAlign, Bar, P} from '../elements/elements.js';
+import {RightAlign, Bar, P} from '../elements/elements.js';
 
 export const WorkoutsView = ({list, fetchSetsForWorkoutConnected}) => {
     return (
@@ -20,7 +20,7 @@ export const WorkoutsView = ({list, fetchSetsForWorkoutConnected}) => {
                             typeof item.set1 === 'object' &&
                             item.set1.map(
                                 (set) => (
-                                    <P>{set.movement}</P>
+                                    <P>{set.movement} X {set.reps} at {set.weight}</P>
                                 )
                             )
                         }
