@@ -107,7 +107,7 @@ class WorkoutDBFacade {
     }
     insertWorkout(workout, cb) {
         var sets = [];
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 10; i++) {
             if (i < workout.sets.length) {
                 sets.push(workout.sets[i].id);
             } else {
@@ -142,8 +142,8 @@ class WorkoutDBFacade {
                     ${sets[5]},
                     ${sets[6]},
                     ${sets[7]},
-                    null,
-                    null,
+                    ${sets[8]},
+                    ${sets[9]},
                     null
                 );
             `,
