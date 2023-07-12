@@ -13,7 +13,7 @@ export const WorkoutsViewConnected = () => {
     fetchWorkoutsConnected();
 
     return (
-        <WorkoutsView list={getWorkoutsConnected} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} />
+        <WorkoutsView list={getWorkoutsConnected()} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} />
     );
 }
 

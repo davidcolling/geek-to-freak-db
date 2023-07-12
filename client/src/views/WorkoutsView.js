@@ -4,7 +4,7 @@ import {WideButton, RightAlign, Bar, P} from '../elements/elements.js';
 export const WorkoutsView = ({list, fetchSetsForWorkoutConnected}) => {
     return (
         <div>
-            {list().map( 
+            {list.map( 
                 (item) => (
                     <div>
                         <Bar>
