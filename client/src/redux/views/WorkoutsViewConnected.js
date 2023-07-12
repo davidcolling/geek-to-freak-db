@@ -10,10 +10,8 @@ export const WorkoutsViewConnected = () => {
     const fetchWorkoutsConnected = () => dispatch(fetchWorkouts());
     const getWorkoutsConnected = useSelector(getWorkouts);
 
-    fetchWorkoutsConnected();
-
     return (
-        <WorkoutsView list={getWorkoutsConnected} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} />
+        <WorkoutsView list={getWorkoutsConnected} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} fetchWorkoutsConnected={fetchWorkoutsConnected} />
     );
 }
 
