@@ -6,7 +6,6 @@ export function SettingsView({toggleLight}) {
         <div>
             <Centered height={"600px"} >
                 <WideButton onClick={toggleLight} >Toggle Color</WideButton>
-                <br />
             </Centered>
         </div>
     );

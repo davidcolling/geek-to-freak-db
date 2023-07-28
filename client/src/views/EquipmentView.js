@@ -18,7 +18,6 @@ export const EquipmentView = ({viewEquipmentAdder, list, removeItem}) => {
                     </Bar>
                 )
             )}
-            <br />
             <WideButton onClick={viewEquipmentAdder}>Add</WideButton>
         </div>
     )

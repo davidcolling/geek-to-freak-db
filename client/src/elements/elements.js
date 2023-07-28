@@ -50,13 +50,23 @@ export const Button = styled(ButtonStyles)`
     padding-left: 15px;
 `
 
-export const WideButton = styled(ButtonStyles)`
-    width: 90%;
-    max-width:800px;
-    min-width:300px;
-    display: block;
-    margin: auto;
-`
+export const WideButton = ({children, onClick}) => {
+    return (
+        <div>
+            <ButtonStyles
+                style={{
+                    width: "90%",
+                    maxWidth: "800px",
+                    minWidth: "300px",
+		    margin: "auto",
+		    display: "block"
+                }}
+                onClick={onClick}
+            >{children}</ButtonStyles>
+            <Spacer />
+        </div>
+    );
+}
 
 export const SquareButton = styled(ButtonStyles)`
     width: 60px;

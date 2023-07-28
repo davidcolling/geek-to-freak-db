@@ -7,7 +7,6 @@ export const WorkoutsView = ({list, fetchSetsForWorkoutConnected}) => {
             {list.map( 
                 (item) => <Workout workout={item} fetchSetsForWorkoutConnected={fetchSetsForWorkoutConnected} />
             )}
-            <br />
         </div>
     )
 }

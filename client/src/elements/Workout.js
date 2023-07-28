@@ -15,9 +15,11 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
             </Bar>
             {
                 typeof workout.sets !== 'undefined' && 
-		<SetList list={workout.sets} />
+                <div>
+                    <SetList list={workout.sets} />
+                    <Spacer />
+                </div>
             }
-	    <Spacer />
         </div>
     )
 }
