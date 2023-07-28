@@ -14,8 +14,8 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
                 </RightAlign>
             </Bar>
             {
-                typeof workout.set1 === 'object' &&
-                workout.set1.map(
+                typeof workout.sets !== 'undefined' && 
+                workout.sets.map(
                     (set) => (
                         <P>{set.movement} X {set.reps} at {set.weight}</P>
                     )

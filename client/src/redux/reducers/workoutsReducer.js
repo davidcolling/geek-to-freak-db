@@ -22,7 +22,7 @@ const workoutsReducer = function(state, action) {
                 output = state;
                 for (var i = 0; i < output.length; i++) {
                     if (output[i].set1 === action.payload[0].id) {
-                        output[i].set1 = action.payload;
+                        output[i] = { ...output[i], sets: action.payload};
                     }
                 }
             }
@@ -37,3 +37,4 @@ const workoutsReducer = function(state, action) {
 }
 
 export default workoutsReducer;
+
