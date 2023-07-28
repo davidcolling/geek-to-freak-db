@@ -16,7 +16,7 @@ const workoutsReducer = function(state, action) {
             } else {
                 output = action.paylaod;
                 for (var i = 0; i < output.length; i++) {
-                    output[i] = {...output[i], sets:[]};
+                    output[i] = {...output[i], sets: []};
                 }
             }
             break;
