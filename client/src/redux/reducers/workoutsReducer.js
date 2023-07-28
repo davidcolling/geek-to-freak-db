@@ -15,6 +15,9 @@ const workoutsReducer = function(state, action) {
                 }
             } else {
                 output = action.paylaod;
+                for (var i = 0; i < output.length; i++) {
+                    output[i] = {...output[i], sets:[]};
+                }
             }
             break;
         case(ADD_PREVIOUS_WORKOUT):
@@ -22,7 +25,7 @@ const workoutsReducer = function(state, action) {
                 output = state;
                 for (var i = 0; i < output.length; i++) {
                     if (output[i].set1 === action.payload[0].id) {
-                        output[i] = { ...output[i], sets: action.payload};
+                        output[i].sets = action.payload;
                     }
                 }
             }
