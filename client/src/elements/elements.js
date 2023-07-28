@@ -16,9 +16,22 @@ export const LineDivider = styled.div`
     border-width: 1px;
 `
 
-export const Spacer = styled.div`
-    height: ${ (props) => (props.height)};
-`
+export const Spacer = ({height}) => {
+    var outputHeight;
+    if (typeof height !== 'undefined') {
+        outputHeight = height;
+    } else {
+        outputHeight = '30px';
+    }
+    return (
+        <div 
+            style={{
+                height: outputHeight
+            }}
+        >
+        </div>
+    );
+}
 
 const ButtonStyles = styled.button`
     font-size: 20;
