@@ -6,8 +6,7 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
     return (
         <div>
             <Bar>
-                <button onClick={() => fetchSetsForWorkoutConnected(workout.id)}></button>
-                <P>{workout.startTime}</P>
+                <P onClick={() => fetchSetsForWorkoutConnected(workout.id)}>{workout.startTime}</P>
                 <RightAlign>
                     <Bar>
                         {workout.endTime}
