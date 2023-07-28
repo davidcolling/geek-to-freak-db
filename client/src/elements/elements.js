@@ -21,9 +21,9 @@ export const Spacer = styled.div`
 `
 
 const ButtonStyles = styled.button`
-	font-size: 20;
-	text-transform: uppercase;
-	letter-spacing: 1em;
+    font-size: 20;
+    text-transform: uppercase;
+    letter-spacing: 1em;
     color: black;
     background: transparent;
     height: 60px;
@@ -149,5 +149,13 @@ export const FixedFooter = styled.div`
     margin: auto;
     background-color: white;
     opacity: 90%;
+`
+
+export const ShadeBG = styled.div`
+    background-color: #dddddd;
+    > * {
+        background-color: #dddddd;
+        padding: 5px;
+    }
 `
 

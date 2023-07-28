@@ -1,17 +1,17 @@
 import React from 'react';
-import {P} from './elements.js';
+import {ShadeBG, P} from './elements.js';
 
 export const SetList = ({list}) => {
     return (
-        <div>
-	    {
+        <ShadeBG>
+            {
                 list.map(
                     (set) => (
                         <P>{set.movement} X {set.reps} at {set.weight}</P>
                     )
                 )
             }
-        </div>
+        </ShadeBG>
     )
 }
 
