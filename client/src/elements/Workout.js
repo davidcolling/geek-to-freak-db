@@ -1,5 +1,5 @@
 import React from 'react';
-import {Spacer, RightAlign, Bar, P} from './elements.js';
+import {RightAlign, Bar, P} from './elements.js';
 import SetList from './SetList.js';
 
 export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
@@ -17,7 +17,6 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
                 typeof workout.sets !== 'undefined' && 
                 <div>
                     <SetList list={workout.sets} />
-                    <Spacer />
                 </div>
             }
         </div>
