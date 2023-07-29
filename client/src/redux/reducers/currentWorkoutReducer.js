@@ -4,7 +4,7 @@ const currentWorkoutReducer = function(state, action) {
     var output = {
         sets: [],
         currentSet: {
-            equipment: 'none',
+            movement: 'none',
             reps: 0,
             weight: 0,
             lastRepComplete: true,
@@ -23,7 +23,7 @@ const currentWorkoutReducer = function(state, action) {
 
                 output.sets = state.sets;
                 output.currentSet = {
-                    equipment: (id === "equipment") ? input : state.currentSet.equipment,
+                    movement: (id === "equipment") ? input : state.currentSet.movement,
                     reps: (id === "reps") ? input : state.currentSet.reps,
                     weight: (id === "weight") ? input : state.currentSet.weight,
                     lastRepComplete: (id === "lastRepComplete") ? !state.currentSet.lastRepComplete : state.currentSet.lastRepComplete, 

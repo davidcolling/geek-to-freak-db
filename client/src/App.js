@@ -19,7 +19,7 @@ const initialState = {
     currentWorkout: {
         sets: [],
         currentSet: {
-            equipment: 'none',
+            movement: 'none',
             reps: 0,
             weight: 0,
             lastRepComplete: false,
