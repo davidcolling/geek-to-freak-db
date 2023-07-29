@@ -3,7 +3,7 @@ import {ShadeBG, P} from './elements.js';
 
 export const SetList = ({list}) => {
     return (
-        <ShadeBG>
+        <ShadeBG darkMultiple={1}>
             {
                 list.map(
                     (set) => (

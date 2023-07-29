@@ -7,6 +7,7 @@ import {
     spacing, 
     border
 } from './global.js'
+import dbgPost from '../dbg.js';
 
 export const LineDivider = styled.div`
     border-top: solid;
@@ -163,7 +164,6 @@ export const ClickBlocker = styled.div`
     width: 100%;
     height: 100%;
 `
-
 export const FixedFooter = styled.div`
     position: fixed;
     bottom: 0;
@@ -174,11 +174,23 @@ export const FixedFooter = styled.div`
     opacity: 90%;
 `
 
-export const ShadeBG = styled.div`
-    background-color: #dddddd;
-    > * {
-        background-color: #dddddd;
-        padding: 5px;
+export const ShadeBG = ({darkMultiple, children}) => {
+    var whiteDecimal = parseInt("ffffff", 16);
+    var shadeDecimal = parseInt("111111", 16);
+    var outputDecimal = whiteDecimal - (shadeDecimal * darkMultiple);
+    if (outputDecimal < 0) {
+        outputDecimal = 0;
     }
-`
-
+    var outputBGColor = "#" + outputDecimal.toString(16);
+    dbgPost(outputBGColor);
+    return (
+        <div
+            style={{
+                backgroundColor: outputBGColor,
+                padding: "5px"
+            }}
+        >
+            {children}
+        </div>
+    )
+}
