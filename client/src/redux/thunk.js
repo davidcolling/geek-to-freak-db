@@ -6,7 +6,7 @@ import {
     setWorkouts,
     addPreviousWorkout
 } from './actions.js';
-import {POSTED_VIEW, EQUIPMENT_VIEW} from './views.js';
+import {POSTED_VIEW, EQUIPMENT_VIEW, WORKOUT_ADDER_VIEW} from './views.js';
 
 export const postEquipment = () => {
     return async (dispatch, getState) => {
@@ -57,7 +57,7 @@ export const postCurrentSet = () => {
         })
         var data = await response.json();
         await dispatch(addCurrentSet(data.insertId));
-        await dispatch(setView(POSTED_VIEW));
+        await dispatch(setView(WORKOUT_ADDER_VIEW));
     }
 }
 
