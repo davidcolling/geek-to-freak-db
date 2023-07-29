@@ -7,7 +7,6 @@ import {
     spacing, 
     border
 } from './global.js'
-import dbgPost from '../dbg.js';
 
 export const LineDivider = styled.div`
     border-top: solid;
@@ -182,7 +181,6 @@ export const ShadeBG = ({darkMultiple, children}) => {
         outputDecimal = 0;
     }
     var outputBGColor = "#" + outputDecimal.toString(16);
-    dbgPost(outputBGColor);
     return (
         <div
             style={{
