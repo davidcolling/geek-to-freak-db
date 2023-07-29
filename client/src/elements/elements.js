@@ -175,7 +175,7 @@ export const FixedFooter = styled.div`
 
 export const ShadeBG = ({darkMultiple, children}) => {
     var whiteDecimal = parseInt("ffffff", 16);
-    var shadeDecimal = parseInt("111111", 16);
+    var shadeDecimal = parseInt("070707", 16);
     var outputDecimal = whiteDecimal - (shadeDecimal * darkMultiple);
     if (outputDecimal < 0) {
         outputDecimal = 0;
