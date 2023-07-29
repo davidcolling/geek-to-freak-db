@@ -1,5 +1,5 @@
 import React from 'react';
-import {P, WideButton} from '../elements/elements.js';
+import {WideButton} from '../elements/elements.js';
 import SetList from '../elements/SetList.js';
 
 export const WorkoutAdder = ({getCurrentWorkoutConnected, addSet, post}) => {
