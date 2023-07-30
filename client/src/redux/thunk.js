@@ -6,7 +6,7 @@ import {
     setWorkouts,
     addPreviousWorkout
 } from './actions.js';
-import {POSTED_VIEW, EQUIPMENT_VIEW, WORKOUT_ADDER_VIEW} from './views.js';
+import {EQUIPMENT_VIEW, WORKOUT_ADDER_VIEW, WORKOUTS_VIEW} from './views.js';
 
 export const postEquipment = () => {
     return async (dispatch, getState) => {
@@ -41,7 +41,7 @@ export const removeEquipment = () => {
                 "Content-Type": "application/json"
             }
         })
-        await dispatch(setView(POSTED_VIEW));
+        await dispatch(setView(EQUIPMENT_VIEW));
      }
 }
 
@@ -72,7 +72,7 @@ export const postCurrentWorkout = () => {
             }
         })
         await dispatch(clearCurrentWorkout());
-        await dispatch(setView(POSTED_VIEW));
+        await dispatch(setView(WORKOUTS_VIEW));
     }
 }
 
