@@ -11,7 +11,6 @@ import EquipmentAdderViewConnected from './redux/views/EquipmentAdderViewConnect
 import WorkoutsViewConnected from './redux/views/WorkoutsViewConnected.js';
 import SetAdderConnected from './redux/views/SetAdderConnected.js';
 import SettingsViewConnected from './redux/views/SettingsViewConnected.js';
-import PostedView from './views/PostedView.js';
 import {FixedFooter, Bar, ClickBlocker, Spacer, LineDivider, SquareButton, ContentContainer} from './elements/elements.js';
 import Popup from './elements/Popup.js';
 import homeImg from './images/home.svg';
@@ -52,8 +51,6 @@ const matchView = view => {
              return <EquipmentViewConnected />
         case EQUIPMENT_ADDER_VIEW:
              return <EquipmentAdderViewConnected />
-        case POSTED_VIEW :
-            return <PostedView />
         case SET_ADDER_VIEW :
             return <SetAdderConnected />
         case SETTINGS_VIEW :
