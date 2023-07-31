@@ -259,7 +259,7 @@ app.post('/dbg', function(request, response) {
 
 app.post('/set', function(request, response) {
     facade.insertSet(
-        request.body.equipment, 
+        request.body.movement, 
         request.body.reps, 
         request.body.weight, 
         request.body.lastRepComplete, 
