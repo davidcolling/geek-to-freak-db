@@ -3,7 +3,7 @@
     // displays persistently visible components
 import React from 'react';
 
-import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, POSTED_VIEW, SET_ADDER_VIEW, SETTINGS_VIEW, WORKOUTS_VIEW} from './redux/views.js';
+import {HOME_VIEW, WORKOUT_ADDER_VIEW, EQUIPMENT_VIEW, EQUIPMENT_ADDER_VIEW, SET_ADDER_VIEW, SETTINGS_VIEW, WORKOUTS_VIEW} from './redux/views.js';
 import HomeViewConnected from './redux/views/HomeViewConnected.js';
 import WorkoutAdderConnected from './redux/views/WorkoutAdderConnected.js';
 import EquipmentViewConnected from './redux/views/EquipmentViewConnected.js';
