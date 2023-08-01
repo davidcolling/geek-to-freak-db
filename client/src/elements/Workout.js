@@ -1,11 +1,12 @@
 import React from 'react';
-import {RightAlign, Bar, P} from './elements.js';
+import {RightAlign, Bar, P, ShadeBG} from './elements.js';
 import SetList from './SetList.js';
 import removeImg from '../images/remove-square.svg';
 
 export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
+    var dm = 1;
     return (
-        <div>
+        <ShadeBG darkMultiple={dm}>
             <Bar>
                 <P onClick={() => fetchSetsForWorkoutConnected(workout.id)}>{workout.startTime}</P>
                 <RightAlign>
@@ -17,10 +18,10 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
             {
                 typeof workout.sets !== 'undefined' && 
                 <div>
-                    <SetList list={workout.sets} />
+                    <SetList list={workout.sets} darkMultiple={dm +1}/>
                 </div>
             }
-        </div>
+        </ShadeBG>
     )
 }
 
