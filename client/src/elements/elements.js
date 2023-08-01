@@ -139,12 +139,13 @@ const BarUnstyled  = styled.div`
     }
 `
 
-export const Bar = ({children}) => {
+export const Bar = ({children, onClick}) => {
     return (
         <div 
             style={{
                 width: "100%"
             }}
+            onClick={onClick}
         >
             <StyledDiv><BarUnstyled>{children}</BarUnstyled></StyledDiv>
         </div>
@@ -173,7 +174,7 @@ export const FixedFooter = styled.div`
     opacity: 90%;
 `
 
-export const ShadeBG = ({darkMultiple, children}) => {
+export const ShadeBG = ({darkMultiple, children, onClick}) => {
     var whiteDecimal = parseInt("ffffff", 16);
     var shadeDecimal = parseInt("070707", 16);
     var outputDecimal = whiteDecimal - (shadeDecimal * darkMultiple);
@@ -187,6 +188,7 @@ export const ShadeBG = ({darkMultiple, children}) => {
                 backgroundColor: outputBGColor,
                 padding: "5px"
             }}
+            onClick={onClick}
         >
             {children}
         </div>

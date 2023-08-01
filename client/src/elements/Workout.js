@@ -7,9 +7,9 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
     var dm = 1;
     return (
         <div>
-            <ShadeBG darkMultiple={dm}>
+            <ShadeBG darkMultiple={dm} onClick={() => fetchSetsForWorkoutConnected(workout.id)}>
                 <Bar>
-                    <P onClick={() => fetchSetsForWorkoutConnected(workout.id)}>{workout.startTime}</P>
+                    <P>{workout.startTime}</P>
                     <RightAlign>
                         <Bar>
                             <img src={removeImg} alt="remove" onClick={() => {}} />
