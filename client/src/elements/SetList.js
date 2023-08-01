@@ -1,5 +1,5 @@
 import React from 'react';
-import {P} from './elements.js';
+import {Spacer, P} from './elements.js';
 
 export const SetList = ({list}) => {
     return (
@@ -18,6 +18,7 @@ export const SetList = ({list}) => {
                         )
                     }
                 </table>
+                <Spacer />
         </div>
     )
 }
