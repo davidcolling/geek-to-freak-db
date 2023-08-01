@@ -194,3 +194,18 @@ export const ShadeBG = ({darkMultiple, children, onClick}) => {
         </div>
     )
 }
+
+export const BorderDiv = ({children, onClick}) => {
+    return (
+        <div
+            style={{
+                borderColor:"#000000",
+                borderStyle:"solid",
+                borderWidth:"1px"
+            }}
+            onClick={onClick}
+        >
+            {children}
+        </div>
+    )
+}

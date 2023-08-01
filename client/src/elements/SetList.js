@@ -1,16 +1,9 @@
 import React from 'react';
-import {Spacer, ShadeBG, P} from './elements.js';
+import {P} from './elements.js';
 
-export const SetList = ({list, darkMultiple}) => {
-    var dm ;
-    if (typeof darkMultiple === 'undefined') {
-        dm = 1;
-    } else {
-        dm = darkMultiple;
-    }
+export const SetList = ({list}) => {
     return (
         <div>
-            <ShadeBG darkMultiple={dm}>
                 <table
                     style={{
                         width: "100%"
@@ -25,8 +18,6 @@ export const SetList = ({list, darkMultiple}) => {
                         )
                     }
                 </table>
-            </ShadeBG>
-            <Spacer />
         </div>
     )
 }
