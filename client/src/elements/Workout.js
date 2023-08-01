@@ -1,5 +1,5 @@
 import React from 'react';
-import {RightAlign, Bar, P, Spacer, BorderDiv} from './elements.js';
+import {ContentContainer, RightAlign, Bar, P, Spacer, BorderDiv} from './elements.js';
 import SetList from './SetList.js';
 import removeImg from '../images/remove-square.svg';
 
@@ -8,6 +8,7 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
     return (
         <div>
             <BorderDiv onClick={() => fetchSetsForWorkoutConnected(workout.id)}>
+                <ContentContainer>
                 <Spacer />
                 <Bar>
                     <P>{workout.startTime}</P>
@@ -19,6 +20,7 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
                     typeof workout.sets !== 'undefined' && 
                     <SetList list={workout.sets} darkMultiple={dm +1}/>
                 }
+                </ContentContainer>
             </BorderDiv>
             <Spacer />
         </div>
