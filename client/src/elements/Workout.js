@@ -1,6 +1,7 @@
 import React from 'react';
 import {RightAlign, Bar, P} from './elements.js';
 import SetList from './SetList.js';
+import removeImg from '../images/remove-square.svg';
 
 export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
     return (
@@ -9,7 +10,7 @@ export const Workout = ({workout, fetchSetsForWorkoutConnected}) => {
                 <P onClick={() => fetchSetsForWorkoutConnected(workout.id)}>{workout.startTime}</P>
                 <RightAlign>
                     <Bar>
-                        {workout.endTime}
+                        <img src={removeImg} alt="remove" onClick={() => {}} />
                     </Bar>
                 </RightAlign>
             </Bar>
