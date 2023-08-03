@@ -288,11 +288,28 @@ app.get('/equipment', function(request, response) {
     );
 });
 
-app.get('/workout', function(request, response) {
-    facade.selectWorkouts(
-        makeCallbackResponse(response)
-    );
+app.get('/workout', async (request, response) => {
+    var data = await backendQuery();
+    console.log(JSON.stringify(data))
+    response.send(data);
 });
+
+const backendQuery = async () => {
+    return new Promise(
+        (resolve, reject) => {
+            db.query(
+                'select * from workouts;',
+                (err, results) => {
+                    if (err) {
+                        console.log("workout server error: " + err)
+                    } else {
+                        resolve(results);
+                    }
+                }
+            )
+        }
+    )
+}
 
 app.post('/workout', function(request, response) {
     if ( request.body.type === "new" ) {
